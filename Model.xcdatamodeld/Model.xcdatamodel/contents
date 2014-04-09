@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Incomes" representedClassName="Incomes" syncable="YES">
+        <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="period" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Periods" inverseName="income" inverseEntity="Periods" syncable="YES"/>
+    </entity>
+    <entity name="Periods" representedClassName="Periods" syncable="YES">
+        <attribute name="periodNum" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="income" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Incomes" inverseName="period" inverseEntity="Incomes" syncable="YES"/>
+        <relationship name="projects" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Projects" inverseName="period" inverseEntity="Projects" syncable="YES"/>
+    </entity>
+    <entity name="Projects" representedClassName="Projects" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="period" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Periods" inverseName="projects" inverseEntity="Periods" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Incomes" positionX="27" positionY="90" width="128" height="90"/>
+        <element name="Periods" positionX="0" positionY="63" width="128" height="88"/>
+        <element name="Projects" positionX="-36" positionY="9" width="128" height="88"/>
+    </elements>
+</model>

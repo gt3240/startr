@@ -88,26 +88,32 @@
         }
         
     }
-    //
-
 }
+
 -(void)openSavedProjectAt:(NSNumber *)index
 {
-    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    //delegate from another class
     
-    //UINavigationController *nvc = [storyboard instantiateViewControllerWithIdentifier:@"incomeNav"];
-    //IncomeViewController *vc = nvc.viewControllers[0];
+    // works, and index value gets passed, but menu button doesn't work after, cuz didn't push with container?
+    /*
+    IncomeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"incomeList"];
+    [incomeNav pushViewController:vc animated:YES];
+    vc.projectIndexToOpen = index;
+    */
     
-    //[self presentViewController:nvc animated:YES completion:NULL];
-    //UIViewController *incomeScene = [self.storyboard instantiateViewControllerWithIdentifier:@"incomeList"];
-    //[incomeNav pushViewController:incomeScene animated:YES];
-    
+    // the value doesn't get passed, but everything else works
+    /*
     IncomeViewController *vc = [[IncomeViewController alloc]init];
     
     vc.projectIndexToOpen = index;
+    */
+    UITabBarController *tbc = self.childViewControllers[1];
+    UINavigationController *nav = tbc.viewControllers[0];
+    IncomeViewController *tvc = (IncomeViewController *)nav.topViewController;
     
-    [self menuButtonPushed];
+    tvc.projectIndexToOpen = index;
     
+    [self menuButtonPushed]; // close side menu
 }
 
 -(void)menuButtonPushed

@@ -56,7 +56,11 @@
     projectsArr = [Projects allOrderedBy:@"date" ascending:NO];
     //NSLog(@"%lu", (unsigned long)projectsArr.count);
     
-    [self loadPeriodFromProject:1];
+    if (self.projectIndexToOpen){
+        [self loadPeriodFromProject:self.projectIndexToOpen.integerValue];
+    }else {
+        [self loadPeriodFromProject:1];
+    }
     
     if (!periodToShow) {
         periodToShow = periodsArr[0];
@@ -132,9 +136,11 @@
     
     periodCount = newCount.intValue;
     
+    [self loadPeriodFromProject:1];
+    
     [self.periodCollectionView reloadData];
     
-    [self loadPeriodFromProject:0];
+    
     NSLog(@"period count is %d, current count is %d", periodCount, newCount.intValue);
 }
 
@@ -194,12 +200,6 @@
     ViewPeriodCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellType forIndexPath:indexPath];
     
     int buttonTitle = indexPath.row + 1;
-    
-    //int buttonTitle = ((Periods *)periodsArr[indexPath.row]).periodNum.intValue;
-    
-    //int buttonTitle = (int)periodsArr[indexPath.row];
-    
-    //NSString * buttonTitle = periodsArr[indexPath.row];
     
     if(indexPath.section == 0){
         cell.periodLabel.text = [NSString stringWithFormat:@"%d", buttonTitle];

@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Projects.h"
 
 @interface ProjectTypeViewController : UIViewController
 
+@property (strong, nonatomic)NSString *projectName;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewIncomeTableViewController.h"
 
 @protocol IncomeViewDelegate <NSObject>
 
@@ -14,16 +15,21 @@
 
 @end
 
-@interface IncomeViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface IncomeViewController : UIViewController<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, editOrNewIncomeDelegate>
 {
     NSMutableArray * income; // change to nsarray when connect to core data
     NSArray * projectsArr;
-    NSMutableArray *periodsArr;
+    NSArray *periodsArr;
+    NSArray *incomeArr;
     
     int previousSelected;
 }
 
 @property (nonatomic,strong) id<IncomeViewDelegate> myDelegate;
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *periodCollectionView;
+@property (strong,nonatomic)NSNumber *projectIndexToOpen;
+
 
 @end

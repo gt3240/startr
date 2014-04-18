@@ -11,9 +11,7 @@
 #import "NewIncomeTableViewController.h"
 
 @interface IncomeDetailsTableViewController ()
-{
-    Incomes * imIncome;
-}
+
 @end
 
 @implementation IncomeDetailsTableViewController
@@ -41,32 +39,37 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    /*
-    imIncome = self.incomeToShowDetail[0];
     
-    //NSLog(@"%lu", (unsigned long)self.incomeToShowDetail.count);
+    self.amountLabel.text = [self formatToCurrency:self.incomeToShowDetail.amount];
+    self.titleLabel.text = self.incomeToShowDetail.title;
     
-    self.amountLabel.text = [NSString stringWithFormat:@"$%@", imIncome.amount];
     
-    self.titleLabel.text = imIncome.title;
+    self.fromLabel.text = self.incomeToShowDetail.source;
     
-    self.fromLabel.text = imIncome.source;
-    
-    if (imIncome.recurring) {
-        self.recurringAmountLabel.text = imIncome.recurring_amount.stringValue;
-        if ([imIncome.recurring_type isEqualToString:@"fixedAmount"]){
+    if ([self.incomeToShowDetail.recurring intValue] == 1) {
+        
+        self.recurringLabel.text = @"Increased by";
+        
+        self.recurringAmountLabel.text = self.incomeToShowDetail.recurringAmount.stringValue;
+        if ([self.incomeToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
             
-            self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", imIncome.recurring_amount];
+            self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.incomeToShowDetail.recurringAmount];
         } else {
             
-            self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", imIncome.recurring_amount];
+            self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.incomeToShowDetail.recurringAmount];
             
         }
     } else {
         self.recurringAmountLabel.text = @"";
         self.recurringLabel.text = @"";
     }
-     */
+}
+
+- (NSString *)formatToCurrency: (NSNumber *)amount{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:amount.floatValue]];
+    return numberAsString;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -76,15 +79,10 @@
     
     destination.incomeToEdit = self.incomeToShowDetail;
     
-    destination.editDelegate = self;
+    destination.editIncomeDelegate = self;
     
     //NSMutableArray * imIncomeArrayToSend = [NSMutableArray array];
     
-    //[imIncomeArrayToSend addObject:imIncome];
-    
-    //destination.incomeToEdit = imIncomeArrayToSend;
-    
-    //NSLog(@"%lu", (unsigned long)self.incomeToShowDetail.count);
 }
 
 @end

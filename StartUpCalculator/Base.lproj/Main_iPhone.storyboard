@@ -7,7 +7,7 @@
         <!--Income View Controller - Income-->
         <scene sceneID="aFK-2F-33T">
             <objects>
-                <viewController title="Income" id="8zt-qI-DlK" customClass="IncomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="incomeList" title="Income" id="8zt-qI-DlK" customClass="IncomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SwA-hE-ExH"/>
                         <viewControllerLayoutGuide type="bottom" id="KAN-Ga-pV9"/>
@@ -72,7 +72,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$4000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWS-ba-B3y">
-                                                    <rect key="frame" x="215" y="18" width="72" height="21"/>
+                                                    <rect key="frame" x="165" y="18" width="122" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="17"/>
                                                     <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="deviceRGB"/>
@@ -140,6 +140,28 @@
                                             <outlet property="periodLabel" destination="Vsp-2x-EK8" id="ZxA-K4-xyh"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddPeriodCell" id="Sw5-0h-2sb">
+                                        <rect key="frame" x="30" y="-3" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MnJ-Er-Wtn">
+                                                    <rect key="frame" x="-5" y="-5" width="40" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" image="plus_icon">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="AddPeriodButtonPressed:" destination="8zt-qI-DlK" eventType="touchUpInside" id="2ZU-3Q-NGj"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="8zt-qI-DlK" id="hcR-bT-EEx"/>
@@ -152,13 +174,13 @@
                     <tabBarItem key="tabBarItem" title="Item" id="oA0-rg-P3O"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Income" id="llJ-zf-J3p">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="Qbc-I3-ivU">
+                        <barButtonItem key="leftBarButtonItem" image="menu_icon" id="Qbc-I3-ivU">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="menuPressed:" destination="8zt-qI-DlK" id="cyv-GU-60s"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="W51-0O-OxX">
+                        <barButtonItem key="rightBarButtonItem" image="plus_icon" id="W51-0O-OxX">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="gDO-i5-Cox" kind="modal" identifier="newIncomeSegue" id="o2a-pW-uAa"/>
@@ -168,6 +190,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mainTableView" destination="oa3-t4-Mxg" id="inN-0q-sU7"/>
+                        <outlet property="periodCollectionView" destination="4DA-EM-neT" id="HrJ-bg-Nzv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l2N-4W-Jje" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -177,7 +200,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </containerView>
             </objects>
-            <point key="canvasLocation" x="2238" y="-310"/>
+            <point key="canvasLocation" x="2764" y="-310"/>
         </scene>
         <!--New Income Table View Controller - New Income-->
         <scene sceneID="22s-XV-5zw">
@@ -337,12 +360,12 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6 Month" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="66y-QG-27G">
-                                                    <rect key="frame" x="142" y="11" width="158" height="21"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJv-Lr-8zt">
+                                                    <rect key="frame" x="115" y="7" width="185" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -352,13 +375,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5eu-Vs-oAl" id="Vbi-sB-iSD">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="5Ro-eB-N1C">
-                                                    <rect key="frame" x="18" y="7" width="284" height="31"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="tintColor" red="0.1137254902" green="0.52549019610000003" blue="0.72156862749999995" alpha="1" colorSpace="deviceRGB"/>
-                                                </slider>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -391,22 +407,24 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Income" id="ewV-m1-uvG">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Phu-Zj-VZx">
+                        <barButtonItem key="leftBarButtonItem" image="cancel_icon" id="Phu-Zj-VZx">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="canclePressed:" destination="OjO-xl-58e" id="Q2d-kv-5iW"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="LA9-Me-ryp">
+                        <barButtonItem key="rightBarButtonItem" image="done_icon" id="LA9-Me-ryp">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="donePressed:" destination="OjO-xl-58e" id="vuU-xt-2PD"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="amountTextField" destination="EDw-1g-VMh" id="Mde-G4-yer"/>
                         <outlet property="notes" destination="pnK-9P-Rxe" id="aML-sE-0n7"/>
                         <outlet property="recurringAmount" destination="c0C-AC-vTV" id="uQN-AP-VGG"/>
-                        <outlet property="recurringPeriod" destination="66y-QG-27G" id="nd8-bU-teW"/>
-                        <outlet property="recurringPeriodSlider" destination="5Ro-eB-N1C" id="z3N-ff-AZ7"/>
+                        <outlet property="recurringPeriodTextField" destination="zJv-Lr-8zt" id="rzI-i2-I6e"/>
                         <outlet property="recurringSwitch" destination="djc-4n-cBf" id="IeZ-T0-PvA"/>
                         <outlet property="recurringType" destination="iyv-KM-Ik6" id="eR1-Gh-P4Y"/>
                         <outlet property="sourceLabel" destination="7ph-Sr-8bE" id="Tzw-Ma-e68"/>
@@ -415,7 +433,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnj-9y-Hpv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3123" y="-1211"/>
+            <point key="canvasLocation" x="3539" y="-1211"/>
         </scene>
         <!--Income Details Table View Controller - Month 1-->
         <scene sceneID="cka-uL-0qN">
@@ -521,7 +539,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Month 1" id="Poq-Dz-RJb">
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="NCs-nq-bgv">
+                        <barButtonItem key="rightBarButtonItem" image="edit_icon" id="NCs-nq-bgv">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="gDO-i5-Cox" kind="modal" identifier="editIncomeSegue" id="YUu-o5-o01"/>
@@ -538,18 +556,18 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EJ8-St-vxK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2711" y="-310"/>
+            <point key="canvasLocation" x="3237" y="-310"/>
         </scene>
-        <!--New Project View Controller-->
+        <!--New Project View Controller - NewProjectView-->
         <scene sceneID="ma5-ia-A8X">
             <objects>
-                <viewController id="jCC-FK-x8y" customClass="NewProjectViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewProjectView" title="NewProjectView" id="jCC-FK-x8y" customClass="NewProjectViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gxY-ja-8uw"/>
                         <viewControllerLayoutGuide type="bottom" id="mK9-wB-6Bl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="S8Y-fo-Unh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OB3-Fs-FWN">
@@ -558,13 +576,16 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What should we call your project?" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhv-gr-43G">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What should we call your project?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhv-gr-43G">
                                 <rect key="frame" x="12" y="204" width="297" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.1137254902" green="0.52549019610000003" blue="0.72156862749999995" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jCC-FK-x8y" id="v56-mA-nmL"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Crn-uA-f31">
                                 <rect key="frame" x="12" y="290" width="297" height="55"/>
@@ -576,19 +597,20 @@
                                 </state>
                                 <connections>
                                     <action selector="projectNameButtonPressed:" destination="jCC-FK-x8y" eventType="touchUpInside" id="p3A-S9-oTR"/>
-                                    <segue destination="y2F-Q0-nGS" kind="modal" modalTransitionStyle="flipHorizontal" id="fEW-GG-yBd"/>
+                                    <segue destination="y2F-Q0-nGS" kind="push" id="fEW-GG-yBd"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.1137254902" green="0.52549019610000003" blue="0.72156862749999995" alpha="1" colorSpace="deviceRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Qku-RZ-XNg"/>
                     <connections>
                         <outlet property="projectNameTextField" destination="bhv-gr-43G" id="bB0-D5-dd5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IVn-qD-LPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="30" y="-310"/>
+            <point key="canvasLocation" x="556" y="-310"/>
         </scene>
         <!--Project Type View Controller-->
         <scene sceneID="NSn-DR-K47">
@@ -599,7 +621,7 @@
                         <viewControllerLayoutGuide type="bottom" id="R0n-2Z-Arz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xDM-ox-Bpc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please select" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBA-vL-zJ9">
@@ -618,7 +640,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="M5c-hG-zun" kind="modal" id="Wis-a5-mcV"/>
+                                    <segue destination="M5c-hG-zun" kind="modal" identifier="weeklyType" id="Wis-a5-mcV"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dyn-jn-bud">
@@ -630,7 +652,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="M5c-hG-zun" kind="modal" id="8Bi-o2-jZa"/>
+                                    <segue destination="M5c-hG-zun" kind="modal" identifier="monthlyType" id="8Bi-o2-jZa"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -640,7 +662,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NTY-jc-CoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443" y="-310"/>
+            <point key="canvasLocation" x="711" y="-662"/>
         </scene>
         <!--Container View Controller - Item-->
         <scene sceneID="qcc-FA-QBq">
@@ -660,7 +682,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Aa9-ig-3me" appends="YES" id="5dy-IM-Y6s"/>
-                                    <segue destination="vFV-Zk-dKY" kind="embed" id="B3R-LO-I9m"/>
+                                    <segue destination="njg-Th-4je" kind="embed" identifier="sideMenuSegue" id="B3R-LO-I9m"/>
                                 </connections>
                             </containerView>
                             <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0P6-Sf-in1">
@@ -689,14 +711,55 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="893" y="-310"/>
+            <point key="canvasLocation" x="1377" y="-318"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Saved Projects Table View Controller-->
+        <scene sceneID="LtF-Ll-eJd">
+            <objects>
+                <tableViewController storyboardIdentifier="SavedProjects" id="2y0-4c-9rt" customClass="SavedProjectsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dbL-gH-VGb">
+                        <rect key="frame" x="0.0" y="44" width="210" height="524"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="projectNameCell" id="WOP-XV-GZu" customClass="SavedProjectsTableViewCell">
+                                <rect key="frame" x="0.0" y="22" width="210" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WOP-XV-GZu" id="Tgw-xC-aAF">
+                                    <rect key="frame" x="0.0" y="0.0" width="210" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8S-6i-DpU">
+                                            <rect key="frame" x="20" y="11" width="170" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="ProjectNameLabel" destination="E8S-6i-DpU" id="d3y-3h-lNu"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2y0-4c-9rt" id="mlR-z7-GwW"/>
+                            <outlet property="delegate" destination="2y0-4c-9rt" id="ULs-nX-jAs"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="7HW-te-aqP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3cz-vE-AZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111" y="-1010"/>
+        </scene>
+        <!--Side Menu Table View Controller-->
         <scene sceneID="6L1-kG-cOp">
             <objects>
-                <tableViewController id="vFV-Zk-dKY" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4PY-dp-PIq">
-                        <rect key="frame" x="0.0" y="0.0" width="210" height="568"/>
+                <tableViewController id="vFV-Zk-dKY" customClass="SideMenuTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="4PY-dp-PIq">
+                        <rect key="frame" x="0.0" y="44" width="210" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -743,6 +806,9 @@
                                                     <state key="normal" title="New Project">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="NewProjectPressed:" destination="vFV-Zk-dKY" eventType="touchUpInside" id="ytq-KQ-28b"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -763,6 +829,9 @@
                                                     <state key="normal" title="Saved Projects">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <segue destination="2y0-4c-9rt" kind="push" identifier="SavedProjectSegue" id="wzS-OK-Mm9"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -877,16 +946,17 @@
                             <outlet property="delegate" destination="vFV-Zk-dKY" id="YO6-WQ-Bef"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="HhN-w1-qqd"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FJX-hg-5JX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1322" y="-1010"/>
+            <point key="canvasLocation" x="1738" y="-1010"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - Income-->
         <scene sceneID="55i-DW-sbK">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9J9-sM-7lS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="lP1-BR-9mU"/>
+                <navigationController storyboardIdentifier="incomeNav" automaticallyAdjustsScrollViewInsets="NO" id="9J9-sM-7lS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Income" image="in_icon" id="lP1-BR-9mU"/>
                     <toolbarItems/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0Iu-ZO-xRE">
@@ -909,7 +979,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nz8-Ft-1tV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808" y="-310"/>
+            <point key="canvasLocation" x="2334" y="-310"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pkN-Gr-VSF">
@@ -933,7 +1003,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Go-YY-Uou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2650" y="-1211"/>
+            <point key="canvasLocation" x="3066" y="-1211"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sO2-fb-dVf">
@@ -951,9 +1021,56 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3se-GX-M3z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1322" y="-310"/>
+            <point key="canvasLocation" x="1848" y="-310"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZAP-vJ-qBC">
+            <objects>
+                <navigationController storyboardIdentifier="NewProjectNav" automaticallyAdjustsScrollViewInsets="NO" id="Wvh-DW-h1A" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="AAV-eh-HAs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.1137254902" green="0.52549019610000003" blue="0.72156862749999995" alpha="1" colorSpace="deviceRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jCC-FK-x8y" kind="relationship" relationship="rootViewController" id="T1h-Vk-69t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HnF-6d-kUn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="-310"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="jKN-QD-l2E">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="njg-Th-4je" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="7WI-MH-XlO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vFV-Zk-dKY" kind="relationship" relationship="rootViewController" id="NjW-fF-Od0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qC-Xp-c23" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1322" y="-1010"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cancel_icon" width="20" height="20"/>
+        <image name="done_icon" width="20" height="20"/>
+        <image name="edit_icon" width="20" height="20"/>
+        <image name="in_icon" width="30" height="30"/>
+        <image name="menu_icon" width="20" height="20"/>
+        <image name="plus_icon" width="20" height="20"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

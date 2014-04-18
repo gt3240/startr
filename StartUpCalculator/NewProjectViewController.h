@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewProjectViewController : UIViewController
+@interface NewProjectViewController : UIViewController<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *projectNameTextField;
 
 @end

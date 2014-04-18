@@ -2,7 +2,7 @@
 //  Projects.m
 //  StartUpCalculator
 //
-//  Created by Tom on 4/9/14.
+//  Created by Tom on 4/16/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
@@ -14,6 +14,7 @@
 
 @dynamic date;
 @dynamic name;
+@dynamic type;
 @dynamic period;
 
 @end

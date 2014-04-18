@@ -8,7 +8,6 @@
 
 #import "NewProjectViewController.h"
 #import "ProjectTypeViewController.h"
-#import "InnerBand.h"
 
 
 @interface NewProjectViewController ()
@@ -40,6 +39,7 @@
 
 - (IBAction)projectNameButtonPressed:(UIButton *)sender {
     // save the project name
+    
 }
 
 #pragma mark - Navigation
@@ -49,7 +49,13 @@
 {
     ProjectTypeViewController * destinationSegue = segue.destinationViewController;
     
-    
+    destinationSegue.projectName = self.projectNameTextField.text;
+        
+}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 

@@ -7,6 +7,9 @@
 //
 
 #import "ProjectTypeViewController.h"
+#import "InnerBand.h"
+#import "Projects.h"
+#import "IncomeViewController.h"
 
 @interface ProjectTypeViewController ()
 
@@ -27,6 +30,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"new project name is %@", self.projectName);
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +39,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    Projects *newProject;
+    if ([segue.identifier isEqualToString: @"weeklyType"]) {
+        newProject.type = @"week";
+    } else {
+        newProject.type = @"month";
+    }
+    
+    newProject = [Projects create];
+    newProject.name = self.projectName;
+    newProject.date = [NSDate date];
+    [[IBCoreDataStore mainStore] save];
+    
+    IncomeViewController *destination = segue.destinationViewController;
+    
 }
-*/
 
 @end

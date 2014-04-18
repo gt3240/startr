@@ -15,10 +15,16 @@
 #import "Periods.h"
 #import "IncomeDetailsTableViewController.h"
 
+
 @interface IncomeViewController ()
 {
     BOOL buttonIsSelected;
     ViewPeriodCollectionCell * selectedCell;
+    int incomeRowCount;
+    int periodCount;
+    float monthlyTotal;
+    Periods *periodToShow;
+    Projects *projectToShow;
 }
 @end
 
@@ -37,39 +43,32 @@
 {
     [super viewDidLoad];
     
-    periodsArr = [NSMutableArray array];
-    
-    NSNumber * add = @0;
-    
-    for (int i = 1; i < 50; i++){
-        
-        add = @(i);
-        [periodsArr addObject:add];
-    }
-    
-    //periodsArr = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13"];
-    NSLog(@"%lu", (unsigned long)periodsArr.count);
+    periodsArr = [NSArray array];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    /*
-    projectsArr = [Projects allOrderedBy:@"name" ascending:YES];
-    NSLog(@"%lu", (unsigned long)projectsArr.count);
+    NSLog(@"project id is %@", self.projectIndexToOpen);
     
-    NSSortDescriptor *miSort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:27/255.0f green:114/255.0f blue:169/255.0f alpha:1.0f];
     
-    //int selected = self.tableView.indexPathForSelectedRow.row;
+    projectsArr = [Projects allOrderedBy:@"date" ascending:NO];
+    //NSLog(@"%lu", (unsigned long)projectsArr.count);
     
-    Projects *projectToShow = projectsArr[0];
+    [self loadPeriodFromProject:1];
     
-    NSLog(@"%@", projectToShow.name);
+    if (!periodToShow) {
+        periodToShow = periodsArr[0];
+    } else {
+        periodToShow = periodsArr[previousSelected];
+    }
     
-    periodsArr = [projectToShow.period sortedArrayUsingDescriptors:@[miSort]];
+    [self loadIncome];
     
-    NSLog(@"%lu", (unsigned long)periodsArr.count);
-    */
+    incomeRowCount = incomeArr.count;
+    
+    periodCount = periodsArr.count;
 }
 
 - (void)didReceiveMemoryWarning
@@ -78,12 +77,65 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (NSString *)formatToCurrency: (NSNumber *)amount{
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    NSString *numberAsString = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:amount.floatValue]];
+    return numberAsString;
+}
+
 #pragma mark - Buttons or action
+
+-(void)loadPeriodFromProject:(int)projectindex
+{
+    NSSortDescriptor *miSort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
+    
+    projectToShow = projectsArr[projectindex];
+    
+    periodsArr = [projectToShow.period sortedArrayUsingDescriptors:@[miSort]];
+}
+
+-(void)loadIncome
+{
+    NSSortDescriptor *incomeSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    incomeArr = [periodToShow.income sortedArrayUsingDescriptors:@[incomeSort]];
+}
+
+-(void)incomeAdded
+{
+    //periodToShow = periodsArr[previousSelected];
+    
+    [self loadIncome];
+    
+    incomeRowCount = incomeArr.count;
+    
+    [self.mainTableView reloadData];
+    
+    
+    NSLog(@"selected period tag is %ld", (long)selectedCell.tag);
+}
 
 - (IBAction)menuPressed:(UIBarButtonItem *)sender {
     
     [self.myDelegate menuButtonPushed];
+
+}
+
+- (IBAction)AddPeriodButtonPressed:(UIButton *)sender {
+    Periods *newPeriod = [Periods create];
+    NSNumber *currentCount = [NSNumber numberWithInt:periodCount];
+    NSNumber *addCount = @1;
+    NSNumber *newCount = @([currentCount intValue] + [addCount intValue]);
+    newPeriod.periodNum = newCount;
+    [projectToShow addPeriodObject:newPeriod];
+    [[IBCoreDataStore mainStore] save];
     
+    periodCount = newCount.intValue;
+    
+    [self.periodCollectionView reloadData];
+    
+    [self loadPeriodFromProject:0];
+    NSLog(@"period count is %d, current count is %d", periodCount, newCount.intValue);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -97,40 +149,74 @@
     
     [selectedCell setButtonSelected:YES];
     previousSelected = (int)selectedCell.tag;
+    
+    //refresh table when selected
+    NSSortDescriptor *incomeSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    
+    periodToShow = periodsArr[selectedCell.tag];
+    
+    //NSLog(@"selected tag is %ld", (long)selectedCell.tag);
+    
+    incomeArr = [periodToShow.income sortedArrayUsingDescriptors:@[incomeSort]];
+    
+    incomeRowCount = incomeArr.count;
+    //NSLog(@"income count is %lu", (unsigned long)incomeArr.count);
+    
+    [self.mainTableView reloadData];
+    
 }
 
 #pragma mark - CollectionView
 -(int)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return 2;
 }
 
 -(int)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return periodsArr.count;
-    
+    if (section == 1){
+        return 1;
+    } else {
+        NSLog(@"cell periodCount is %d", periodCount);
+        return periodCount;
+    }
 }
 
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *cellType = @"PeriodCollectionCell";
     
-    ViewPeriodCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PeriodCollectionCell" forIndexPath:indexPath];
-    NSString * buttonTitle = [NSString stringWithFormat:@"%@", periodsArr[indexPath.row]];
-    
-    cell.periodLabel.text = buttonTitle;
-    cell.tag = indexPath.row;
-    
-    NSLog(@"cell is %ld and selected is %ld", (long)cell.tag, (long)selectedCell.tag);
-    
-    if (cell.tag != selectedCell.tag){
-        
-        [cell setButtonSelected:NO];
-    } else {
-        [cell setButtonSelected:YES];
+    if (indexPath.section == 1) {
+        cellType = @"AddPeriodCell";
     }
-    return cell;
+    
+    ViewPeriodCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellType forIndexPath:indexPath];
+    
+    int buttonTitle = indexPath.row + 1;
+    
+    //int buttonTitle = ((Periods *)periodsArr[indexPath.row]).periodNum.intValue;
+    
+    //int buttonTitle = (int)periodsArr[indexPath.row];
+    
+    //NSString * buttonTitle = periodsArr[indexPath.row];
+    
+    if(indexPath.section == 0){
+        cell.periodLabel.text = [NSString stringWithFormat:@"%d", buttonTitle];
+        cell.tag = indexPath.row;
+        //NSLog(@"button is %@", buttonTitle);
+        //NSLog(@"cell is %ld and selected is %ld", (long)cell.tag, (long)selectedCell.tag);
+        
+        if (cell.tag != previousSelected){
+            
+            [cell setButtonSelected:NO];
+        } else {
+            [cell setButtonSelected:YES];
+        }
+    }
+        return cell;
 }
+
 
 #pragma mark - Table view
 
@@ -146,7 +232,7 @@
     if (section == 0){
         return 1;
     } else {
-        return periodsArr.count;
+        return incomeRowCount;
     }
 }
 
@@ -173,31 +259,27 @@
     IncomeItemsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType forIndexPath:indexPath];
     
     // Configure the cell...
-    /*
+    
     if (indexPath.section == 0) {
-        float sum = 0;
-        for (int i = 0; i < income.count; i++)
-        {
-            Income * imIncome = income [i];
-            sum += imIncome.amount.floatValue;
-        }
+       
+        cell.totalLabel.text = [self formatToCurrency:periodToShow.incomeTotal];
         
-        cell.totalLabel.text = [NSString stringWithFormat:@"$%.2f", sum];
     } else {
-        Income * imIncome = income [indexPath.row];
+        Incomes * imIncome = incomeArr [indexPath.row];
         
         cell.titleLabel.text = imIncome.title;
-        cell.amountLabel.text = [NSString stringWithFormat:@"$%@", imIncome.amount];
+        cell.amountLabel.text = [self formatToCurrency:imIncome.amount];
+        
         cell.customerLabel.text = imIncome.source;
-        if (imIncome.recurring == YES){
+        
+        if ([imIncome.recurring intValue] == 1){
             cell.recurringLabel.text = @"Recurring";
         } else {
             cell.recurringLabel.text = @"";
         }
-    
     }
-     */
-    cell.totalLabel.text = @"hola";
+    
+    //cell.totalLabel.text = @"hola";
     return cell;
 }
 
@@ -212,8 +294,27 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
      if (editingStyle == UITableViewCellEditingStyleDelete) {
-         // Delete the row from the data source
+         
+         [self.mainTableView beginUpdates];
+         
+         Periods *periodToDelete = periodsArr[previousSelected];
+         Incomes *incomeToDelete = incomeArr[indexPath.row];
+         
+         incomeRowCount = incomeRowCount - 1;
+         
+         periodToDelete.incomeTotal = @([periodToDelete.incomeTotal floatValue] - [incomeToDelete.amount floatValue]);
+         [periodToDelete removeIncomeObject:incomeToDelete];
+         
          [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         
+         [[IBCoreDataStore mainStore] save];
+         
+         [self loadIncome];
+         
+         [self.mainTableView endUpdates];
+         
+         [self.mainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+                           
      } else if (editingStyle == UITableViewCellEditingStyleInsert) {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
      }
@@ -228,34 +329,33 @@
     
 }
 
-
-
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    /*
+    
     if([segue.identifier isEqualToString:@"detailsSegue"]){
         
         IncomeDetailsTableViewController * destination = segue.destinationViewController;
     
-        Income *incomeToSend = income[self.mainTableView.indexPathForSelectedRow.row];
+        Incomes *incomeToSend = incomeArr[self.mainTableView.indexPathForSelectedRow.row];
         
-        NSMutableArray * imIncomeArrayToSend = [NSMutableArray array];
+        destination.incomeToShowDetail = incomeToSend; // send the class over
         
-        [imIncomeArrayToSend addObject:incomeToSend];
+    } else {
+        
+        UINavigationController * nav = segue.destinationViewController;
     
+        NewIncomeTableViewController * destination = nav.viewControllers[0];
         
-        //NSLog(@"%@", incomeToSend.title);
+        Periods *periodToSend = periodsArr[previousSelected];
         
-        destination.incomeToShowDetail = imIncomeArrayToSend;
+        destination.periodToAdd = periodToSend;
         
-        //[destination.incomeToShowDetail addObjectsFromArray:income[self.mainTableView.indexPathForSelectedRow.row]];
-        
-        //NSLog(@" this is %ld", (long)self.mainTableView.indexPathForSelectedRow.row);
-        //NSLog(@"the count is %lu", (unsigned long)destination.incomeToShowDetail.count);
+        destination.editIncomeDelegate = self;
+
+        NSLog(@"%@", periodToSend.periodNum);
     }
-     */
 }
 
 

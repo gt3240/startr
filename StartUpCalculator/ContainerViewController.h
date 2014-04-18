@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IncomeViewController.h"
+#import "SideMenuTableViewController.h"
 
-@interface ContainerViewController : UIViewController<IncomeViewDelegate>
+
+@interface ContainerViewController : UIViewController<IncomeViewDelegate, SideMenuDelegate>
 {
     int topeDerecha;
     int superX;

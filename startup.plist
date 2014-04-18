@@ -145,5 +145,409 @@
 			</dict>
 		</array>
 	</dict>
+	<dict>
+		<key>projectName</key>
+		<string>2nd Project</string>
+		<key>projectDate</key>
+		<date>2014-04-09T02:24:03Z</date>
+		<key>period</key>
+		<array>
+			<dict>
+				<key>periodNum</key>
+				<integer>1</integer>
+				<key>income</key>
+				<array>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Sales from Socks</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Varies</string>
+						<key>amount</key>
+						<integer>9000</integer>
+						<key>recurring</key>
+						<false/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<integer>0</integer>
+						<key>recurringPeriods</key>
+						<integer>0</integer>
+						<key>notes</key>
+						<string>2nd Income</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>periodNum</key>
+				<integer>2</integer>
+				<key>income</key>
+				<array>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Sales from Socks</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Varies</string>
+						<key>amount</key>
+						<integer>9000</integer>
+						<key>recurring</key>
+						<false/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<integer>0</integer>
+						<key>recurringPeriods</key>
+						<integer>0</integer>
+						<key>notes</key>
+						<string>2nd Income</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>periodNum</key>
+				<integer>2</integer>
+				<key>income</key>
+				<array>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Sales from Socks</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Varies</string>
+						<key>amount</key>
+						<integer>9000</integer>
+						<key>recurring</key>
+						<false/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<integer>0</integer>
+						<key>recurringPeriods</key>
+						<integer>0</integer>
+						<key>notes</key>
+						<string>2nd Income</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>periodNum</key>
+				<integer>2</integer>
+				<key>income</key>
+				<array>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Sales from Socks</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Varies</string>
+						<key>amount</key>
+						<integer>9000</integer>
+						<key>recurring</key>
+						<false/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<integer>0</integer>
+						<key>recurringPeriods</key>
+						<integer>0</integer>
+						<key>notes</key>
+						<string>2nd Income</string>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>periodNum</key>
+				<integer>2</integer>
+				<key>income</key>
+				<array>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Rent</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Gaming Art</string>
+						<key>amount</key>
+						<integer>2500</integer>
+						<key>recurring</key>
+						<true/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<real>1.5</real>
+						<key>recurringPeriods</key>
+						<integer>10</integer>
+						<key>notes</key>
+						<string>This is the first month rent</string>
+					</dict>
+					<dict>
+						<key>title</key>
+						<string>Sales from Socks</string>
+						<key>type</key>
+						<string>regular</string>
+						<key>source</key>
+						<string>Varies</string>
+						<key>amount</key>
+						<integer>9000</integer>
+						<key>recurring</key>
+						<false/>
+						<key>recurringType</key>
+						<string>percentage</string>
+						<key>recurringAmount</key>
+						<integer>0</integer>
+						<key>recurringPeriods</key>
+						<integer>0</integer>
+						<key>notes</key>
+						<string>2nd Income</string>
+					</dict>
+				</array>
+			</dict>
+		</array>
+	</dict>
 </array>
 </plist>

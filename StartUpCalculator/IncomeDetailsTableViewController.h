@@ -12,7 +12,7 @@
 
 
 
-@interface IncomeDetailsTableViewController : UITableViewController<editIncomeDelegate>
+@interface IncomeDetailsTableViewController : UITableViewController<editOrNewIncomeDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *fromLabel;
@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recurringLabel;
 
 
-@property (strong, nonatomic)NSMutableArray *incomeToShowDetail;
+@property (strong, nonatomic)Incomes *incomeToShowDetail;
 
 
 @end

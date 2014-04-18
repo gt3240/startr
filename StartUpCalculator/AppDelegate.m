@@ -25,12 +25,14 @@
     
     [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     
+    self.window.tintColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    NSUserDefaults *miDefaults = [NSUserDefaults standardUserDefaults];
-    
-    if (![miDefaults objectForKey:@"firstLaunch"]) {
+    BOOL isRunMoreThanOnce = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRunMoreThanOnce"];
+    if(!isRunMoreThanOnce){
         // load the p list
-        /*
+        NSLog(@"oops, not first time");
+
         NSString *pathArtist = [[NSBundle mainBundle] pathForResource:@"startup" ofType:@"plist"];
         NSArray *projectList = [NSArray arrayWithContentsOfFile:pathArtist];
         
@@ -44,19 +46,25 @@
                 newPeriod.periodNum = periodList[@"periodNum"];
                 newPeriod.projects = newProject;
                 
-                for (NSDictionary *incomeList in periodList[@"canciones"]) {
+                for (NSDictionary *incomeList in periodList[@"income"]) {
                     Incomes *newIncome = [Incomes create];
                     newIncome.title = incomeList[@"title"];
                     newIncome.amount = incomeList[@"amount"];
                     newIncome.period = newPeriod;
+                    newIncome.recurring = incomeList[@"recurring"];
+                    newIncome.recurringAmount = incomeList[@"recurringAmount"];
+                    newIncome.recurringType = incomeList[@"recurringType"];
+                    newIncome.recurringPeriod = incomeList[@"recurringPeriod"];
+                    newIncome.notes = incomeList[@"notes"];
+                    newIncome.source = incomeList[@"source"];
                 }
             }
             
             [[IBCoreDataStore mainStore] save];
-        }
+           }
         
-        */
-        [miDefaults setObject:@1 forKey:@"firstLaunch"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isRunMoreThanOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
 

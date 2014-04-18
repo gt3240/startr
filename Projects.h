@@ -2,7 +2,7 @@
 //  Projects.h
 //  StartUpCalculator
 //
-//  Created by Tom on 4/9/14.
+//  Created by Tom on 4/16/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSSet *period;
 @end
 

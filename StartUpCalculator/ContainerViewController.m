@@ -7,9 +7,14 @@
 //
 
 #import "ContainerViewController.h"
+#import "SavedProjectsTableViewController.h"
+#import "SideMenuTableViewController.h"
+
 
 @interface ContainerViewController ()
-
+{
+    UINavigationController *incomeNav;
+}
 @end
 
 @implementation ContainerViewController
@@ -86,6 +91,24 @@
     //
 
 }
+-(void)openSavedProjectAt:(NSNumber *)index
+{
+    //UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    //UINavigationController *nvc = [storyboard instantiateViewControllerWithIdentifier:@"incomeNav"];
+    //IncomeViewController *vc = nvc.viewControllers[0];
+    
+    //[self presentViewController:nvc animated:YES completion:NULL];
+    //UIViewController *incomeScene = [self.storyboard instantiateViewControllerWithIdentifier:@"incomeList"];
+    //[incomeNav pushViewController:incomeScene animated:YES];
+    
+    IncomeViewController *vc = [[IncomeViewController alloc]init];
+    
+    vc.projectIndexToOpen = index;
+    
+    [self menuButtonPushed];
+    
+}
 
 -(void)menuButtonPushed
 {
@@ -108,6 +131,7 @@
         
     }completion:nil];
 }
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -120,11 +144,24 @@
         
         UITabBarController *miTab = segue.destinationViewController;
         
-        UINavigationController *incomeNav = miTab.viewControllers[0];
+        incomeNav = miTab.viewControllers[0];
         
         IncomeViewController *destino = incomeNav.viewControllers[0];
         
         destino.myDelegate = self;
+        
+        //in delegate
+        //UIViewController *nuevaEscena = [self.storyboard instantiateViewControllerWithIdentifier:@"nuevaEscena"];
+        //[incomeNav pushViewController:nuevaEscena animated:YES];
+        
+    }
+    
+    if ([segue.identifier isEqualToString:@"sideMenuSegue"]) {
+        
+        UINavigationController *nav = segue.destinationViewController;
+        
+        SideMenuTableViewController *vc = nav.viewControllers[0];
+        vc.delegate = self;
         
     }
 }

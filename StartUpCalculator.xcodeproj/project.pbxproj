@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1EAE4818FF259F00282768 /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4718FF259F00282768 /* Incomes.m */; };
+		CB1EAE4B18FF25A000282768 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4A18FF25A000282768 /* Projects.m */; };
+		CB1EAE4E18FF25A000282768 /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4D18FF25A000282768 /* Expenses.m */; };
+		CB1EAE5118FF25A000282768 /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE5018FF25A000282768 /* Periods.m */; };
+		CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE5318FF2F1000282768 /* SideMenuCustomSegue.m */; };
+		CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */; };
+		CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */; };
+		CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */; };
 		CB67A63118F2FB1B001022E7 /* NewProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67A63018F2FB1B001022E7 /* NewProjectViewController.m */; };
 		CB67A63518F2FB5E001022E7 /* ProjectTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67A63418F2FB5E001022E7 /* ProjectTypeViewController.m */; };
-		CB734B3418F5D2CE003268EB /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734B3318F5D2CE003268EB /* Incomes.m */; };
-		CB734B3718F5D2CE003268EB /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734B3618F5D2CE003268EB /* Periods.m */; };
-		CB734B3A18F5D2CE003268EB /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734B3918F5D2CE003268EB /* Projects.m */; };
+		CB69BE0D1900B6B40075F79A /* TempProject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB69BE0C1900B6B40075F79A /* TempProject.m */; };
 		CB734BDF18F5D62B003268EB /* IBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734B9E18F5D62B003268EB /* IBActionSheet.m */; };
 		CB734BE018F5D62B003268EB /* IBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734BA018F5D62B003268EB /* IBAlertView.m */; };
 		CB734BE118F5D62B003268EB /* IBCoreTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734BA218F5D62B003268EB /* IBCoreTextLabel.m */; };
@@ -77,16 +83,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB1EAE4618FF259F00282768 /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
+		CB1EAE4718FF259F00282768 /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
+		CB1EAE4918FF25A000282768 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
+		CB1EAE4A18FF25A000282768 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
+		CB1EAE4C18FF25A000282768 /* Expenses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expenses.h; sourceTree = "<group>"; };
+		CB1EAE4D18FF25A000282768 /* Expenses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expenses.m; sourceTree = "<group>"; };
+		CB1EAE4F18FF25A000282768 /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
+		CB1EAE5018FF25A000282768 /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
+		CB1EAE5218FF2F1000282768 /* SideMenuCustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCustomSegue.h; sourceTree = "<group>"; };
+		CB1EAE5318FF2F1000282768 /* SideMenuCustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCustomSegue.m; sourceTree = "<group>"; };
+		CB6109A718FEFC5500300B9A /* SavedProjectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewController.h; sourceTree = "<group>"; };
+		CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedProjectsTableViewController.m; sourceTree = "<group>"; };
+		CB6109AA18FEFDDC00300B9A /* SavedProjectsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewCell.h; sourceTree = "<group>"; };
+		CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedProjectsTableViewCell.m; sourceTree = "<group>"; };
+		CB63818918FE25B6007EFB7E /* SideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewController.h; sourceTree = "<group>"; };
+		CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewController.m; sourceTree = "<group>"; };
 		CB67A62F18F2FB1B001022E7 /* NewProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectViewController.h; sourceTree = "<group>"; };
 		CB67A63018F2FB1B001022E7 /* NewProjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewProjectViewController.m; sourceTree = "<group>"; };
 		CB67A63318F2FB5E001022E7 /* ProjectTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectTypeViewController.h; sourceTree = "<group>"; };
 		CB67A63418F2FB5E001022E7 /* ProjectTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectTypeViewController.m; sourceTree = "<group>"; };
-		CB734B3218F5D2CE003268EB /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
-		CB734B3318F5D2CE003268EB /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
-		CB734B3518F5D2CE003268EB /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
-		CB734B3618F5D2CE003268EB /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
-		CB734B3818F5D2CE003268EB /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
-		CB734B3918F5D2CE003268EB /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
+		CB69BE0B1900B6B40075F79A /* TempProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempProject.h; sourceTree = "<group>"; };
+		CB69BE0C1900B6B40075F79A /* TempProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempProject.m; sourceTree = "<group>"; };
 		CB734B9D18F5D62B003268EB /* IBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBActionSheet.h; sourceTree = "<group>"; };
 		CB734B9E18F5D62B003268EB /* IBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBActionSheet.m; sourceTree = "<group>"; };
 		CB734B9F18F5D62B003268EB /* IBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBAlertView.h; sourceTree = "<group>"; };
@@ -211,17 +229,36 @@
 			isa = PBXGroup;
 			children = (
 				CB734B9B18F5D62B003268EB /* InnerBand */,
-				CB734B3818F5D2CE003268EB /* Projects.h */,
-				CB734B3918F5D2CE003268EB /* Projects.m */,
-				CB734B3518F5D2CE003268EB /* Periods.h */,
-				CB734B3618F5D2CE003268EB /* Periods.m */,
-				CB734B3218F5D2CE003268EB /* Incomes.h */,
-				CB734B3318F5D2CE003268EB /* Incomes.m */,
 				CBEE9C9518F504BB00D2CAB5 /* Model.xcdatamodeld */,
+				CB1EAE4618FF259F00282768 /* Incomes.h */,
+				CB1EAE4718FF259F00282768 /* Incomes.m */,
+				CB1EAE4918FF25A000282768 /* Projects.h */,
+				CB1EAE4A18FF25A000282768 /* Projects.m */,
+				CB1EAE4C18FF25A000282768 /* Expenses.h */,
+				CB1EAE4D18FF25A000282768 /* Expenses.m */,
+				CB1EAE4F18FF25A000282768 /* Periods.h */,
+				CB1EAE5018FF25A000282768 /* Periods.m */,
 				CBEE9BC318F4E5E300D2CAB5 /* startup.plist */,
 			);
 			name = "Core Data";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		CB1EAE5518FF2F1F00282768 /* Menu Item */ = {
+			isa = PBXGroup;
+			children = (
+				CB6109AA18FEFDDC00300B9A /* SavedProjectsTableViewCell.h */,
+				CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */,
+				CB63818918FE25B6007EFB7E /* SideMenuTableViewController.h */,
+				CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */,
+				CB1EAE5218FF2F1000282768 /* SideMenuCustomSegue.h */,
+				CB1EAE5318FF2F1000282768 /* SideMenuCustomSegue.m */,
+				CB6109A718FEFC5500300B9A /* SavedProjectsTableViewController.h */,
+				CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */,
+				CB69BE0B1900B6B40075F79A /* TempProject.h */,
+				CB69BE0C1900B6B40075F79A /* TempProject.m */,
+			);
+			name = "Menu Item";
 			sourceTree = "<group>";
 		};
 		CB47BCB618E49BAD0068B53B /* Income */ = {
@@ -416,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				CBA0FF2718E366D800781F08 /* Main_iPhone.storyboard */,
+				CB1EAE5518FF2F1F00282768 /* Menu Item */,
 				CB67A63218F2FB23001022E7 /* Start Project */,
 				CBBE2A3018E735D00031B38A /* ContainerViewController.h */,
 				CBBE2A3118E735D00031B38A /* ContainerViewController.m */,
@@ -562,8 +600,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB734B3418F5D2CE003268EB /* Incomes.m in Sources */,
+				CB1EAE4B18FF25A000282768 /* Projects.m in Sources */,
 				CBA0FF2F18E366D800781F08 /* ViewController.m in Sources */,
+				CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */,
+				CB1EAE5118FF25A000282768 /* Periods.m in Sources */,
 				CB734BEF18F5D62B003268EB /* UIView+InnerBand.m in Sources */,
 				CB734BE018F5D62B003268EB /* IBAlertView.m in Sources */,
 				CB734BFA18F5D62B003268EB /* IBTargetAction.m in Sources */,
@@ -575,20 +615,22 @@
 				CBAF9A6218EA27CF00FBEB6E /* NewIncomeTableViewController.m in Sources */,
 				CBBE2A3218E735D00031B38A /* ContainerViewController.m in Sources */,
 				CB734BF318F5D62B003268EB /* IBBlockBasedDispatchMessage.m in Sources */,
-				CB734B3718F5D2CE003268EB /* Periods.m in Sources */,
 				CBA0FF2618E366D800781F08 /* AppDelegate.m in Sources */,
 				CB734BF718F5D62B003268EB /* IBDispatchMessage.m in Sources */,
 				CB67A63518F2FB5E001022E7 /* ProjectTypeViewController.m in Sources */,
+				CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */,
 				CB734BEA18F5D62B003268EB /* NSObject+InnerBand.m in Sources */,
 				CB734BEB18F5D62B003268EB /* NSString+Encoding.m in Sources */,
+				CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */,
 				CB734BE618F5D62B003268EB /* NSManagedObject+InnerBand.m in Sources */,
 				CB734BE818F5D62B003268EB /* NSMutableString+InnerBand.m in Sources */,
-				CB734B3A18F5D2CE003268EB /* Projects.m in Sources */,
+				CB1EAE4E18FF25A000282768 /* Expenses.m in Sources */,
 				CB734BEC18F5D62B003268EB /* NSString+InnerBand.m in Sources */,
 				CB734BF818F5D62B003268EB /* IBMessageCenter.m in Sources */,
 				CB734BF918F5D62B003268EB /* IBMessageProcessor.m in Sources */,
 				CB734BF518F5D62B003268EB /* IBHTTPPostRequestMessage.m in Sources */,
 				CB734BF418F5D62B003268EB /* IBHTTPGetRequestMessage.m in Sources */,
+				CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */,
 				CB734BE318F5D62B003268EB /* CGContext+InnerBand.m in Sources */,
 				CB734BEE18F5D62B003268EB /* UIImage+InnerBand.m in Sources */,
 				CB734BE918F5D62B003268EB /* NSNumber+InnerBand.m in Sources */,
@@ -601,6 +643,8 @@
 				CB67A63118F2FB1B001022E7 /* NewProjectViewController.m in Sources */,
 				CBA0FF2218E366D800781F08 /* main.m in Sources */,
 				CB734BE218F5D62B003268EB /* IBHTMLLabel.m in Sources */,
+				CB69BE0D1900B6B40075F79A /* TempProject.m in Sources */,
+				CB1EAE4818FF259F00282768 /* Incomes.m in Sources */,
 				CB734BDF18F5D62B003268EB /* IBActionSheet.m in Sources */,
 				CBEE9C9718F504BB00D2CAB5 /* Model.xcdatamodeld in Sources */,
 				CBD982A618E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m in Sources */,

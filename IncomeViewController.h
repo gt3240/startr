@@ -29,7 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *periodCollectionView;
+
 @property (strong,nonatomic)NSNumber *projectIndexToOpen;
-
-
+@property (strong, nonatomic)Projects *projectToOpen;
 @end

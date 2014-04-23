@@ -14,6 +14,8 @@
 #import "InnerBand.h"
 #import "Periods.h"
 #import "IncomeDetailsTableViewController.h"
+#import "OpenProjectTableViewController.h"
+#import "ProjectTypeViewController.h"
 
 
 @interface IncomeViewController ()
@@ -24,7 +26,7 @@
     int periodCount;
     float monthlyTotal;
     Periods *periodToShow;
-    Projects *projectToShow;
+    Projects *currentProject;
 }
 @end
 
@@ -43,36 +45,43 @@
 {
     [super viewDidLoad];
     
-    periodsArr = [NSArray array];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:27/255.0f green:114/255.0f blue:169/255.0f alpha:1.0f];
     
+    NSLog(@"project id is %@",self.projectIndexToOpen);
+    
+    periodsArr = [NSArray array];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"project id is %@", self.projectIndexToOpen);
     
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:27/255.0f green:114/255.0f blue:169/255.0f alpha:1.0f];
-    
-    projectsArr = [Projects allOrderedBy:@"date" ascending:NO];
-    //NSLog(@"%lu", (unsigned long)projectsArr.count);
-    
-    if (self.projectIndexToOpen){
-        [self loadPeriodFromProject:self.projectIndexToOpen.integerValue];
-    }else {
-        [self loadPeriodFromProject:1];
-    }
-    
-    if (!periodToShow) {
-        periodToShow = periodsArr[0];
+    if (!self.projectToOpen) {
+        NSLog(@"Please create a project or open a saved project");
+        self.projectIndexToOpen = @1;
     } else {
-        periodToShow = periodsArr[previousSelected];
+        
+        //[self loadPeriodFromProject:self.projectIndexToOpen.intValue];
+        currentProject = self.projectToOpen;
+        
+        [self loadPeriodFromProject:currentProject];
+        
+        //NSLog(@"projectIndexToOpen is %@", self.projectIndexToOpen);
+        //NSLog(@"project is %@", self.projectToOpen);
+        
+        
+        if (!periodToShow) {
+            periodToShow = periodsArr[0];
+        } else {
+            periodToShow = periodsArr[previousSelected];
+        }
+        
+        [self loadIncome];
+        
+        incomeRowCount = incomeArr.count;
     }
-    
-    [self loadIncome];
-    
-    incomeRowCount = incomeArr.count;
-    
-    periodCount = periodsArr.count;
+    [self.periodCollectionView reloadData];
+    [self.mainTableView reloadData];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,13 +99,11 @@
 
 #pragma mark - Buttons or action
 
--(void)loadPeriodFromProject:(int)projectindex
+-(void)loadPeriodFromProject:(Projects *)project
 {
     NSSortDescriptor *miSort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
     
-    projectToShow = projectsArr[projectindex];
-    
-    periodsArr = [projectToShow.period sortedArrayUsingDescriptors:@[miSort]];
+    periodsArr = [project.period sortedArrayUsingDescriptors:@[miSort]];
 }
 
 -(void)loadIncome
@@ -115,7 +122,6 @@
     
     [self.mainTableView reloadData];
     
-    
     NSLog(@"selected period tag is %ld", (long)selectedCell.tag);
 }
 
@@ -131,12 +137,12 @@
     NSNumber *addCount = @1;
     NSNumber *newCount = @([currentCount intValue] + [addCount intValue]);
     newPeriod.periodNum = newCount;
-    [projectToShow addPeriodObject:newPeriod];
+    [currentProject addPeriodObject:newPeriod];
     [[IBCoreDataStore mainStore] save];
     
     periodCount = newCount.intValue;
     
-    [self loadPeriodFromProject:1];
+    [self loadPeriodFromProject:currentProject];
     
     [self.periodCollectionView reloadData];
     
@@ -183,7 +189,8 @@
     if (section == 1){
         return 1;
     } else {
-        NSLog(@"cell periodCount is %d", periodCount);
+        periodCount = (int)periodsArr.count;
+        //NSLog(@"periodCount is %d", periodCount);
         return periodCount;
     }
 }
@@ -199,10 +206,13 @@
     
     ViewPeriodCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellType forIndexPath:indexPath];
     
-    int buttonTitle = indexPath.row + 1;
+    //int buttonTitle = indexPath.row + 1;
+    Periods *pToShow = periodsArr[indexPath.row];
+    
+    //NSLog(@"project id is %@", self.projectIndexToOpen);
     
     if(indexPath.section == 0){
-        cell.periodLabel.text = [NSString stringWithFormat:@"%d", buttonTitle];
+        cell.periodLabel.text = [NSString stringWithFormat:@"%@", pToShow.periodNum];
         cell.tag = indexPath.row;
         //NSLog(@"button is %@", buttonTitle);
         //NSLog(@"cell is %ld and selected is %ld", (long)cell.tag, (long)selectedCell.tag);
@@ -342,18 +352,19 @@
         
         destination.incomeToShowDetail = incomeToSend; // send the class over
         
-    } else {
-        
-        UINavigationController * nav = segue.destinationViewController;
+    }
     
+    if ([segue.identifier isEqualToString:@"newIncomeSegue"]){
+        UINavigationController * nav = segue.destinationViewController;
+        
         NewIncomeTableViewController * destination = nav.viewControllers[0];
         
         Periods *periodToSend = periodsArr[previousSelected];
         
         destination.periodToAdd = periodToSend;
         
-        destination.editIncomeDelegate = self;
-
+        destination.addIncomeDelegate = self;
+        
         NSLog(@"%@", periodToSend.periodNum);
     }
 }

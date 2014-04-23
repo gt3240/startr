@@ -38,7 +38,6 @@
     topeDerecha = superX+self.leftMenu.frame.size.width;
     
     leftPanelOrigin = self.leftMenu.layer.position;
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,26 +91,15 @@
 
 -(void)openSavedProjectAt:(NSNumber *)index
 {
-    //delegate from another class
     
-    // works, and index value gets passed, but menu button doesn't work after, cuz didn't push with container?
-    /*
-    IncomeViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"incomeList"];
-    [incomeNav pushViewController:vc animated:YES];
-    vc.projectIndexToOpen = index;
-    */
-    
-    // the value doesn't get passed, but everything else works
-    /*
-    IncomeViewController *vc = [[IncomeViewController alloc]init];
-    
-    vc.projectIndexToOpen = index;
-    */
     UITabBarController *tbc = self.childViewControllers[1];
     UINavigationController *nav = tbc.viewControllers[0];
     IncomeViewController *tvc = (IncomeViewController *)nav.topViewController;
     
+    
     tvc.projectIndexToOpen = index;
+    [tvc.periodCollectionView reloadData];
+    [tvc.mainTableView reloadData];
     
     [self menuButtonPushed]; // close side menu
 }

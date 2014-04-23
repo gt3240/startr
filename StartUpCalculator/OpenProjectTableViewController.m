@@ -1,25 +1,25 @@
 //
-//  SavedProjectsTableViewController.m
+//  OpenProjectTableViewController.m
 //  StartUpCalculator
 //
-//  Created by Tom on 4/16/14.
+//  Created by Tom on 4/19/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
-#import "SavedProjectsTableViewController.h"
-#import "Projects.h"
+#import "OpenProjectTableViewController.h"
+#import "OpenTableTableViewCell.h"
 #import "InnerBand.h"
-#import "SavedProjectsTableViewCell.h"
-#import "IncomeViewController.h"
+#import "Projects.h"
+#import "ContainerViewController.h"
 
-@interface SavedProjectsTableViewController ()
+@interface OpenProjectTableViewController ()
 {
     NSArray *savedProjectsArr;
     Projects *savedProjectC;
 }
 @end
 
-@implementation SavedProjectsTableViewController
+@implementation OpenProjectTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,11 +34,14 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    savedProjectsArr = [NSArray array];
-    
-    //NSLog(@"%@", self.indexOfSavedProject);
+    savedProjectsArr = [NSArray array];}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -46,13 +49,6 @@
     savedProjectsArr = [Projects allOrderedBy:@"date" ascending:NO];
     
     //NSLog(@"%lu", (unsigned long)savedProjectsArr.count);
-    
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -66,23 +62,36 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    
     return savedProjectsArr.count;
+
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SavedProjectsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"projectNameCell" forIndexPath:indexPath];
+    OpenTableTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SavedProjectsCell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
     savedProjectC = savedProjectsArr[indexPath.row];
     
-    cell.ProjectNameLabel.text = savedProjectC.name;
-    
+    cell.nameLabel.text = savedProjectC.name;
+    //cell.dateLabel.text = savedProjectC.date;
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         Projects *projectToDelete = savedProjectsArr[indexPath.row];
@@ -94,21 +103,21 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.indexOfSavedProject.proIndex =[NSNumber numberWithFloat:indexPath.row];
-    
-    //NSLog(@"%@", self.indexOfSavedProject);
-    
-    //self.savedProjects = savedProjectsArr[indexPath.row];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    if ([segue.identifier isEqualToString:@"OpenProjectsSegue"]) {
+        
+        UITabBarController *tbc = segue.destinationViewController;
+        UINavigationController *nav = tbc.viewControllers[0];
+        IncomeViewController *vc = nav.viewControllers[0];
+        
+        vc.projectToOpen = savedProjectsArr[self.savedProjectTable.indexPathForSelectedRow.row];
+    }
+
 }
 
 @end

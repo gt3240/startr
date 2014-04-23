@@ -12,4 +12,7 @@
 @interface ProjectTypeViewController : UIViewController
 
 @property (strong, nonatomic)NSString *projectName;
+
+@property (strong,nonatomic)NSNumber *projectIndexToOpen;
+
 @end

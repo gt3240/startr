@@ -12,7 +12,7 @@
 
 @protocol editOrNewIncomeDelegate <NSObject>
 
--(void)incomeEdited:(Incomes *)editedIncome;
+//-(void)incomeEdited:(Incomes *)editedIncome;
 
 -(void)incomeAdded;
 @end
@@ -35,7 +35,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *notes;
 @property (weak, nonatomic) IBOutlet UITextField *sourceLabel;
 
-@property (strong, nonatomic) id<editOrNewIncomeDelegate>  editIncomeDelegate;
+//@property (strong, nonatomic) id<editOrNewIncomeDelegate>  editIncomeDelegate;
 @property (strong, nonatomic) id<editOrNewIncomeDelegate>  addIncomeDelegate;
 
 

@@ -79,7 +79,7 @@
     
     destination.incomeToEdit = self.incomeToShowDetail;
     
-    destination.editIncomeDelegate = self;
+    destination.addIncomeDelegate = self;
     
     //NSMutableArray * imIncomeArrayToSend = [NSMutableArray array];
     

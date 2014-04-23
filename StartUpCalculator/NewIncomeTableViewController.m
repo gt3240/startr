@@ -106,7 +106,7 @@
         
         [[IBCoreDataStore mainStore] save];
         
-        [self.editIncomeDelegate incomeAdded];
+        [self.addIncomeDelegate incomeAdded];
         
         [self dismissViewControllerAnimated:YES completion:nil];
     }

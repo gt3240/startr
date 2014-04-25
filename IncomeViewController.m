@@ -44,9 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:27/255.0f green:114/255.0f blue:169/255.0f alpha:1.0f];
-    
+        
     NSLog(@"project id is %@",self.projectIndexToOpen);
     
     periodsArr = [NSArray array];
@@ -54,7 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
+    [self setTabBarItemColor];
     if (!self.projectToOpen) {
         NSLog(@"Please create a project or open a saved project");
         self.projectIndexToOpen = @1;
@@ -88,6 +86,19 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setTabBarItemColor
+{
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0/255.0f green:120/255.0f blue:255/255.0f alpha:1.0f];
+    
+    NSArray *items = self.tabBarController.tabBar.items;
+    UITabBarItem *outBtn = items[1];
+    UITabBarItem *resultBtn = items[2];
+    
+    outBtn.image = [[UIImage imageNamed:@"Out_iconBlue"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    resultBtn.image = [[UIImage imageNamed:@"Results_iconBlue"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 }
 
 - (NSString *)formatToCurrency: (NSNumber *)amount{

@@ -7,11 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1C56941908993300F59790 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C56931908993300F59790 /* About.png */; };
+		CB1C5696190899BA00F59790 /* About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB1C5695190899BA00F59790 /* About@2x.png */; };
 		CB1EAE4818FF259F00282768 /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4718FF259F00282768 /* Incomes.m */; };
 		CB1EAE4B18FF25A000282768 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4A18FF25A000282768 /* Projects.m */; };
 		CB1EAE4E18FF25A000282768 /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE4D18FF25A000282768 /* Expenses.m */; };
 		CB1EAE5118FF25A000282768 /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE5018FF25A000282768 /* Periods.m */; };
 		CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAE5318FF2F1000282768 /* SideMenuCustomSegue.m */; };
+		CB308F2B190824930083B716 /* TBController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2A190824930083B716 /* TBController.m */; };
+		CB3F31041909B11B00511A15 /* MainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */; };
+		CB3F31061909C29800511A15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F31051909C29800511A15 /* QuartzCore.framework */; };
 		CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */; };
 		CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */; };
 		CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */; };
@@ -46,6 +51,8 @@
 		CB734BF818F5D62B003268EB /* IBMessageCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734BDA18F5D62B003268EB /* IBMessageCenter.m */; };
 		CB734BF918F5D62B003268EB /* IBMessageProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734BDC18F5D62B003268EB /* IBMessageProcessor.m */; };
 		CB734BFA18F5D62B003268EB /* IBTargetAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CB734BDE18F5D62B003268EB /* IBTargetAction.m */; };
+		CB7D1414190A1AF9000A36F6 /* ExpensesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7D1413190A1AF9000A36F6 /* ExpensesViewController.m */; };
+		CB7D1418190A1E1F000A36F6 /* ResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7D1417190A1E1F000A36F6 /* ResultsTableViewController.m */; };
 		CB95A8B618EF7D78001279AB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB95A8B518EF7D78001279AB /* Images.xcassets */; };
 		CBA0FF1618E366D800781F08 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA0FF1518E366D800781F08 /* Foundation.framework */; };
 		CBA0FF1818E366D800781F08 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBA0FF1718E366D800781F08 /* CoreGraphics.framework */; };
@@ -85,6 +92,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CB1C56931908993300F59790 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
+		CB1C5695190899BA00F59790 /* About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About@2x.png"; sourceTree = "<group>"; };
 		CB1EAE4618FF259F00282768 /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
 		CB1EAE4718FF259F00282768 /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
 		CB1EAE4918FF25A000282768 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
@@ -95,6 +104,11 @@
 		CB1EAE5018FF25A000282768 /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
 		CB1EAE5218FF2F1000282768 /* SideMenuCustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCustomSegue.h; sourceTree = "<group>"; };
 		CB1EAE5318FF2F1000282768 /* SideMenuCustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCustomSegue.m; sourceTree = "<group>"; };
+		CB308F29190824930083B716 /* TBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBController.h; sourceTree = "<group>"; };
+		CB308F2A190824930083B716 /* TBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBController.m; sourceTree = "<group>"; };
+		CB3F31021909B11B00511A15 /* MainMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuTableViewController.h; path = ../MainMenuTableViewController.h; sourceTree = "<group>"; };
+		CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuTableViewController.m; path = ../MainMenuTableViewController.m; sourceTree = "<group>"; };
+		CB3F31051909C29800511A15 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CB6109A718FEFC5500300B9A /* SavedProjectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewController.h; sourceTree = "<group>"; };
 		CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedProjectsTableViewController.m; sourceTree = "<group>"; };
 		CB6109AA18FEFDDC00300B9A /* SavedProjectsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewCell.h; sourceTree = "<group>"; };
@@ -166,6 +180,10 @@
 		CB734BDC18F5D62B003268EB /* IBMessageProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBMessageProcessor.m; sourceTree = "<group>"; };
 		CB734BDD18F5D62B003268EB /* IBTargetAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBTargetAction.h; sourceTree = "<group>"; };
 		CB734BDE18F5D62B003268EB /* IBTargetAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IBTargetAction.m; sourceTree = "<group>"; };
+		CB7D1412190A1AF9000A36F6 /* ExpensesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpensesViewController.h; sourceTree = "<group>"; };
+		CB7D1413190A1AF9000A36F6 /* ExpensesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpensesViewController.m; sourceTree = "<group>"; };
+		CB7D1416190A1E1F000A36F6 /* ResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewController.h; sourceTree = "<group>"; };
+		CB7D1417190A1E1F000A36F6 /* ResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewController.m; sourceTree = "<group>"; };
 		CB95A8B518EF7D78001279AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CBA0FF1218E366D800781F08 /* StartUpCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartUpCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA0FF1518E366D800781F08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -212,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB3F31061909C29800511A15 /* QuartzCore.framework in Frameworks */,
 				CBA0FF1818E366D800781F08 /* CoreGraphics.framework in Frameworks */,
 				CBA0FF1A18E366D800781F08 /* UIKit.framework in Frameworks */,
 				CBA0FF1618E366D800781F08 /* Foundation.framework in Frameworks */,
@@ -293,6 +312,15 @@
 				CB67A63018F2FB1B001022E7 /* NewProjectViewController.m */,
 			);
 			name = "New Project";
+			sourceTree = "<group>";
+		};
+		CB696B5D19085DAB001FD144 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CB1C5695190899BA00F59790 /* About@2x.png */,
+				CB1C56931908993300F59790 /* About.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		CB734B9B18F5D62B003268EB /* InnerBand */ = {
@@ -425,6 +453,24 @@
 			path = "Dispatch Messages";
 			sourceTree = "<group>";
 		};
+		CB7D1415190A1AFC000A36F6 /* Expenses */ = {
+			isa = PBXGroup;
+			children = (
+				CB7D1412190A1AF9000A36F6 /* ExpensesViewController.h */,
+				CB7D1413190A1AF9000A36F6 /* ExpensesViewController.m */,
+			);
+			name = Expenses;
+			sourceTree = "<group>";
+		};
+		CB7D1419190A1E23000A36F6 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				CB7D1416190A1E1F000A36F6 /* ResultsTableViewController.h */,
+				CB7D1417190A1E1F000A36F6 /* ResultsTableViewController.m */,
+			);
+			name = Results;
+			sourceTree = "<group>";
+		};
 		CBA0FF0918E366D800781F08 = {
 			isa = PBXGroup;
 			children = (
@@ -447,6 +493,7 @@
 		CBA0FF1418E366D800781F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB3F31051909C29800511A15 /* QuartzCore.framework */,
 				CBA0FF1518E366D800781F08 /* Foundation.framework */,
 				CBA0FF1718E366D800781F08 /* CoreGraphics.framework */,
 				CBA0FF1918E366D800781F08 /* UIKit.framework */,
@@ -458,7 +505,11 @@
 		CBA0FF1B18E366D800781F08 /* StartUpCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				CB3F31021909B11B00511A15 /* MainMenuTableViewController.h */,
+				CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */,
 				CBA0FF2718E366D800781F08 /* Main_iPhone.storyboard */,
+				CB308F29190824930083B716 /* TBController.h */,
+				CB308F2A190824930083B716 /* TBController.m */,
 				CB1EAE5518FF2F1F00282768 /* Side Menu Item */,
 				CBC4B0F619035813008B991B /* Open Project */,
 				CB67A63218F2FB23001022E7 /* New Project */,
@@ -467,6 +518,8 @@
 				CBA0FF2418E366D800781F08 /* AppDelegate.h */,
 				CBA0FF2518E366D800781F08 /* AppDelegate.m */,
 				CB18390118F0D019001C1E85 /* Core Data */,
+				CB7D1419190A1E23000A36F6 /* Results */,
+				CB7D1415190A1AFC000A36F6 /* Expenses */,
 				CB47BCB618E49BAD0068B53B /* Income */,
 				CBA0FF1C18E366D800781F08 /* Supporting Files */,
 			);
@@ -480,6 +533,7 @@
 				CB95A8B518EF7D78001279AB /* Images.xcassets */,
 				CBA0FF2D18E366D800781F08 /* ViewController.h */,
 				CBA0FF2E18E366D800781F08 /* ViewController.m */,
+				CB696B5D19085DAB001FD144 /* Resources */,
 				CBA0FF1D18E366D800781F08 /* StartUpCalculator-Info.plist */,
 				CBA0FF1E18E366D800781F08 /* InfoPlist.strings */,
 				CBA0FF2118E366D800781F08 /* main.m */,
@@ -594,11 +648,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1C56941908993300F59790 /* About.png in Resources */,
 				CBA0FF2C18E366D800781F08 /* Main_iPad.storyboard in Resources */,
 				CB95A8B618EF7D78001279AB /* Images.xcassets in Resources */,
 				CBA0FF2918E366D800781F08 /* Main_iPhone.storyboard in Resources */,
 				CBEE9BC418F4E5E300D2CAB5 /* startup.plist in Resources */,
 				CBF42DEF18EB740200A78B54 /* Default-568h@2x.png in Resources */,
+				CB1C5696190899BA00F59790 /* About@2x.png in Resources */,
 				CBA0FF2018E366D800781F08 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,6 +679,7 @@
 				CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */,
 				CB1EAE5118FF25A000282768 /* Periods.m in Sources */,
 				CB734BEF18F5D62B003268EB /* UIView+InnerBand.m in Sources */,
+				CB7D1414190A1AF9000A36F6 /* ExpensesViewController.m in Sources */,
 				CB734BE018F5D62B003268EB /* IBAlertView.m in Sources */,
 				CB734BFA18F5D62B003268EB /* IBTargetAction.m in Sources */,
 				CB734BF618F5D62B003268EB /* IBSequencedMessage.m in Sources */,
@@ -645,6 +702,7 @@
 				CB1EAE4E18FF25A000282768 /* Expenses.m in Sources */,
 				CB734BEC18F5D62B003268EB /* NSString+InnerBand.m in Sources */,
 				CB734BF818F5D62B003268EB /* IBMessageCenter.m in Sources */,
+				CB308F2B190824930083B716 /* TBController.m in Sources */,
 				CB734BF918F5D62B003268EB /* IBMessageProcessor.m in Sources */,
 				CBC4B0F51903580E008B991B /* OpenTableTableViewCell.m in Sources */,
 				CB734BF518F5D62B003268EB /* IBHTTPPostRequestMessage.m in Sources */,
@@ -655,6 +713,7 @@
 				CB734BE918F5D62B003268EB /* NSNumber+InnerBand.m in Sources */,
 				CB734BED18F5D62B003268EB /* UIColor+InnerBand.m in Sources */,
 				CB734BE118F5D62B003268EB /* IBCoreTextLabel.m in Sources */,
+				CB7D1418190A1E1F000A36F6 /* ResultsTableViewController.m in Sources */,
 				CBC4B0F2190357FF008B991B /* OpenProjectTableViewController.m in Sources */,
 				CB734BE418F5D62B003268EB /* NSArray+InnerBand.m in Sources */,
 				CB734BF018F5D62B003268EB /* IBFunctions.m in Sources */,
@@ -664,6 +723,7 @@
 				CBA0FF2218E366D800781F08 /* main.m in Sources */,
 				CB734BE218F5D62B003268EB /* IBHTMLLabel.m in Sources */,
 				CB69BE0D1900B6B40075F79A /* TempProject.m in Sources */,
+				CB3F31041909B11B00511A15 /* MainMenuTableViewController.m in Sources */,
 				CB1EAE4818FF259F00282768 /* Incomes.m in Sources */,
 				CB734BDF18F5D62B003268EB /* IBActionSheet.m in Sources */,
 				CBEE9C9718F504BB00D2CAB5 /* Model.xcdatamodeld in Sources */,

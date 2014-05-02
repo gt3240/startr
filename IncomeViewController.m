@@ -16,6 +16,7 @@
 #import "IncomeDetailsTableViewController.h"
 #import "OpenProjectTableViewController.h"
 #import "ProjectTypeViewController.h"
+#import "IncomeDetailViewController.h"
 
 
 @interface IncomeViewController ()
@@ -55,7 +56,7 @@
     [self setTabBarItemColor];
     if (!self.projectToOpen) {
         NSLog(@"Please create a project or open a saved project");
-        self.projectIndexToOpen = @1;
+        //self.projectIndexToOpen = @1;
     } else {
         
         //[self loadPeriodFromProject:self.projectIndexToOpen.intValue];
@@ -77,6 +78,9 @@
         
         incomeRowCount = incomeArr.count;
     }
+    
+    self.termsTypeLabel.text = self.projectToOpen.type;
+    
     [self.periodCollectionView reloadData];
     [self.mainTableView reloadData];
 
@@ -90,7 +94,7 @@
 
 - (void)setTabBarItemColor
 {
-    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0/255.0f green:120/255.0f blue:255/255.0f alpha:1.0f];
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:255/255.0f alpha:1.0f];
     
     NSArray *items = self.tabBarController.tabBar.items;
     UITabBarItem *outBtn = items[1];
@@ -112,9 +116,9 @@
 
 -(void)loadPeriodFromProject:(Projects *)project
 {
-    NSSortDescriptor *miSort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
     
-    periodsArr = [project.period sortedArrayUsingDescriptors:@[miSort]];
+    periodsArr = [project.period sortedArrayUsingDescriptors:@[sort]];
 }
 
 -(void)loadIncome
@@ -264,7 +268,7 @@
     if (indexPath.section < 1)
         return 55.0;
     else {
-        return 95.0;
+        return 65.0;
     }
 }
 
@@ -286,17 +290,34 @@
         cell.totalLabel.text = [self formatToCurrency:periodToShow.incomeTotal];
         
     } else {
+        
         Incomes * imIncome = incomeArr [indexPath.row];
         
         cell.titleLabel.text = imIncome.title;
         cell.amountLabel.text = [self formatToCurrency:imIncome.amount];
         
+        if ([imIncome.type isEqualToString:@"Investment"])
+        {
+            cell.image.image = [UIImage imageNamed:@"investment"];
+        } else if ([imIncome.type isEqualToString:@"Loan"]){
+            cell.image.image = [UIImage imageNamed:@"loan"];
+        } else if ([imIncome.type isEqualToString:@"Sales"])
+        {
+            cell.image.image = [UIImage imageNamed:@"sales"];
+        } else if ([imIncome.type isEqualToString:@"Others"])
+        {
+            cell.image.image = [UIImage imageNamed:@"others"];
+        } else         {
+            cell.image.image = [UIImage imageNamed:@""];
+        }
+        
         cell.customerLabel.text = imIncome.source;
         
-        if ([imIncome.recurring intValue] == 1){
-            cell.recurringLabel.text = @"Recurring";
+        if ([imIncome.recurring  isEqual: @1]){
+            cell.recurringIcon.image = [UIImage imageNamed:@"recurring"];
         } else {
-            cell.recurringLabel.text = @"";
+            cell.recurringIcon.image = [UIImage imageNamed:@""];
+
         }
     }
     
@@ -357,7 +378,7 @@
     
     if([segue.identifier isEqualToString:@"detailsSegue"]){
         
-        IncomeDetailsTableViewController * destination = segue.destinationViewController;
+        IncomeDetailViewController * destination = segue.destinationViewController;
     
         Incomes *incomeToSend = incomeArr[self.mainTableView.indexPathForSelectedRow.row];
         
@@ -373,6 +394,7 @@
         Periods *periodToSend = periodsArr[previousSelected];
         
         destination.periodToAdd = periodToSend;
+        destination.projectToAdd = currentProject;
         
         destination.addIncomeDelegate = self;
         

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Incomes.h"
 #import "Periods.h"
+#import "projects.h"
 
 @protocol editOrNewIncomeDelegate <NSObject>
 
@@ -23,7 +24,8 @@
 
 @property (strong, nonatomic)Incomes *incomeToEdit;
 @property (strong, nonatomic)Periods *periodToAdd;
-@property (strong, nonatomic)NSString *test;
+@property (strong, nonatomic)Projects *projectToAdd;
+
 
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
@@ -34,6 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *notes;
 @property (weak, nonatomic) IBOutlet UITextField *sourceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *IncomeTypeLabel;
 
 //@property (strong, nonatomic) id<editOrNewIncomeDelegate>  editIncomeDelegate;
 @property (strong, nonatomic) id<editOrNewIncomeDelegate>  addIncomeDelegate;

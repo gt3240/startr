@@ -31,7 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"new project name is %@", self.projectName);
+    [self.termsTextField.layer setCornerRadius:5.0f];
+    //NSLog(@"new project name is %@", self.projectName);
     
 }
 
@@ -40,27 +41,39 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([self.termsTextField.text isEqualToString:@""]) {
+        
+        self.termsTextField.layer.borderColor=[[UIColor colorWithRed:232/255.0f green:91/255.0f blue:103/255.0f alpha:0.8f]CGColor];
+        
+        self.termsTextField.layer.borderWidth=2.0;
+        return NO;
+    } else {
+        return YES;
+    }
+}
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
     Projects *newProject;
-    if ([segue.identifier isEqualToString: @"weeklyType"]) {
-        newProject.type = @"week";
-    } else {
-        newProject.type = @"month";
-    }
     
     newProject = [Projects create];
     newProject.name = self.projectName;
     newProject.date = [NSDate date];
     
-    Periods *newPeriod;
+    if (self.typeSelector.selectedSegmentIndex == 0) {
+        newProject.type = @"Week";
+    } else {
+        newProject.type = @"Month";
+    }
     
-    newPeriod = [Periods create];
-    newPeriod.periodNum = @1;
-    newPeriod.projects = newProject;
-    
+    for (int i = 1; i <= self.termsTextField.text.intValue; i++) {
+        Periods *newPeriod;
+        newPeriod = [Periods create];
+        newPeriod.periodNum = [NSNumber numberWithInt:i];
+        newPeriod.projects = newProject;
+    }
     
     [[IBCoreDataStore mainStore] save];
     

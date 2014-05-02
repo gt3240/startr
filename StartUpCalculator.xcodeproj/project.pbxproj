@@ -78,6 +78,11 @@
 		CBD982A618E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD982A518E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m */; };
 		CBEE9BC418F4E5E300D2CAB5 /* startup.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBEE9BC318F4E5E300D2CAB5 /* startup.plist */; };
 		CBEE9C9718F504BB00D2CAB5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBEE9C9518F504BB00D2CAB5 /* Model.xcdatamodeld */; };
+		CBF1BB26190EBAC8000A38D2 /* IncomeTypeCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB25190EBAC8000A38D2 /* IncomeTypeCollectionViewController.m */; };
+		CBF1BB29190EBB04000A38D2 /* IncomeTypeCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB28190EBB04000A38D2 /* IncomeTypeCollectionCell.m */; };
+		CBF1BB2B190EBDAF000A38D2 /* IncomeType.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBF1BB2A190EBDAF000A38D2 /* IncomeType.plist */; };
+		CBF1BB2E190EBF5E000A38D2 /* IncomeAndExpenseType.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB2D190EBF5E000A38D2 /* IncomeAndExpenseType.m */; };
+		CBF1BB31190F0021000A38D2 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */; };
 		CBF42DEF18EB740200A78B54 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -222,6 +227,15 @@
 		CBD982A518E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IncomeItemsTableViewCell.m; path = ../IncomeItemsTableViewCell.m; sourceTree = "<group>"; };
 		CBEE9BC318F4E5E300D2CAB5 /* startup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startup.plist; sourceTree = "<group>"; };
 		CBEE9C9618F504BB00D2CAB5 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		CBF1BB24190EBAC8000A38D2 /* IncomeTypeCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeTypeCollectionViewController.h; sourceTree = "<group>"; };
+		CBF1BB25190EBAC8000A38D2 /* IncomeTypeCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeTypeCollectionViewController.m; sourceTree = "<group>"; };
+		CBF1BB27190EBB04000A38D2 /* IncomeTypeCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeTypeCollectionCell.h; sourceTree = "<group>"; };
+		CBF1BB28190EBB04000A38D2 /* IncomeTypeCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeTypeCollectionCell.m; sourceTree = "<group>"; };
+		CBF1BB2A190EBDAF000A38D2 /* IncomeType.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = IncomeType.plist; sourceTree = "<group>"; };
+		CBF1BB2C190EBF5E000A38D2 /* IncomeAndExpenseType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeAndExpenseType.h; sourceTree = "<group>"; };
+		CBF1BB2D190EBF5E000A38D2 /* IncomeAndExpenseType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeAndExpenseType.m; sourceTree = "<group>"; };
+		CBF1BB2F190F0021000A38D2 /* IncomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeDetailViewController.h; sourceTree = "<group>"; };
+		CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
 		CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -289,8 +303,17 @@
 		CB47BCB618E49BAD0068B53B /* Income */ = {
 			isa = PBXGroup;
 			children = (
+				CBF1BB2A190EBDAF000A38D2 /* IncomeType.plist */,
+				CBF1BB27190EBB04000A38D2 /* IncomeTypeCollectionCell.h */,
+				CBF1BB28190EBB04000A38D2 /* IncomeTypeCollectionCell.m */,
+				CBF1BB24190EBAC8000A38D2 /* IncomeTypeCollectionViewController.h */,
+				CBF1BB25190EBAC8000A38D2 /* IncomeTypeCollectionViewController.m */,
+				CBF1BB2C190EBF5E000A38D2 /* IncomeAndExpenseType.h */,
+				CBF1BB2D190EBF5E000A38D2 /* IncomeAndExpenseType.m */,
 				CBAF9A6018EA27CF00FBEB6E /* NewIncomeTableViewController.h */,
 				CBAF9A6118EA27CF00FBEB6E /* NewIncomeTableViewController.m */,
+				CBF1BB2F190F0021000A38D2 /* IncomeDetailViewController.h */,
+				CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */,
 				CBAF9A5D18EA19F000FBEB6E /* IncomeDetailsTableViewController.h */,
 				CBAF9A5E18EA19F000FBEB6E /* IncomeDetailsTableViewController.m */,
 				CBD982A418E5FF2600AFA3C0 /* IncomeItemsTableViewCell.h */,
@@ -649,6 +672,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB1C56941908993300F59790 /* About.png in Resources */,
+				CBF1BB2B190EBDAF000A38D2 /* IncomeType.plist in Resources */,
 				CBA0FF2C18E366D800781F08 /* Main_iPad.storyboard in Resources */,
 				CB95A8B618EF7D78001279AB /* Images.xcassets in Resources */,
 				CBA0FF2918E366D800781F08 /* Main_iPhone.storyboard in Resources */,
@@ -681,6 +705,7 @@
 				CB734BEF18F5D62B003268EB /* UIView+InnerBand.m in Sources */,
 				CB7D1414190A1AF9000A36F6 /* ExpensesViewController.m in Sources */,
 				CB734BE018F5D62B003268EB /* IBAlertView.m in Sources */,
+				CBF1BB26190EBAC8000A38D2 /* IncomeTypeCollectionViewController.m in Sources */,
 				CB734BFA18F5D62B003268EB /* IBTargetAction.m in Sources */,
 				CB734BF618F5D62B003268EB /* IBSequencedMessage.m in Sources */,
 				CB734BE718F5D62B003268EB /* NSMutableArray+InnerBand.m in Sources */,
@@ -693,6 +718,7 @@
 				CBA0FF2618E366D800781F08 /* AppDelegate.m in Sources */,
 				CB734BF718F5D62B003268EB /* IBDispatchMessage.m in Sources */,
 				CB67A63518F2FB5E001022E7 /* ProjectTypeViewController.m in Sources */,
+				CBF1BB29190EBB04000A38D2 /* IncomeTypeCollectionCell.m in Sources */,
 				CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */,
 				CB734BEA18F5D62B003268EB /* NSObject+InnerBand.m in Sources */,
 				CB734BEB18F5D62B003268EB /* NSString+Encoding.m in Sources */,
@@ -715,6 +741,7 @@
 				CB734BE118F5D62B003268EB /* IBCoreTextLabel.m in Sources */,
 				CB7D1418190A1E1F000A36F6 /* ResultsTableViewController.m in Sources */,
 				CBC4B0F2190357FF008B991B /* OpenProjectTableViewController.m in Sources */,
+				CBF1BB2E190EBF5E000A38D2 /* IncomeAndExpenseType.m in Sources */,
 				CB734BE418F5D62B003268EB /* NSArray+InnerBand.m in Sources */,
 				CB734BF018F5D62B003268EB /* IBFunctions.m in Sources */,
 				CB734BF218F5D62B003268EB /* IBCoreDataStore.m in Sources */,
@@ -728,6 +755,7 @@
 				CB734BDF18F5D62B003268EB /* IBActionSheet.m in Sources */,
 				CBEE9C9718F504BB00D2CAB5 /* Model.xcdatamodeld in Sources */,
 				CBD982A618E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m in Sources */,
+				CBF1BB31190F0021000A38D2 /* IncomeDetailViewController.m in Sources */,
 				CBD982A018E5FED100AFA3C0 /* IncomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
     [self.tableView setBackgroundView:imageView];
     
@@ -36,6 +36,12 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-  (void)viewWillAppear:(BOOL)animated
+{
+    self.navigationController.navigationBar.translucent = YES;
+
 }
 
 - (void)didReceiveMemoryWarning

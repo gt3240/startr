@@ -29,7 +29,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
+    self.navigationController.navigationBar.translucent = YES;
+
     [self.projectNameTextField.layer setCornerRadius:5.0f];
 
 }

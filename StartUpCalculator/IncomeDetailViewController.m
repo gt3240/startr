@@ -57,7 +57,13 @@
     if ([self.incomeToShowDetail.recurring intValue] == 1) {
         
         //self.recurringLabel.text = @"Increased by";
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm:ss"];
+        self.notesTextView.text = [dateFormatter stringFromDate:self.incomeToShowDetail.recurringDateID];
         
+        self.recurUntilLabel.text = [NSString stringWithFormat: @"Recur until %@ %@", self.incomeToShowDetail.period.projects.type, self.incomeToShowDetail.recurringEndPeriod.stringValue];
+        
+        NSLog(@"type is %@", self.incomeToShowDetail.period.periodType);
         self.recurringAmountLabel.text = self.incomeToShowDetail.recurringAmount.stringValue;
         if ([self.incomeToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
             
@@ -65,7 +71,6 @@
         } else {
             
             self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.incomeToShowDetail.recurringAmount];
-            
         }
     } else {
         self.recurringAmountLabel.text = @"---";
@@ -100,6 +105,10 @@
     
     destination.incomeToEdit = self.incomeToShowDetail;
     
+    destination.projectToAdd = self.projectToAdd;
+    destination.periodToAdd = self.periodToAdd;
+
+
     destination.addIncomeDelegate = self;
     
     //NSMutableArray * imIncomeArrayToSend = [NSMutableArray array];

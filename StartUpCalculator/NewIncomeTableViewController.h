@@ -19,7 +19,7 @@
 @end
 
 
-@interface NewIncomeTableViewController : UITableViewController
+@interface NewIncomeTableViewController : UITableViewController<UIAlertViewDelegate, UIActionSheetDelegate>
 
 
 @property (strong, nonatomic)Incomes *incomeToEdit;

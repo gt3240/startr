@@ -31,6 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationController.navigationBar.translucent = YES;
+
     [self.termsTextField.layer setCornerRadius:5.0f];
     //NSLog(@"new project name is %@", self.projectName);
     

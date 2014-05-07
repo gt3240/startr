@@ -54,7 +54,7 @@
         self.recurringAmountLabel.text = self.incomeToShowDetail.recurringAmount.stringValue;
         if ([self.incomeToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
             
-            self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.incomeToShowDetail.recurringAmount];
+            self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.incomeToShowDetail.period.projects.type];
         } else {
             
             self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.incomeToShowDetail.recurringAmount];

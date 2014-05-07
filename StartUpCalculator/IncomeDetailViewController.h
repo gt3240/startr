@@ -20,5 +20,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *typeImage;
 
 @property (strong, nonatomic)Incomes *incomeToShowDetail;
+@property (weak, nonatomic) IBOutlet UITextView *notesTextView;
+@property (weak, nonatomic) IBOutlet UILabel *recurUntilLabel;
 
+@property (strong, nonatomic)Projects *projectToAdd;
+@property (strong, nonatomic)Periods *periodToAdd;
 @end

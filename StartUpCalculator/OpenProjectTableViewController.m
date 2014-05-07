@@ -16,6 +16,7 @@
 {
     NSArray *savedProjectsArr;
     Projects *savedProjectC;
+    NSDateFormatter *dateFormatter;
 }
 @end
 
@@ -35,8 +36,14 @@
     [super viewDidLoad];
     
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationController.navigationBar.translucent = NO;
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:255/255.0f alpha:1.0f];
+    savedProjectsArr = [NSArray array];
     
-    savedProjectsArr = [NSArray array];}
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
+
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -47,7 +54,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     savedProjectsArr = [Projects allOrderedBy:@"date" ascending:NO];
-    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
+    [self.tableView setBackgroundView:imageView];
+
     //NSLog(@"%lu", (unsigned long)savedProjectsArr.count);
 }
 
@@ -77,7 +86,7 @@
     savedProjectC = savedProjectsArr[indexPath.row];
     
     cell.nameLabel.text = savedProjectC.name;
-    //cell.dateLabel.text = savedProjectC.date;
+    cell.dateLabel.text = [dateFormatter stringFromDate:savedProjectC.date];
     return cell;
 }
 

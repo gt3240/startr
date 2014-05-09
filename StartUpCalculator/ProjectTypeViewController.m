@@ -11,6 +11,7 @@
 #import "Projects.h"
 #import "Periods.h"
 #import "IncomeViewController.h"
+#import "TBController.h"
 
 @interface ProjectTypeViewController ()
 
@@ -79,14 +80,14 @@
     
     [[IBCoreDataStore mainStore] save];
     
-    UITabBarController *tbc = segue.destinationViewController;
+    TBController *tbc = segue.destinationViewController;
     UINavigationController *nav = tbc.viewControllers[0];
     IncomeViewController *vc = nav.viewControllers[0];
     
     vc.projectIndexToOpen = @1;
     vc.projectToOpen = newProject;
     
-    
+    tbc.projectToOpen = newProject;
 }
 
 @end

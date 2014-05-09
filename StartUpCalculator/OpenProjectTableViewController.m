@@ -11,6 +11,7 @@
 #import "InnerBand.h"
 #import "Projects.h"
 #import "ContainerViewController.h"
+#import "TBController.h"
 
 @interface OpenProjectTableViewController ()
 {
@@ -120,11 +121,14 @@
     
     if ([segue.identifier isEqualToString:@"OpenProjectsSegue"]) {
         
-        UITabBarController *tbc = segue.destinationViewController;
+        TBController *tbc = segue.destinationViewController;
         UINavigationController *nav = tbc.viewControllers[0];
         IncomeViewController *vc = nav.viewControllers[0];
         
         vc.projectToOpen = savedProjectsArr[self.savedProjectTable.indexPathForSelectedRow.row];
+        
+        // pass project to tabbar
+        tbc.projectToOpen = savedProjectsArr[self.savedProjectTable.indexPathForSelectedRow.row];
     }
 
 }

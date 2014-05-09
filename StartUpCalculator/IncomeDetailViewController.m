@@ -50,7 +50,7 @@
     {
         self.typeImage.image = [UIImage imageNamed:@"others"];
     } else         {
-        self.typeImage.image = [UIImage imageNamed:@""];
+        self.typeImage.image = [UIImage imageNamed:@"PlaceHolderBlue"];
     }
 
     
@@ -82,13 +82,25 @@
 {
     self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:255/255.0f alpha:1.0f];
     
+    self.tabBarController.tabBar.tintColor = [UIColor whiteColor];
+    
     NSArray *items = self.tabBarController.tabBar.items;
+    UITabBarItem *inBtn = items[0];
     UITabBarItem *outBtn = items[1];
     UITabBarItem *resultBtn = items[2];
+    UITabBarItem *infoBtn = items[3];
+    
     
     outBtn.image = [[UIImage imageNamed:@"Out_iconBlue"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     resultBtn.image = [[UIImage imageNamed:@"Results_iconBlue"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    infoBtn.image = [[UIImage imageNamed:@"profile_iconBlue"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    [inBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateHighlighted];
+    
+    [outBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
+    [resultBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
+    [infoBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
 }
 
 - (NSString *)formatToCurrency: (NSNumber *)amount{
@@ -108,8 +120,7 @@
     destination.projectToAdd = self.projectToAdd;
     destination.periodToAdd = self.periodToAdd;
 
-
-    destination.addIncomeDelegate = self;
+    //destination.addIncomeDelegate = self;
     
     //NSMutableArray * imIncomeArrayToSend = [NSMutableArray array];
     

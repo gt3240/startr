@@ -43,7 +43,7 @@
     incomeTypeObj = [[IncomeAndExpenseType alloc]init];
     
     if (self.incomeToEdit){
-        
+        self.title = @"Edit";
         self.titleTextField.text = self.incomeToEdit.title;
         self.amountTextField.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.amount];
         self.sourceLabel.text = self.incomeToEdit.source;
@@ -129,20 +129,19 @@
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
-        
-        //First update period income total
-        startingAmount = self.amountTextField.text.floatValue;
-        
-        newAmount = startingAmount;
-        
-        if ([shouldRecurr isEqualToNumber:@1]) {
-            [self setRecurringInfoFor:addIncome];
-            
-        } else {
-            [self createNewIncome:addIncome toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue];
-        }
-        
         if ([self validateInputs] == YES) {
+            //First update period income total
+            startingAmount = self.amountTextField.text.floatValue;
+            
+            newAmount = startingAmount;
+            
+            if ([shouldRecurr isEqualToNumber:@1]) {
+                [self setRecurringInfoFor:addIncome];
+                
+            } else {
+                [self createNewIncome:addIncome toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue];
+            }
+            
             [self.periodToAdd addIncomeObject:addIncome];
             
             [[IBCoreDataStore mainStore] save];
@@ -374,7 +373,12 @@
     
     if(self.incomeToEdit){
         if (section == 1) {
-            return 1;
+            if ([shouldRecurr  isEqual: @1]) {
+                return 1;
+
+            } else {
+                return 0;
+            }
         }
     } else {
         if (section == 1) {

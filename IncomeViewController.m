@@ -75,7 +75,7 @@
         
         [self loadIncome];
         
-        incomeRowCount = incomeArr.count;
+        incomeRowCount = (int)incomeArr.count;
     }
     
     self.termsTypeLabel.text = self.projectToOpen.type;
@@ -114,7 +114,6 @@
     [outBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
     [resultBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
     [infoBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:93/255.0f blue:188/255.0f alpha:1.0f]} forState:UIControlStateNormal];
-
 }
 
 - (NSString *)formatToCurrency: (NSNumber *)amount{
@@ -145,7 +144,7 @@
     
     [self loadIncome];
     
-    incomeRowCount = incomeArr.count;
+    incomeRowCount = (int)incomeArr.count;
     
     [self.mainTableView reloadData];
     
@@ -177,41 +176,13 @@
     NSLog(@"period count is %d, current count is %d", periodCount, newCount.intValue);
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (previousSelected >=0) {
-        ViewPeriodCollectionCell *previousCell = [collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:previousSelected inSection:0]];
-        [previousCell setButtonSelected:NO];
-    }
-        
-    selectedCell = [collectionView cellForItemAtIndexPath:indexPath];
-    
-    [selectedCell setButtonSelected:YES];
-    previousSelected = (int)selectedCell.tag;
-    
-    //refresh table when selected
-    NSSortDescriptor *incomeSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
-    
-    periodToShow = periodsArr[selectedCell.tag];
-    
-    //NSLog(@"selected tag is %ld", (long)selectedCell.tag);
-    
-    incomeArr = [periodToShow.income sortedArrayUsingDescriptors:@[incomeSort]];
-    
-    incomeRowCount = incomeArr.count;
-    //NSLog(@"income count is %lu", (unsigned long)incomeArr.count);
-    
-    [self.mainTableView reloadData];
-    
-}
-
 #pragma mark - CollectionView
--(int)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+-(long)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
 }
 
--(int)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+-(long)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 1){
         return 1;
@@ -248,10 +219,41 @@
             
             [cell setButtonSelected:NO];
         } else {
+            // set text color when nothing is selected
+            [cell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
             [cell setButtonSelected:YES];
         }
     }
         return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (previousSelected >=0) {
+        ViewPeriodCollectionCell *previousCell = [collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:previousSelected inSection:0]];
+        [previousCell setButtonSelected:NO];
+    }
+    
+    selectedCell = [collectionView cellForItemAtIndexPath:indexPath];
+    
+    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    [selectedCell setButtonSelected:YES];
+    
+    previousSelected = (int)selectedCell.tag;
+    
+    //refresh table when selected
+    NSSortDescriptor *incomeSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    
+    periodToShow = periodsArr[selectedCell.tag];
+    
+    //NSLog(@"selected tag is %ld", (long)selectedCell.tag);
+    
+    incomeArr = [periodToShow.income sortedArrayUsingDescriptors:@[incomeSort]];
+    
+    incomeRowCount = (int)incomeArr.count;
+    //NSLog(@"income count is %lu", (unsigned long)incomeArr.count);
+    
+    [self.mainTableView reloadData];
 }
 
 
@@ -320,7 +322,7 @@
         {
             cell.image.image = [UIImage imageNamed:@"others"];
         } else         {
-            cell.image.image = [UIImage imageNamed:@"edit_icon"];
+            cell.image.image = [UIImage imageNamed:@"PlaceHolderBlue"];
         }
         
         cell.customerLabel.text = imIncome.source;
@@ -347,7 +349,7 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
          
          [self.mainTableView beginUpdates];
          
@@ -416,6 +418,5 @@
         NSLog(@"%@", periodToSend.periodNum);
     }
 }
-
 
 @end

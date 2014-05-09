@@ -10,7 +10,7 @@
 #import "Incomes.h"
 #import "NewIncomeTableViewController.h"
 
-@interface IncomeDetailViewController : UIViewController<editOrNewIncomeDelegate>
+@interface IncomeDetailViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Projects.h"
 
 @interface TBController : UITabBarController
+
+@property (strong,nonatomic)NSNumber *projectIndexToOpen;
+@property (strong, nonatomic)Projects *projectToOpen;
 
 @end

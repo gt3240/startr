@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "bgTotal.png"
+      "filename" : "BlueBar.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "bgTotal-1.png"
+      "filename" : "BlueBar-1.png"
     }
   ],
   "info" : {

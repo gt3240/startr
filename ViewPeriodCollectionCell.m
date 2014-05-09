@@ -34,7 +34,8 @@
         UIBezierPath * circleBackGround = [UIBezierPath bezierPathWithOvalInRect:box];
         [[UIColor whiteColor] setFill];
         [circleBackGround fill];
-        [self.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+        
+        //[self.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
     } else {
         [self.periodLabel setTextColor:[UIColor whiteColor]];
     }

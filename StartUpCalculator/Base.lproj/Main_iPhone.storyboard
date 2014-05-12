@@ -687,6 +687,9 @@
                                     <segment title="Yearly"/>
                                 </segments>
                                 <color key="tintColor" red="0.1058823529" green="0.67450980390000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="displayTypeChanged:" destination="XpX-RA-mpP" eventType="valueChanged" id="fWY-j4-DC8"/>
+                                </connections>
                             </segmentedControl>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YUK-9x-lmV">
                                 <rect key="frame" x="0.0" y="56" width="320" height="7"/>
@@ -1241,7 +1244,7 @@
             </objects>
             <point key="canvasLocation" x="3296" y="-318"/>
         </scene>
-        <!--New Expense Table View Controller - Root View Controller-->
+        <!--New Expense Table View Controller-->
         <scene sceneID="Gao-wx-M9f">
             <objects>
                 <tableViewController id="ZMo-7J-cXk" customClass="NewExpenseTableViewController" sceneMemberID="viewController">
@@ -1456,7 +1459,7 @@
                             <outlet property="delegate" destination="ZMo-7J-cXk" id="CQI-bF-Wsy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="xWX-1z-7j7">
+                    <navigationItem key="navigationItem" id="xWX-1z-7j7">
                         <barButtonItem key="leftBarButtonItem" image="cancel_icon" id="sNC-Qx-Dgd">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -1547,6 +1550,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Pun-d2-Ezt">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.92156862750000001" green="0.36078431370000003" blue="0.40784313729999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="ZMo-7J-cXk" kind="relationship" relationship="rootViewController" id="7UC-d9-aHv"/>

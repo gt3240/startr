@@ -714,7 +714,7 @@
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_date" translatesAutoresizingMaskIntoConstraints="NO" id="neV-Xu-r57">
-                                                    <rect key="frame" x="22" y="23" width="34" height="41"/>
+                                                    <rect key="frame" x="22" y="33" width="34" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="34" id="88B-Zc-Nel"/>
@@ -722,7 +722,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6GS-q4-yXt">
-                                                    <rect key="frame" x="27" y="36" width="25" height="21"/>
+                                                    <rect key="frame" x="27" y="46" width="25" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="aPv-z9-e7O"/>
@@ -790,10 +790,23 @@
                                                     <color key="textColor" red="0.1058823529" green="0.67450980390000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quarterly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yvi-sD-3lZ">
+                                                    <rect key="frame" x="11" y="12" width="57" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Y1u-12-334"/>
+                                                        <constraint firstAttribute="width" constant="57" id="fTb-LU-Ft0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <color key="textColor" red="0.1058823529" green="0.67450980390000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="cjV-hZ-kcI" firstAttribute="leading" secondItem="yvi-sD-3lZ" secondAttribute="trailing" constant="-68" id="0f6-9e-bnJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="cjV-hZ-kcI" secondAttribute="bottom" id="65B-k6-Wt5"/>
                                                 <constraint firstItem="cjV-hZ-kcI" firstAttribute="leading" secondItem="neV-Xu-r57" secondAttribute="leading" constant="-22" id="9pj-z4-cQo"/>
+                                                <constraint firstItem="6GS-q4-yXt" firstAttribute="top" secondItem="yvi-sD-3lZ" secondAttribute="bottom" constant="13" id="BOs-Fu-4lF"/>
                                                 <constraint firstItem="DuB-x4-jMF" firstAttribute="top" secondItem="cjV-hZ-kcI" secondAttribute="top" constant="65" id="E92-qw-sTs"/>
                                                 <constraint firstItem="DuB-x4-jMF" firstAttribute="leading" secondItem="cjV-hZ-kcI" secondAttribute="leading" constant="80.5" id="MfT-HZ-jXC"/>
                                                 <constraint firstItem="HAl-Vf-fZw" firstAttribute="top" secondItem="cjV-hZ-kcI" secondAttribute="top" constant="20" id="Paw-Rs-6MQ"/>
@@ -801,7 +814,7 @@
                                                 <constraint firstItem="6GS-q4-yXt" firstAttribute="leading" secondItem="neV-Xu-r57" secondAttribute="trailing" constant="-29" id="YAK-GW-hjD"/>
                                                 <constraint firstAttribute="trailing" secondItem="cjV-hZ-kcI" secondAttribute="trailing" id="YlY-dd-gbq"/>
                                                 <constraint firstItem="cjV-hZ-kcI" firstAttribute="leading" secondItem="ND1-gP-eH5" secondAttribute="leading" id="hpH-RC-g8l"/>
-                                                <constraint firstItem="cjV-hZ-kcI" firstAttribute="top" secondItem="neV-Xu-r57" secondAttribute="bottom" constant="-64" id="l3S-oZ-dju"/>
+                                                <constraint firstItem="cjV-hZ-kcI" firstAttribute="top" secondItem="neV-Xu-r57" secondAttribute="bottom" constant="-74" id="l3S-oZ-dju"/>
                                                 <constraint firstItem="HAl-Vf-fZw" firstAttribute="leading" secondItem="cjV-hZ-kcI" secondAttribute="leading" constant="80.5" id="wBp-Jr-VOB"/>
                                                 <constraint firstItem="cjV-hZ-kcI" firstAttribute="top" secondItem="ND1-gP-eH5" secondAttribute="top" id="zbf-WA-KT0"/>
                                             </constraints>
@@ -812,6 +825,7 @@
                                             <outlet property="incomeAmountLabel" destination="hKu-ff-qK9" id="b2i-zI-D0W"/>
                                             <outlet property="periodLabel" destination="6GS-q4-yXt" id="Nrh-ko-7y6"/>
                                             <outlet property="totalAmountLabel" destination="SJD-tf-COq" id="nIJ-1S-3ej"/>
+                                            <outlet property="typeLabel" destination="yvi-sD-3lZ" id="kzh-24-iPb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -826,6 +840,9 @@
                     <navigationItem key="navigationItem" id="kQH-KQ-5Hw">
                         <barButtonItem key="leftBarButtonItem" image="menu_icon" id="Wbx-5p-v9P">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="Wvh-DW-h1A" kind="modal" id="y3I-30-KWa"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -834,7 +851,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YCh-Lv-Rjb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2816" y="1064"/>
+            <point key="canvasLocation" x="2764" y="1064"/>
         </scene>
         <!--New Income Table View Controller - New Income-->
         <scene sceneID="22s-XV-5zw">
@@ -2032,8 +2049,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="y3I-30-KWa"/>
         <segue reference="G84-9D-cy4"/>
-        <segue reference="mnH-SV-IUm"/>
         <segue reference="o2a-pW-uAa"/>
         <segue reference="G3C-2P-T9m"/>
     </inferredMetricsTieBreakers>

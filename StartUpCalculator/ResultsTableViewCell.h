@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *incomeAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *expenseAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *periodLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
 @end

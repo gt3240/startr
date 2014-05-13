@@ -19,8 +19,9 @@
     NSMutableArray *incomeArr;
     NSArray *expenseArr;
     NSMutableArray *dicArr;
-    NSString * displayType; // 1 for monthly, 2 for quarterly, 3 for yearly
+    NSString * displayType;
     int sectionCount;
+    int currentSection;
 }
 @end
 
@@ -46,10 +47,8 @@
     incomeArr = [NSMutableArray array];
     expenseArr = [NSArray array];
     dicArr = [NSMutableArray array];
-    [self loadPeriodFromProject:self.openProject];
-    [self groupPeriodArr:periodsArr intoGroupsof:1];
-    sectionCount = ceil(((double)incomeArr.count) / 12);
-    displayType = @"monthly"; // 1 for monthly, 2 for quarterly, 3 for yearly
+    displayType = @"monthly";
+    //[self groupPeriodArr:periodsArr intoGroupsof:1];
     
 }
 
@@ -58,14 +57,18 @@
     [self setTabBarItemColor];
     //NSLog(@"project is %@", self.openProject);
     
-    if (!self.openProject) {
-        //alert
-    } else {
+    [self loadPeriodFromProject:self.openProject];
     
-        [self loadPeriodFromProject:self.openProject];
+    [self groupPeriodArr:periodsArr intoGroupsof:displayType];
+    
+    if ([displayType isEqualToString:@"monthly"]) {
+        sectionCount = ceil(((double)incomeArr.count) / 12);
+    } else if ([displayType isEqualToString:@"quarterly"]) {
+        sectionCount = ceil(((double)incomeArr.count) / 4);
+    } if ([displayType isEqualToString:@"yearly"]) {
+        sectionCount = 1;
     }
     
-    //[self groupPeriodArr:periodsArr intoGroupsof:1];
     [self.resultTBV reloadData];
 }
 
@@ -108,27 +111,21 @@
 
 - (IBAction)displayTypeChanged:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 1) {
-        [self groupPeriodArr:periodsArr intoGroupsof:3];
-        NSLog(@" Quarterly selected");
-        NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
         displayType = @"quarterly";
+        [self groupPeriodArr:periodsArr intoGroupsof:displayType];
         sectionCount = ceil(((double)incomeArr.count) / 4);
         
         [self.resultTBV reloadData];
         
     } else if (sender.selectedSegmentIndex == 2) {
-        NSLog(@" Yearly selected");
-        [self groupPeriodArr:periodsArr intoGroupsof:12];
-        NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
         displayType = @"yearly";
-        sectionCount = incomeArr.count;
+        [self groupPeriodArr:periodsArr intoGroupsof:displayType];
+        sectionCount = 1;
         [self.resultTBV reloadData];
 
     } else {
-        NSLog(@" Monthly selected");
-        [self groupPeriodArr:periodsArr intoGroupsof:1];
-        NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
         displayType = @"monthly";
+        [self groupPeriodArr:periodsArr intoGroupsof:displayType];
         sectionCount = ceil(((double)incomeArr.count) / 12);
         [self.resultTBV reloadData];
     }
@@ -143,16 +140,18 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    
-    NSString *sectionName = [NSString stringWithFormat:@"Year %ld", (long)section + 1];
-    
-    return sectionName;
-
+    if ([displayType isEqualToString:@"monthly"] || [displayType isEqualToString:@"quarterly"]) {
+        NSString *sectionName = [NSString stringWithFormat:@"Year %ld", (long)section + 1];
+        
+        return sectionName;
+    } else {
+        return @"";
+    }
 }
 
 - (int)getNumOfLeftOverRows: (int)displayTypeCount
 {
-    int difference = incomeArr.count - incomeArr.count / displayTypeCount * displayTypeCount;
+    int difference = (int)incomeArr.count - (int)incomeArr.count / displayTypeCount * displayTypeCount;
     if (difference == 0) {
         return displayTypeCount;
     } else {
@@ -162,6 +161,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
     if ([displayType isEqualToString:@"monthly"]) {
         if (section == sectionCount - 1) {
             return [self getNumOfLeftOverRows:12];
@@ -179,7 +179,7 @@
         
     } else {
         // yearly
-        return 1;
+        return incomeArr.count;
     }
 }
 
@@ -187,30 +187,66 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultsItemCell" forIndexPath:indexPath];
- 
-    cell.periodLabel.text = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
-    NSString * incomeStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"];
+    NSString * incomeStr;
+    NSString *expenseStr;
+    NSString * z = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
+    if ([displayType isEqualToString:@"monthly"]) {
+        currentSection = (int)indexPath.section * 12;
+        int sec = z.intValue + currentSection;
+        cell.periodLabel.text =[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
+        cell.incomeAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:sec - 1]  objectForKey:@"incomeTotal"]];
+        cell.expenseAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:sec -1]  objectForKey:@"expenseTotal"]];
+        incomeStr = [[incomeArr objectAtIndex:sec - 1]  objectForKey:@"incomeTotal"];
+        expenseStr = [[incomeArr objectAtIndex:sec - 1]  objectForKey:@"expenseTotal"];
+        //cell.periodLabel.text =[NSString stringWithFormat:@"%d", sec];
+        
+    } else if ([displayType isEqualToString:@"quarterly"]) {
+        currentSection = (int)indexPath.section * 4;
+        int sec = z.intValue + currentSection;
+        cell.periodLabel.text =[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
+        cell.incomeAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:sec - 1]  objectForKey:@"incomeTotal"]];
+        cell.expenseAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:sec - 1]  objectForKey:@"expenseTotal"]];
+        incomeStr = [[incomeArr objectAtIndex:sec - 1]  objectForKey:@"incomeTotal"];
+        expenseStr = [[incomeArr objectAtIndex:sec - 1]  objectForKey:@"expenseTotal"];
+    } else if ([displayType isEqualToString:@"yearly"]) {
+        cell.periodLabel.text =[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
+        cell.incomeAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"]];
+        cell.expenseAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"]];
+        incomeStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"];
+        expenseStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"];
+        //NSLog(@"z is %@",z);
+    }
+    
+    NSString *str = displayType;
+    NSString *truncatedDisplayTypeString = [str substringToIndex:[str length]-2];
+    
+    cell.typeLabel.text = [truncatedDisplayTypeString capitalizedString];
+
     float income = incomeStr.floatValue;
     
-    NSString *expenseStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"];
     float expense = expenseStr.floatValue;
-    
-    cell.incomeAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"]];
-    cell.expenseAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"]];
     
     float total = income - expense;
     
     cell.totalAmountLabel.text = [self formatToCurrency:[NSNumber numberWithFloat:total]];
-    NSLog(@"total is %f", total);
+    //NSLog(@"total is %f", total);
     return cell;
 }
 
-- (void)groupPeriodArr: (NSArray *)periodArr intoGroupsof:(int)groupSize
+- (void)groupPeriodArr: (NSArray *)periodArr intoGroupsof:(NSString *)groupType
 {
     [incomeDic removeAllObjects];
     [expenseDic removeAllObjects];
     [incomeArr removeAllObjects];
-   
+    int groupSize;
+    if ([groupType isEqualToString:@"monthly"]) {
+        groupSize = 1;
+    } else if ([groupType isEqualToString:@"quarterly"]) {
+        groupSize = 3;
+    } else if ([groupType isEqualToString:@"yearly"]) {
+        groupSize = 12;
+    }
+    
     int arrSize = (int)periodsArr.count;
     double numOfGroups = ceil(((double)arrSize) / groupSize);
     groupedPeriods = [NSMutableArray array];
@@ -241,17 +277,8 @@
                                         dicKey, @"period",
                                         incomeDicVal, @"incomeTotal",
                                         expenseDicVal, @"expenseTotal", nil];
-        
         [incomeArr addObject:dic1];
-        
-        //[incomeDic setValue:incomeDicVal forKey:dicKey];
-        //[expenseDic setValue:expenseDicVal forKey:dicKey];
-        //NSLog(@"incomeDic is %@", incomeDic);
-        //NSLog(@"expense Dic is %@", expenseDic);
-        //incomeArr = [incomeDic allKeys];
-        //expenseArr = [expenseDic allKeys];
-
-    }
+         }
 }
 
 

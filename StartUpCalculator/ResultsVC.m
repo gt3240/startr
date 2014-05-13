@@ -16,9 +16,11 @@
     NSMutableArray *groupedPeriods;
     NSMutableDictionary * incomeDic;
     NSMutableDictionary *expenseDic;
-    NSArray *incomeArr;
+    NSMutableArray *incomeArr;
     NSArray *expenseArr;
+    NSMutableArray *dicArr;
     NSString * displayType; // 1 for monthly, 2 for quarterly, 3 for yearly
+    int sectionCount;
 }
 @end
 
@@ -41,9 +43,14 @@
     periodsArr = [NSArray array];
     incomeDic = [NSMutableDictionary dictionary];
     expenseDic = [NSMutableDictionary dictionary];
-    incomeArr = [NSArray array];
+    incomeArr = [NSMutableArray array];
     expenseArr = [NSArray array];
+    dicArr = [NSMutableArray array];
+    [self loadPeriodFromProject:self.openProject];
+    [self groupPeriodArr:periodsArr intoGroupsof:1];
+    sectionCount = ceil(((double)incomeArr.count) / 12);
     displayType = @"monthly"; // 1 for monthly, 2 for quarterly, 3 for yearly
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -105,14 +112,16 @@
         NSLog(@" Quarterly selected");
         NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
         displayType = @"quarterly";
+        sectionCount = ceil(((double)incomeArr.count) / 4);
+        
         [self.resultTBV reloadData];
         
     } else if (sender.selectedSegmentIndex == 2) {
         NSLog(@" Yearly selected");
         [self groupPeriodArr:periodsArr intoGroupsof:12];
         NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
-        NSLog(@" ceil is %f", ceil(((double)incomeArr.count) / 12));
         displayType = @"yearly";
+        sectionCount = incomeArr.count;
         [self.resultTBV reloadData];
 
     } else {
@@ -120,6 +129,7 @@
         [self groupPeriodArr:periodsArr intoGroupsof:1];
         NSLog(@"in count is %lu", (unsigned long)incomeArr.count);
         displayType = @"monthly";
+        sectionCount = ceil(((double)incomeArr.count) / 12);
         [self.resultTBV reloadData];
     }
 }
@@ -128,31 +138,47 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([displayType isEqualToString:@"monthly"]) {
-        return 1;
-    } else if ([displayType isEqualToString:@"quarterly"]){
-        return ceil(((double)incomeArr.count) / 3);
-    } else {
-        return incomeArr.count;
-        
-    }
-    
+    return sectionCount;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     
     NSString *sectionName = [NSString stringWithFormat:@"Year %ld", (long)section + 1];
+    
     return sectionName;
+
+}
+
+- (int)getNumOfLeftOverRows: (int)displayTypeCount
+{
+    int difference = incomeArr.count - incomeArr.count / displayTypeCount * displayTypeCount;
+    if (difference == 0) {
+        return displayTypeCount;
+    } else {
+        return difference;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if ([displayType isEqualToString:@"monthly"]) {
-        return incomeArr.count;
+        if (section == sectionCount - 1) {
+            return [self getNumOfLeftOverRows:12];
+        } else {
+            return 12;
+            
+        }
     } else if ([displayType isEqualToString:@"quarterly"]){
-        return 4;
+        
+        if (section == sectionCount - 1) {
+            return [self getNumOfLeftOverRows:4];
+        } else {
+            return 4;
+        }
+        
     } else {
+        // yearly
         return 1;
     }
 }
@@ -161,21 +187,21 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ResultsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"resultsItemCell" forIndexPath:indexPath];
-    /*
-    Periods *imPeriod = periodsArr[indexPath.row];
+ 
+    cell.periodLabel.text = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"period"];
+    NSString * incomeStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"];
+    float income = incomeStr.floatValue;
     
-    cell.periodLabel.text = imPeriod.periodNum.stringValue;
-    cell.incomeAmountLabel.text = [self formatToCurrency:imPeriod.incomeTotal];
-    cell.expenseAmountLabel.text = [self formatToCurrency:imPeriod.expenseTotal];
+    NSString *expenseStr = [[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"];
+    float expense = expenseStr.floatValue;
     
-    NSNumber *pResult = [NSNumber numberWithFloat:([imPeriod.incomeTotal floatValue] - [imPeriod.expenseTotal floatValue])];
+    cell.incomeAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"incomeTotal"]];
+    cell.expenseAmountLabel.text = [self formatToCurrency:[[incomeArr objectAtIndex:indexPath.row]  objectForKey:@"expenseTotal"]];
     
-    cell.totalAmountLabel.text = [self formatToCurrency:pResult];
-     */
+    float total = income - expense;
     
-    NSMutableDictionary *inDic = [incomeArr objectAtIndex:indexPath.row];
-    //cell.periodLabel.text = [inDic objectForKey:@"dicKey"];
-    
+    cell.totalAmountLabel.text = [self formatToCurrency:[NSNumber numberWithFloat:total]];
+    NSLog(@"total is %f", total);
     return cell;
 }
 
@@ -183,6 +209,7 @@
 {
     [incomeDic removeAllObjects];
     [expenseDic removeAllObjects];
+    [incomeArr removeAllObjects];
    
     int arrSize = (int)periodsArr.count;
     double numOfGroups = ceil(((double)arrSize) / groupSize);
@@ -209,12 +236,20 @@
             incomeDicVal = [NSString stringWithFormat:@"%.2f", groupIncomeTotal];
             expenseDicVal = [NSString stringWithFormat:@"%.2f", groupExpenseTotal];
         }
-        [incomeDic setValue:incomeDicVal forKey:dicKey];
-        [expenseDic setValue:expenseDicVal forKey:dicKey];
+      
+        NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        dicKey, @"period",
+                                        incomeDicVal, @"incomeTotal",
+                                        expenseDicVal, @"expenseTotal", nil];
+        
+        [incomeArr addObject:dic1];
+        
+        //[incomeDic setValue:incomeDicVal forKey:dicKey];
+        //[expenseDic setValue:expenseDicVal forKey:dicKey];
         //NSLog(@"incomeDic is %@", incomeDic);
         //NSLog(@"expense Dic is %@", expenseDic);
-        incomeArr = [incomeDic allKeys];
-        expenseArr = [expenseDic allKeys];
+        //incomeArr = [incomeDic allKeys];
+        //expenseArr = [expenseDic allKeys];
 
     }
 }

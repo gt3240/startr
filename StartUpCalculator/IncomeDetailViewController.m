@@ -37,6 +37,7 @@
     self.amountLabel.text = [self formatToCurrency:self.incomeToShowDetail.amount];
     self.titleLabel.text = self.incomeToShowDetail.title;
     self.fromLabel.text = self.incomeToShowDetail.source;
+    self.notesTextView.text = self.incomeToShowDetail.notes;
     
     if ([self.incomeToShowDetail.type isEqualToString:@"Investment"])
     {
@@ -63,7 +64,7 @@
         
         self.recurUntilLabel.text = [NSString stringWithFormat: @"Recur until %@ %@", self.incomeToShowDetail.period.projects.type, self.incomeToShowDetail.recurringEndPeriod.stringValue];
         
-        NSLog(@"type is %@", self.incomeToShowDetail.period.periodType);
+        //NSLog(@"type is %@", self.incomeToShowDetail.period.periodType);
         self.recurringAmountLabel.text = self.incomeToShowDetail.recurringAmount.stringValue;
         if ([self.incomeToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
             

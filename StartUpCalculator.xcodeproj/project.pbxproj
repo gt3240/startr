@@ -76,6 +76,8 @@
 		CBA0FF4218E366D900781F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBA0FF4018E366D900781F08 /* InfoPlist.strings */; };
 		CBA0FF4418E366D900781F08 /* StartUpCalculatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA0FF4318E366D900781F08 /* StartUpCalculatorTests.m */; };
 		CBAF9A6218EA27CF00FBEB6E /* NewIncomeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAF9A6118EA27CF00FBEB6E /* NewIncomeTableViewController.m */; };
+		CBBC31B319240E7000A04372 /* TypeResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBC31B219240E7000A04372 /* TypeResultsViewController.m */; };
+		CBBC31B919240F0900A04372 /* TypeResultsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBC31B819240F0900A04372 /* TypeResultsTableViewCell.m */; };
 		CBBE2A3218E735D00031B38A /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBE2A3118E735D00031B38A /* ContainerViewController.m */; };
 		CBC4B0F2190357FF008B991B /* OpenProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4B0F1190357FF008B991B /* OpenProjectTableViewController.m */; };
 		CBC4B0F51903580E008B991B /* OpenTableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC4B0F41903580E008B991B /* OpenTableTableViewCell.m */; };
@@ -230,6 +232,10 @@
 		CBA0FF4318E366D900781F08 /* StartUpCalculatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartUpCalculatorTests.m; sourceTree = "<group>"; };
 		CBAF9A6018EA27CF00FBEB6E /* NewIncomeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewIncomeTableViewController.h; sourceTree = "<group>"; };
 		CBAF9A6118EA27CF00FBEB6E /* NewIncomeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewIncomeTableViewController.m; sourceTree = "<group>"; };
+		CBBC31B119240E6F00A04372 /* TypeResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeResultsViewController.h; sourceTree = "<group>"; };
+		CBBC31B219240E7000A04372 /* TypeResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeResultsViewController.m; sourceTree = "<group>"; };
+		CBBC31B719240F0900A04372 /* TypeResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeResultsTableViewCell.h; sourceTree = "<group>"; };
+		CBBC31B819240F0900A04372 /* TypeResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeResultsTableViewCell.m; sourceTree = "<group>"; };
 		CBBE2A3018E735D00031B38A /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		CBBE2A3118E735D00031B38A /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		CBC4B0F0190357FF008B991B /* OpenProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenProjectTableViewController.h; sourceTree = "<group>"; };
@@ -514,10 +520,14 @@
 		CB7D1419190A1E23000A36F6 /* Results */ = {
 			isa = PBXGroup;
 			children = (
+				CBBC31B719240F0900A04372 /* TypeResultsTableViewCell.h */,
+				CBBC31B819240F0900A04372 /* TypeResultsTableViewCell.m */,
 				CB8C1A09191D68AE00C9A10F /* ResultsTableViewCell.h */,
 				CB8C1A0A191D68AE00C9A10F /* ResultsTableViewCell.m */,
 				CB5A64F6191D797C0054A0EC /* ResultsVC.h */,
 				CB5A64F7191D797C0054A0EC /* ResultsVC.m */,
+				CBBC31B119240E6F00A04372 /* TypeResultsViewController.h */,
+				CBBC31B219240E7000A04372 /* TypeResultsViewController.m */,
 			);
 			name = Results;
 			sourceTree = "<group>";
@@ -757,6 +767,7 @@
 				CB166787191C208F00C9B7E6 /* Expenses.m in Sources */,
 				CB734BE818F5D62B003268EB /* NSMutableString+InnerBand.m in Sources */,
 				CB734BEC18F5D62B003268EB /* NSString+InnerBand.m in Sources */,
+				CBBC31B919240F0900A04372 /* TypeResultsTableViewCell.m in Sources */,
 				CB734BF818F5D62B003268EB /* IBMessageCenter.m in Sources */,
 				CB308F2B190824930083B716 /* TBController.m in Sources */,
 				CB16678A191C208F00C9B7E6 /* Incomes.m in Sources */,
@@ -766,6 +777,7 @@
 				CB734BF418F5D62B003268EB /* IBHTTPGetRequestMessage.m in Sources */,
 				CB8C1A0B191D68AE00C9A10F /* ResultsTableViewCell.m in Sources */,
 				CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */,
+				CBBC31B319240E7000A04372 /* TypeResultsViewController.m in Sources */,
 				CB734BE318F5D62B003268EB /* CGContext+InnerBand.m in Sources */,
 				CB734BEE18F5D62B003268EB /* UIImage+InnerBand.m in Sources */,
 				CB734BE918F5D62B003268EB /* NSNumber+InnerBand.m in Sources */,

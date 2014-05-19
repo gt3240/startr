@@ -36,6 +36,7 @@
     self.amountLabel.text = [self formatToCurrency:self.expenseToShowDetail.amount];
     self.titleLabel.text = self.expenseToShowDetail.title;
     self.fromLabel.text = self.expenseToShowDetail.source;
+    self.notesTextView.text = self.expenseToShowDetail.notes;
     
     if ([self.expenseToShowDetail.type isEqualToString:@"Rent"])
     {
@@ -96,7 +97,10 @@
             self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.expenseToShowDetail.recurringAmount];
         }
     } else {
-        self.recurringAmountLabel.text = @"---";
+       
+        [self.recurringView setHidden:YES];
+        
+        //self.noteUIView.layer.position.x = new.x;
         //self.recurringLabel.text = @"";
     }
 }

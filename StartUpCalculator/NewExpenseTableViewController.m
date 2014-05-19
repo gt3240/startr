@@ -22,6 +22,7 @@
     NSDate * recurringDateID;
     BOOL deleteRecur;
     UIAlertView *recurAlert;
+    float kOFFSET_FOR_KEYBOARD;
 }
 @end
 
@@ -40,18 +41,31 @@
 {
     [super viewDidLoad];
     
+    self.notes.tag = 5;
+    
     expenseTypeObj = [[IncomeAndExpenseType alloc]init];
     
     if (self.expenseToEdit){
+       
         self.title = @"Edit";
         self.titleTextField.text = self.expenseToEdit.title;
         self.amountTextField.text = [NSString stringWithFormat:@"%@", self.expenseToEdit.amount];
         self.sourceLabel.text = self.expenseToEdit.source;
         expenseTypeObj.typeTitle = self.expenseToEdit.type;
+        
+        if ([self.expenseToEdit.notes isEqualToString:@""]) {
+            self.notes.text = @"Notes";
+            self.notes.textColor = [UIColor colorWithRed:199/255.0f green:199/255.0f blue:205/255.0f alpha:1.0f];
+        } else {
+            self.notes.text = self.expenseToEdit.notes;
+            self.notes.textColor = [UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f];
+        }
+       
         //self.IncomeTypeLabel.text = incomeTypeStr;
         self.TypeLabel.text = expenseTypeObj.typeTitle;
-        
+    
         if ([self.expenseToEdit.recurring intValue] == 1){
+             kOFFSET_FOR_KEYBOARD = 276;
             shouldRecurr = @1;
             [self.recurringSwitch setOn:YES];
             deleteRecur = NO;
@@ -66,10 +80,13 @@
             //self.recurringPeriodTextfield.text = [NSString stringWithFormat:@"%@", self.expenseToEdit.recurringPeriod];
             
         } else {
+             kOFFSET_FOR_KEYBOARD = 236;
             [self.recurringSwitch setOn:NO];
             shouldRecurr = 0;
+            
         }
     } else {
+        kOFFSET_FOR_KEYBOARD = 276;
         addExpense = [Expenses create];
         recurringDateID = [NSDate date];
     }
@@ -80,14 +97,36 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"income type is %@", expenseTypeObj.typeTitle);
     
+    [[UITextField appearance] setTintColor:[UIColor redColor]];
+
     if (expenseTypeObj) {
         self.TypeLabel.text = expenseTypeObj.typeTitle;
     } else {
         self.TypeLabel.text = @"";
     }
     
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(keyboardWillShow)
+//                                                 name:UIKeyboardWillShowNotification
+//                                               object:nil];
+//    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];    
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // unregister for keyboard notifications while not visible.
+//    [[NSNotificationCenter defaultCenter] removeObserver:self
+//                                                    name:UIKeyboardWillShowNotification
+//                                                  object:nil];
+//    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIKeyboardWillHideNotification
+                                                  object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +137,7 @@
 
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
+    NSLog(@"tf tag is %d", self.notes.tag);
     if (self.expenseToEdit){
         
         //First update period income total
@@ -113,6 +153,8 @@
         self.expenseToEdit.amount = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
         
         self.expenseToEdit.type = expenseTypeObj.typeTitle;
+        
+        self.expenseToEdit.notes = self.notes.text;
         
         if (deleteRecur == YES ) {
             [self deleteFutureRecurs:self.expenseToEdit.recurringDateID];
@@ -268,7 +310,13 @@
     
     expense.source = self.sourceLabel.text;
     
-    expense.type = expenseTypeObj.typeTitle;
+    if (expenseTypeObj.typeTitle == NULL) {
+        expense.type = @"Undeclared";
+    } else {
+        expense.type = expenseTypeObj.typeTitle;
+    }
+    
+    expense.notes = self.notes.text;
     
     if ([shouldRecurr isEqualToNumber:@1]) {
         expense.recurring = @1;
@@ -297,8 +345,10 @@
         
     if ([sender isOn]) {
         shouldRecurr = @1;
+        kOFFSET_FOR_KEYBOARD = 414;
     } else {
         shouldRecurr = @0;
+        kOFFSET_FOR_KEYBOARD = 276;
     }
     [self.tableView reloadData];
     
@@ -382,5 +432,80 @@
     }
 }
 
+#pragma mark - keyboard offset
 
+//-(void)keyboardWillShow {
+//    // Animate the current view out of the way
+//    if (self.view.frame.origin.y >= 0)
+//    {
+//        [self setViewMovedUp:YES];
+//    }
+//    else if (self.view.frame.origin.y < 0)
+//    {
+//        [self setViewMovedUp:NO];
+//    }
+//}
+//
+-(void)keyboardWillHide {
+   
+    if (self.view.frame.origin.y < 0)
+    {
+        [self setViewMovedUp:NO];
+    }
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if ([textField isEqual: self.titleTextField]) {
+        [self.sourceLabel becomeFirstResponder];
+    } else if ([textField isEqual: self.sourceLabel]){
+        [self.amountTextField becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)sender
+{
+    if (sender.tag == 5)
+    {
+        if ([self.expenseToEdit.notes isEqualToString:@""]) {
+            sender.text = @"";
+        } else {
+            sender.text = self.expenseToEdit.notes;
+        }
+        sender.textColor = [UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f];
+        //move the main view, so that the keyboard does not hide it.
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
+//method to move the view up/down whenever the keyboard is shown/dismissed
+-(void)setViewMovedUp:(BOOL)movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
 @end

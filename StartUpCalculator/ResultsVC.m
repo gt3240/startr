@@ -9,6 +9,7 @@
 #import "ResultsVC.h"
 #import "ResultsTableViewCell.h"
 #import "Periods.h"
+#import "TypeResultsViewController.h"
 
 @interface ResultsVC ()
 {
@@ -20,6 +21,7 @@
     NSArray *expenseArr;
     NSMutableArray *dicArr;
     NSString * displayType;
+    NSString * periodStr;
     int sectionCount;
     int currentSection;
 }
@@ -48,8 +50,6 @@
     expenseArr = [NSArray array];
     dicArr = [NSMutableArray array];
     displayType = @"monthly";
-    //[self groupPeriodArr:periodsArr intoGroupsof:1];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -114,7 +114,6 @@
         displayType = @"quarterly";
         [self groupPeriodArr:periodsArr intoGroupsof:displayType];
         sectionCount = ceil(((double)incomeArr.count) / 4);
-        
         [self.resultTBV reloadData];
         
     } else if (sender.selectedSegmentIndex == 2) {
@@ -238,7 +237,9 @@
     [incomeDic removeAllObjects];
     [expenseDic removeAllObjects];
     [incomeArr removeAllObjects];
+    periodStr = @"";
     int groupSize;
+    
     if ([groupType isEqualToString:@"monthly"]) {
         groupSize = 1;
     } else if ([groupType isEqualToString:@"quarterly"]) {
@@ -265,21 +266,31 @@
                 Periods * thisP = periodsArr[currentP];
                 groupIncomeTotal = groupIncomeTotal + thisP.incomeTotal.floatValue;
                 groupExpenseTotal = groupExpenseTotal + thisP.expenseTotal.floatValue;
-
+                periodStr = [NSString stringWithFormat:@"%@-%@",periodStr,thisP.periodNum.stringValue];
                 currentP++;
             }
             dicKey = [NSString stringWithFormat:@"%d", g+1];
             incomeDicVal = [NSString stringWithFormat:@"%.2f", groupIncomeTotal];
             expenseDicVal = [NSString stringWithFormat:@"%.2f", groupExpenseTotal];
         }
-      
+        periodStr = [periodStr substringFromIndex:1];
         NSDictionary *dic1 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        periodStr, @"periodStr",
                                         dicKey, @"period",
                                         incomeDicVal, @"incomeTotal",
                                         expenseDicVal, @"expenseTotal", nil];
         [incomeArr addObject:dic1];
-         }
+        periodStr = @"";
+    }
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ResultsTypeSegue"]) {
+        TypeResultsViewController * destination = segue.destinationViewController;
+        destination.periodStr = [[incomeArr objectAtIndex:self.resultTBV.indexPathForSelectedRow.row]  objectForKey:@"periodStr"];
+        destination.openProject = self.openProject;
+    }
+}
 
 @end

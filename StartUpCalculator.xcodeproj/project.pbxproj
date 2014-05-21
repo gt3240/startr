@@ -26,6 +26,7 @@
 		CB5A64F8191D797C0054A0EC /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5A64F7191D797C0054A0EC /* ResultsVC.m */; };
 		CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */; };
 		CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */; };
+		CB62AB5B192C3B0400A1F5C3 /* TestiCloudTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB62AB5A192C3B0400A1F5C3 /* TestiCloudTableViewController.m */; };
 		CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */; };
 		CB67A63118F2FB1B001022E7 /* NewProjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67A63018F2FB1B001022E7 /* NewProjectViewController.m */; };
 		CB67A63518F2FB5E001022E7 /* ProjectTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB67A63418F2FB5E001022E7 /* ProjectTypeViewController.m */; };
@@ -139,6 +140,8 @@
 		CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedProjectsTableViewController.m; sourceTree = "<group>"; };
 		CB6109AA18FEFDDC00300B9A /* SavedProjectsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewCell.h; sourceTree = "<group>"; };
 		CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavedProjectsTableViewCell.m; sourceTree = "<group>"; };
+		CB62AB59192C3B0400A1F5C3 /* TestiCloudTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestiCloudTableViewController.h; sourceTree = "<group>"; };
+		CB62AB5A192C3B0400A1F5C3 /* TestiCloudTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestiCloudTableViewController.m; sourceTree = "<group>"; };
 		CB63818918FE25B6007EFB7E /* SideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewController.h; sourceTree = "<group>"; };
 		CB63818A18FE25B6007EFB7E /* SideMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewController.m; sourceTree = "<group>"; };
 		CB67A62F18F2FB1B001022E7 /* NewProjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewProjectViewController.h; sourceTree = "<group>"; };
@@ -211,6 +214,7 @@
 		CB8C1A09191D68AE00C9A10F /* ResultsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsTableViewCell.h; sourceTree = "<group>"; };
 		CB8C1A0A191D68AE00C9A10F /* ResultsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsTableViewCell.m; sourceTree = "<group>"; };
 		CB95A8B518EF7D78001279AB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CB98E50C192A7BA0005BA0A5 /* StartUpCalculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = StartUpCalculator.entitlements; sourceTree = "<group>"; };
 		CBA0FF1218E366D800781F08 /* StartUpCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StartUpCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA0FF1518E366D800781F08 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBA0FF1718E366D800781F08 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -566,9 +570,12 @@
 		CBA0FF1B18E366D800781F08 /* StartUpCalculator */ = {
 			isa = PBXGroup;
 			children = (
+				CB98E50C192A7BA0005BA0A5 /* StartUpCalculator.entitlements */,
 				CB3F31021909B11B00511A15 /* MainMenuTableViewController.h */,
 				CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */,
 				CBA0FF2718E366D800781F08 /* Main_iPhone.storyboard */,
+				CB62AB59192C3B0400A1F5C3 /* TestiCloudTableViewController.h */,
+				CB62AB5A192C3B0400A1F5C3 /* TestiCloudTableViewController.m */,
 				CB308F29190824930083B716 /* TBController.h */,
 				CB308F2A190824930083B716 /* TBController.m */,
 				CB1EAE5518FF2F1F00282768 /* Side Menu Item */,
@@ -680,6 +687,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Tom Liu";
 				TargetAttributes = {
+					CBA0FF1118E366D800781F08 = {
+						DevelopmentTeam = MMKK5LN68U;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
 					CBA0FF3518E366D900781F08 = {
 						TestTargetID = CBA0FF1118E366D800781F08;
 					};
@@ -753,6 +768,7 @@
 				CBBE2A3218E735D00031B38A /* ContainerViewController.m in Sources */,
 				CB734BF318F5D62B003268EB /* IBBlockBasedDispatchMessage.m in Sources */,
 				CBA0FF2618E366D800781F08 /* AppDelegate.m in Sources */,
+				CB62AB5B192C3B0400A1F5C3 /* TestiCloudTableViewController.m in Sources */,
 				CB734BF718F5D62B003268EB /* IBDispatchMessage.m in Sources */,
 				CB67A63518F2FB5E001022E7 /* ProjectTypeViewController.m in Sources */,
 				CBF1BB29190EBB04000A38D2 /* IncomeTypeCollectionCell.m in Sources */,
@@ -937,11 +953,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				CODE_SIGN_ENTITLEMENTS = StartUpCalculator/StartUpCalculator.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
 				INFOPLIST_FILE = "StartUpCalculator/StartUpCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E87F258E-F6FC-4EB5-A59D-9887EABA4BAA";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -952,11 +971,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
+				CODE_SIGN_ENTITLEMENTS = StartUpCalculator/StartUpCalculator.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
 				INFOPLIST_FILE = "StartUpCalculator/StartUpCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "E87F258E-F6FC-4EB5-A59D-9887EABA4BAA";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

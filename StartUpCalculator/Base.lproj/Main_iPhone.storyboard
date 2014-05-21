@@ -962,6 +962,7 @@
                     <navigationItem key="navigationItem" id="GBE-Lo-PYN"/>
                     <connections>
                         <outlet property="mainTable" destination="WQj-Sz-TDQ" id="jSS-dC-Lz5"/>
+                        <outlet property="typeSwitch" destination="Id2-Dm-aNe" id="Vnk-tZ-s5c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2hs-J3-CB6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1362,6 +1363,7 @@
                                         <rect key="frame" x="20" y="0.0" width="280" height="175"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -2078,6 +2080,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="createPressed:" destination="y2F-Q0-nGS" eventType="touchUpInside" id="jht-gC-sSd"/>
                                     <segue destination="NFA-dX-1XQ" kind="modal" identifier="" id="eYn-2U-i9Z"/>
                                 </connections>
                             </button>
@@ -2244,9 +2247,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="G84-9D-cy4"/>
+        <segue reference="eYn-2U-i9Z"/>
         <segue reference="y3I-30-KWa"/>
         <segue reference="6o1-BX-pmk"/>
-        <segue reference="o2a-pW-uAa"/>
+        <segue reference="GC8-ni-yCY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -80,8 +80,10 @@
 //    NSLog(@"total is %.2f", othersTotal.floatValue);
 //    NSLog(@"displayItemDic is %@", displayItemDic);
     //NSLog(@"displayItemArr is %lu", (unsigned long)displayItemArr.count);
+    
     displayType = @"income";
-
+    self.typeSwitch.selectedSegmentIndex = 0;
+    
     [self.mainTable reloadData];
 //    NSLog(@"keyArr is %@", keyArr);
 //    NSLog(@"valArr is %@", valArr);
@@ -136,7 +138,7 @@
             for (int incomeIndex = 0; incomeIndex < thisIncomeArr.count; incomeIndex++) {
                 Incomes *thisIncome = thisIncomeArr[incomeIndex];
                 //NSLog(@"income type is %@", thisIncome.type);
-                if ([thisIncome.type isEqualToString:@"Electricity"])
+                if ([thisIncome.type isEqualToString:@"Investment"])
                 {
                     investmentTotal = [NSNumber numberWithFloat:([investmentTotal floatValue] + [thisIncome.amount floatValue])];
                 } else if ([thisIncome.type isEqualToString:@"Loan"]){

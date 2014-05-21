@@ -93,6 +93,7 @@
 		CBF1BB2E190EBF5E000A38D2 /* IncomeAndExpenseType.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB2D190EBF5E000A38D2 /* IncomeAndExpenseType.m */; };
 		CBF1BB31190F0021000A38D2 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */; };
 		CBF42DEF18EB740200A78B54 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */; };
+		CBF5AF08192D07E8000EEC87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF5AF07192D07E8000EEC87 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -264,6 +265,7 @@
 		CBF1BB2F190F0021000A38D2 /* IncomeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IncomeDetailViewController.h; sourceTree = "<group>"; };
 		CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
 		CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		CBF5AF07192D07E8000EEC87 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +273,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBF5AF08192D07E8000EEC87 /* CoreData.framework in Frameworks */,
 				CB3F31061909C29800511A15 /* QuartzCore.framework in Frameworks */,
 				CBA0FF1818E366D800781F08 /* CoreGraphics.framework in Frameworks */,
 				CBA0FF1A18E366D800781F08 /* UIKit.framework in Frameworks */,
@@ -558,6 +561,7 @@
 		CBA0FF1418E366D800781F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CBF5AF07192D07E8000EEC87 /* CoreData.framework */,
 				CB3F31051909C29800511A15 /* QuartzCore.framework */,
 				CBA0FF1518E366D800781F08 /* Foundation.framework */,
 				CBA0FF1718E366D800781F08 /* CoreGraphics.framework */,

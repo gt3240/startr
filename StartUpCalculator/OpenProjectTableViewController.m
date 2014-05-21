@@ -8,17 +8,19 @@
 
 #import "OpenProjectTableViewController.h"
 #import "OpenTableTableViewCell.h"
-#import "InnerBand.h"
+#import "AppDelegate.h"
 #import "Projects.h"
 #import "ContainerViewController.h"
 #import "TBController.h"
 
 @interface OpenProjectTableViewController ()
 {
-    NSArray *savedProjectsArr;
     Projects *savedProjectC;
     NSDateFormatter *dateFormatter;
 }
+@property (nonatomic,strong)NSArray* fetchedRecordsArray;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
 
 @implementation OpenProjectTableViewController
@@ -36,10 +38,23 @@
 {
     [super viewDidLoad];
     
-    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //self.navigationController.navigationBar.translucent = NO;
-    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0/255.0f green:150/255.0f blue:255/255.0f alpha:1.0f];
-    savedProjectsArr = [NSArray array];
+    //  1
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
+    // Fetching Records and saving it in "fetchedRecordsArray" object
+    //  2
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    self.fetchedRecordsArray = [[[appDelegate getAllProjects]mutableCopy] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    //  3
+
+    
+    // add iCloud observers
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesDidChange:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeContent:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:self.managedObjectContext.persistentStoreCoordinator];
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
@@ -54,11 +69,50 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    savedProjectsArr = [Projects allOrderedBy:@"date" ascending:NO];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
     [self.tableView setBackgroundView:imageView];
 
-    //NSLog(@"%lu", (unsigned long)savedProjectsArr.count);
+}
+
+#pragma mark - iCloud Methods
+
+- (void)storesWillChange {
+    
+    NSLog(@"\n\nStores WILL change notification received\n\n");
+    
+    // disbale UI
+    [[UIApplication sharedApplication]beginIgnoringInteractionEvents];
+    
+    // save and reset our context
+    if (self.managedObjectContext.hasChanges) {
+        [self.managedObjectContext save:nil];
+    } else {
+        [self.managedObjectContext reset];
+    }
+}
+
+- (void)storesDidChange:(NSNotification *)notification {
+    
+    NSLog(@"\n\nStores DID change notification received\n\n");
+    
+    // enable UI
+    [[UIApplication sharedApplication]endIgnoringInteractionEvents];
+    
+    // update UI
+    
+    [self.tableView reloadData];
+}
+
+- (void)mergeContent:(NSNotification *)notification {
+    
+    NSLog(@"Merge Content here");
+    [self.managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+    
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
+    self.fetchedRecordsArray = [[[appDelegate getAllProjects]mutableCopy] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    [self.tableView reloadData];
+
 }
 
 #pragma mark - Table view data source
@@ -73,7 +127,7 @@
 {
     // Return the number of rows in the section.
     
-    return savedProjectsArr.count;
+    return self.fetchedRecordsArray.count;
 
 }
 
@@ -84,7 +138,7 @@
     
     // Configure the cell...
     
-    savedProjectC = savedProjectsArr[indexPath.row];
+    savedProjectC = self.fetchedRecordsArray[indexPath.row];
     
     cell.nameLabel.text = savedProjectC.name;
     cell.dateLabel.text = [dateFormatter stringFromDate:savedProjectC.date];
@@ -103,14 +157,23 @@
 {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.tableView beginUpdates];
+
         // Delete the row from the data source
-        Projects *projectToDelete = savedProjectsArr[indexPath.row];
-        [projectToDelete destroy];
-        [[IBCoreDataStore mainStore] save];
+        [self.managedObjectContext deleteObject:[self.fetchedRecordsArray objectAtIndex:indexPath.row]];
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't delete: %@", [error localizedDescription]);
+        }
         
-        savedProjectsArr = [Projects allOrderedBy:@"date" ascending:YES];
+        AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+        self.fetchedRecordsArray = [appDelegate getAllProjects];
         
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        //[self.tableView reloadData];
+        [self.tableView endUpdates];
+
+        
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
@@ -125,10 +188,10 @@
         UINavigationController *nav = tbc.viewControllers[0];
         IncomeViewController *vc = nav.viewControllers[0];
         
-        vc.projectToOpen = savedProjectsArr[self.savedProjectTable.indexPathForSelectedRow.row];
+        vc.projectToOpen = self.fetchedRecordsArray[self.savedProjectTable.indexPathForSelectedRow.row];
         
         // pass project to tabbar
-        tbc.projectToOpen = savedProjectsArr[self.savedProjectTable.indexPathForSelectedRow.row];
+        tbc.projectToOpen = self.fetchedRecordsArray[self.savedProjectTable.indexPathForSelectedRow.row];
     }
 
 }

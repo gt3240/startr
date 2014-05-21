@@ -11,7 +11,7 @@
 #import "ViewPeriodCollectionCell.h"
 #import "Incomes.h"
 #import "Projects.h"
-#import "InnerBand.h"
+#import "AppDelegate.h"
 #import "Periods.h"
 #import "OpenProjectTableViewController.h"
 #import "ProjectTypeViewController.h"
@@ -27,7 +27,10 @@
     float monthlyTotal;
     Periods *periodToShow;
     Projects *currentProject;
+    AppDelegate* appDelegate;
 }
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
 
 @implementation IncomeViewController
@@ -48,6 +51,9 @@
     NSLog(@"project id is %@",self.projectIndexToOpen);
     
     periodsArr = [NSArray array];
+    
+    appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -158,31 +164,33 @@
 }
 
 - (IBAction)AddPeriodButtonPressed:(UIButton *)sender {
-    Periods *newPeriod = [Periods create];
+    Periods *newPeriod = [NSEntityDescription insertNewObjectForEntityForName:@"Periods" inManagedObjectContext:self.managedObjectContext];
     NSNumber *currentCount = [NSNumber numberWithInt:periodCount];
     NSNumber *addCount = @1;
     NSNumber *newCount = @([currentCount intValue] + [addCount intValue]);
     newPeriod.periodNum = newCount;
     [currentProject addPeriodObject:newPeriod];
-    [[IBCoreDataStore mainStore] save];
     
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
     periodCount = newCount.intValue;
     
     [self loadPeriodFromProject:currentProject];
     
     [self.periodCollectionView reloadData];
     
-    
     NSLog(@"period count is %d, current count is %d", periodCount, newCount.intValue);
 }
 
 #pragma mark - CollectionView
--(long)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+-(int)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
 }
 
--(long)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+-(int)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 1){
         return 1;
@@ -240,6 +248,9 @@
     [selectedCell setButtonSelected:YES];
     
     previousSelected = (int)selectedCell.tag;
+    
+    //send periodnum to tabbar so other tabs can have it
+    appDelegate.peroidToShow = (int)selectedCell.tag;
     
     //refresh table when selected
     NSSortDescriptor *incomeSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
@@ -351,25 +362,28 @@
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
          
-         [self.mainTableView beginUpdates];
+        [self.mainTableView beginUpdates];
          
-         Periods *periodToDelete = periodsArr[previousSelected];
-         Incomes *incomeToDelete = incomeArr[indexPath.row];
+        Periods *periodToDelete = periodsArr[previousSelected];
+        Incomes *incomeToDelete = incomeArr[indexPath.row];
          
-         incomeRowCount = incomeRowCount - 1;
+        incomeRowCount = incomeRowCount - 1;
          
-         periodToDelete.incomeTotal = @([periodToDelete.incomeTotal floatValue] - [incomeToDelete.amount floatValue]);
-         [periodToDelete removeIncomeObject:incomeToDelete];
+        periodToDelete.incomeTotal = @([periodToDelete.incomeTotal floatValue] - [incomeToDelete.amount floatValue]);
+        [periodToDelete removeIncomeObject:incomeToDelete];
          
-         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
+                  
+        [self loadIncome];
          
-         [[IBCoreDataStore mainStore] save];
+        [self.mainTableView endUpdates];
          
-         [self loadIncome];
-         
-         [self.mainTableView endUpdates];
-         
-         [self.mainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        [self.mainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
                            
      } else if (editingStyle == UITableViewCellEditingStyleInsert) {
      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

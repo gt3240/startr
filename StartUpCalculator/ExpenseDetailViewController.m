@@ -81,11 +81,11 @@
     if ([self.expenseToShowDetail.recurring intValue] == 1) {
         
         //self.recurringLabel.text = @"Increased by";
-        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm:ss"];
-        self.notesTextView.text = [dateFormatter stringFromDate:self.expenseToShowDetail.recurringDateID];
+//        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm:ss"];
+//        self.notesTextView.text = [dateFormatter stringFromDate:self.expenseToShowDetail.recurringDateID];
         
-        self.recurUntilLabel.text = [NSString stringWithFormat: @"Recur until %@ %@", self.expenseToShowDetail.period.projects.type, self.expenseToShowDetail.recurringEndPeriod.stringValue];
+        self.recurUntilLabel.text = [NSString stringWithFormat: @"Recur until month %@", self.expenseToShowDetail.recurringEndPeriod.stringValue];
         
         NSLog(@"type is %@", self.expenseToShowDetail.period.periodType);
         self.recurringAmountLabel.text = self.expenseToShowDetail.recurringAmount.stringValue;

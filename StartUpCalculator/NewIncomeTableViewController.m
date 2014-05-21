@@ -7,7 +7,7 @@
 //
 
 #import "NewIncomeTableViewController.h"
-#import "InnerBand.h"
+#import "AppDelegate.h"
 #import "IncomeTypeCollectionViewController.h"
 #import "IncomeAndExpenseType.h"
 
@@ -22,8 +22,10 @@
     NSDate * recurringDateID;
     BOOL deleteRecur;
     UIAlertView *recurAlert;
-    float kOFFSET_FOR_KEYBOARD;
+    float keyboardOffset;
 }
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
 
 @implementation NewIncomeTableViewController
@@ -42,6 +44,9 @@
     [super viewDidLoad];
     
     self.notes.tag = 5;
+    
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
     
     incomeTypeObj = [[IncomeAndExpenseType alloc]init];
     
@@ -65,7 +70,7 @@
 
         
         if ([self.incomeToEdit.recurring intValue] == 1){
-            kOFFSET_FOR_KEYBOARD = 276;
+            keyboardOffset = 276;
             shouldRecurr = @1;
             [self.recurringSwitch setOn:YES];
             deleteRecur = NO;
@@ -82,13 +87,13 @@
         } else {
             [self.recurringSwitch setOn:NO];
             shouldRecurr = 0;
-            kOFFSET_FOR_KEYBOARD = 236;
+            keyboardOffset = 236;
 
         }
     } else {
-        kOFFSET_FOR_KEYBOARD = 276;
+        keyboardOffset = 276;
 
-        addIncome = [Incomes create];
+        addIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
         recurringDateID = [NSDate date];
     }
     
@@ -154,7 +159,10 @@
             self.incomeToEdit.recurringPeriod = [NSNumber numberWithFloat: self.recurringPeriodTextField.text.floatValue];
         }
         
-        [[IBCoreDataStore mainStore] save];
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -174,7 +182,10 @@
             
             [self.periodToAdd addIncomeObject:addIncome];
             
-            [[IBCoreDataStore mainStore] save];
+            NSError *error;
+            if (![self.managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            };
             
             [self.addIncomeDelegate incomeAdded];
             
@@ -259,7 +270,7 @@
             } else {
                 // add income to next other periods
                 Periods *nextP = pInProjectArr[i - 1];
-                Incomes *newIncome = [Incomes create];
+                Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
                 if (self.recurringType.selectedSegmentIndex == 0) {
                     newAmount += self.recurringAmount.text.floatValue;
                 } else {
@@ -270,10 +281,10 @@
         } else {
             // add new period then add income
             Periods *newPeriod;
-            newPeriod = [Periods create];
+            newPeriod = [NSEntityDescription insertNewObjectForEntityForName:@"Periods" inManagedObjectContext:self.managedObjectContext];
             newPeriod.periodNum = [NSNumber numberWithInt:i];
             newPeriod.projects = self.projectToAdd;
-            Incomes *newIncome = [Incomes create];
+            Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
             if (self.recurringType.selectedSegmentIndex == 0) {
                 newAmount += self.recurringAmount.text.floatValue;
             } else {
@@ -333,10 +344,10 @@
     
     if ([sender isOn]) {
         shouldRecurr = @1;
-        kOFFSET_FOR_KEYBOARD = 414;
+        keyboardOffset = 414;
     } else {
         shouldRecurr = @0;
-        kOFFSET_FOR_KEYBOARD = 276;
+        keyboardOffset = 276;
     }
     [self.tableView reloadData];
     
@@ -469,14 +480,14 @@
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        rect.origin.y -= keyboardOffset;
+        rect.size.height += keyboardOffset;
     }
     else
     {
         // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        rect.origin.y += keyboardOffset;
+        rect.size.height -= keyboardOffset;
     }
     self.view.frame = rect;
     

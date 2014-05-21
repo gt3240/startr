@@ -7,13 +7,18 @@
 //
 
 #import "ProjectTypeViewController.h"
-#import "InnerBand.h"
 #import "Projects.h"
 #import "Periods.h"
 #import "IncomeViewController.h"
 #import "TBController.h"
+#import "AppDelegate.h"
 
 @interface ProjectTypeViewController ()
+{
+    Projects * newProject;
+}
+@property (nonatomic,strong)NSArray* fetchedRecordsArray;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -37,6 +42,11 @@
     [self.termsTextField.layer setCornerRadius:5.0f];
     //NSLog(@"new project name is %@", self.projectName);
     
+    //1
+    AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
+    //2
+    self.managedObjectContext = appDelegate.managedObjectContext;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +54,27 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction)createPressed:(UIButton *)sender {
+    
+    newProject = [NSEntityDescription insertNewObjectForEntityForName:@"Projects" inManagedObjectContext:self.managedObjectContext];
+    newProject.name = self.projectName;
+    newProject.date = [NSDate date];
+    
+    for (int i = 1; i <= self.termsTextField.text.intValue; i++) {
+        Periods * newPeriod = [NSEntityDescription insertNewObjectForEntityForName:@"Periods" inManagedObjectContext:self.managedObjectContext];
+        newPeriod.periodNum = [NSNumber numberWithInt:i];
+        newPeriod.projects = newProject;
+    }
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
+    
+}
+
+
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if ([self.termsTextField.text isEqualToString:@""]) {
@@ -56,29 +87,32 @@
         return YES;
     }
 }
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    Projects *newProject;
+//    Projects *newProject;
+//    
+//    newProject = [Projects create];
+//    newProject.name = self.projectName;
+//    newProject.date = [NSDate date];
+//    
+//    if (self.typeSelector.selectedSegmentIndex == 0) {
+//        newProject.type = @"Week";
+//    } else {
+//        newProject.type = @"Month";
+//    }
+//    
+//    for (int i = 1; i <= self.termsTextField.text.intValue; i++) {
+//        Periods *newPeriod;
+//        newPeriod = [Periods create];
+//        newPeriod.periodNum = [NSNumber numberWithInt:i];
+//        newPeriod.projects = newProject;
+//    }
+//    
+//    [[IBCoreDataStore mainStore] save];
     
-    newProject = [Projects create];
-    newProject.name = self.projectName;
-    newProject.date = [NSDate date];
     
-    if (self.typeSelector.selectedSegmentIndex == 0) {
-        newProject.type = @"Week";
-    } else {
-        newProject.type = @"Month";
-    }
-    
-    for (int i = 1; i <= self.termsTextField.text.intValue; i++) {
-        Periods *newPeriod;
-        newPeriod = [Periods create];
-        newPeriod.periodNum = [NSNumber numberWithInt:i];
-        newPeriod.projects = newProject;
-    }
-    
-    [[IBCoreDataStore mainStore] save];
     
     TBController *tbc = segue.destinationViewController;
     UINavigationController *nav = tbc.viewControllers[0];

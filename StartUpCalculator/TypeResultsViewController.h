@@ -15,5 +15,6 @@
 @property (strong, nonatomic)NSString * periodStr;
 
 @property (strong, nonatomic)Projects *openProject;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *typeSwitch;
 
 @end

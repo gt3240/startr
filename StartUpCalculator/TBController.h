@@ -13,5 +13,4 @@
 
 @property (strong,nonatomic)NSNumber *projectIndexToOpen;
 @property (strong, nonatomic)Projects *projectToOpen;
-
 @end

@@ -11,7 +11,7 @@
 #import "Expenses.h"
 #import "ViewPeriodCollectionCell.h"
 #import "Projects.h"
-#import "InnerBand.h"
+#import "AppDelegate.h"
 #import "Periods.h"
 #import "ExpenseDetailViewController.h"
 
@@ -24,7 +24,10 @@
     float monthlyTotal;
     Periods *periodToShow;
     Projects *currentProject;
+    AppDelegate* appDelegate;
 }
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
 @end
 
 @implementation ExpensesViewController
@@ -43,10 +46,14 @@
     [super viewDidLoad];
     
     periodsArr = [NSArray array];
+    
+    appDelegate = [UIApplication sharedApplication].delegate;
+    self.managedObjectContext = appDelegate.managedObjectContext;
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    NSLog(@"app delegate's period is %d", appDelegate.peroidToShow);
     [self setTabBarItemColor];
     
     if (!self.projectToOpen) {
@@ -64,7 +71,8 @@
         
         
         if (!periodToShow) {
-            periodToShow = periodsArr[0];
+            periodToShow = periodsArr[appDelegate.peroidToShow];
+            selectedCell.tag = appDelegate.peroidToShow;
         } else {
             periodToShow = periodsArr[previousSelected];
         }
@@ -146,19 +154,23 @@
 }
 
 - (IBAction)AddPeriodButtonPressed:(UIButton *)sender {
-    Periods *newPeriod = [Periods create];
+    Periods *newPeriod = [NSEntityDescription insertNewObjectForEntityForName:@"Periods" inManagedObjectContext:self.managedObjectContext];
     NSNumber *currentCount = [NSNumber numberWithInt:periodCount];
     NSNumber *addCount = @1;
     NSNumber *newCount = @([currentCount intValue] + [addCount intValue]);
     newPeriod.periodNum = newCount;
     [currentProject addPeriodObject:newPeriod];
-    [[IBCoreDataStore mainStore] save];
     
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    }
     periodCount = newCount.intValue;
     
     [self loadPeriodFromProject:currentProject];
     
     [self.periodCollectionView reloadData];
+
 }
 
 #pragma mark - CollectionView
@@ -223,6 +235,8 @@
     [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
     [selectedCell setButtonSelected:YES];
     previousSelected = (int)selectedCell.tag;
+    
+    appDelegate.peroidToShow = (int)selectedCell.tag;
     
     //refresh table when selected
     NSSortDescriptor *mySort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
@@ -372,7 +386,10 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
-        [[IBCoreDataStore mainStore] save];
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+        }
         
         [self loadIncome];
         

@@ -13,6 +13,9 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 
 @property (strong, nonatomic)NSString * periodStr;
+@property (strong, nonatomic)NSString * displayTitle;
+@property (nonatomic)int displayTitleNumber;
+@property (nonatomic)int displayTitleSectionNumber;
 
 @property (strong, nonatomic)Projects *openProject;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *typeSwitch;

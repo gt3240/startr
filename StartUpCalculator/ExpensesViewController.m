@@ -19,6 +19,7 @@
 {
     BOOL buttonIsSelected;
     ViewPeriodCollectionCell * selectedCell;
+    ViewPeriodCollectionCell *previousCell;
     int expenseRowCount;
     int periodCount;
     float monthlyTotal;
@@ -66,16 +67,13 @@
         
         [self loadPeriodFromProject:currentProject];
         
-        //NSLog(@"projectIndexToOpen is %@", self.projectIndexToOpen);
-        //NSLog(@"project is %@", self.projectToOpen);
-        
-        
-        if (!periodToShow) {
-            periodToShow = periodsArr[appDelegate.peroidToShow];
-            selectedCell.tag = appDelegate.peroidToShow;
-        } else {
-            periodToShow = periodsArr[previousSelected];
-        }
+        periodToShow = periodsArr[appDelegate.peroidToShow];
+
+//        if (!periodToShow) {
+//            periodToShow = periodsArr[appDelegate.peroidToShow];
+//        } else {
+//            periodToShow = periodsArr[previousSelected];
+//        }
         
         [self loadIncome];
         
@@ -88,6 +86,20 @@
     [self.mainTableView reloadData];
 
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if (previousSelected >=0) {
+        previousCell = (ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:previousSelected inSection:0]];
+        [previousCell setButtonSelected:NO];
+    }
+    [self.periodCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:appDelegate.peroidToShow inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
+    selectedCell  =(ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
+    [selectedCell setButtonSelected:YES];
+    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
+    previousSelected = (int)selectedCell.tag;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -167,9 +179,24 @@
     }
     periodCount = newCount.intValue;
     
+    appDelegate.peroidToShow = newCount.intValue - 1;
+    
+    selectedCell  = (ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
+    [selectedCell setButtonSelected:YES];
+    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    previousSelected = newCount.intValue - 1;
+    
     [self loadPeriodFromProject:currentProject];
+    NSSortDescriptor *expenseSort = [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:YES];
+    
+    periodToShow = periodsArr[newCount.intValue - 1];
+    
+    expenseArr = [periodToShow.income sortedArrayUsingDescriptors:@[expenseSort]];
+    
+    expenseRowCount = (int)expenseArr.count;
     
     [self.periodCollectionView reloadData];
+    [self.mainTableView reloadData];
 
 }
 
@@ -215,7 +242,9 @@
         if (cell.tag != previousSelected){
             
             [cell setButtonSelected:NO];
-        } else {
+        }
+        
+        if (indexPath.row == appDelegate.peroidToShow) {
             [cell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
             [cell setButtonSelected:YES];
         }
@@ -226,11 +255,13 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (previousSelected >=0) {
-        ViewPeriodCollectionCell *previousCell = [collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:previousSelected inSection:0]];
+        previousCell = (ViewPeriodCollectionCell *)[collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:previousSelected inSection:0]];
         [previousCell setButtonSelected:NO];
     }
     
-    selectedCell = [collectionView cellForItemAtIndexPath:indexPath];
+    selectedCell = (ViewPeriodCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    NSLog(@"selecedcell now is %@", selectedCell);
+
     
     [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
     [selectedCell setButtonSelected:YES];
@@ -300,6 +331,7 @@
     if (indexPath.section == 0) {
         
         cell.totalLabel.text = [self formatToCurrency:periodToShow.expenseTotal];
+        cell.totalLabel.adjustsFontSizeToFitWidth = YES;
         
     } else {
         
@@ -307,6 +339,7 @@
        
         cell.titleLabel.text = imExpense.title;
         cell.amountLabel.text = [self formatToCurrency:imExpense.amount];
+        cell.amountLabel.adjustsFontSizeToFitWidth = YES;
         
         if ([imExpense.type isEqualToString:@"Rent"])
         {
@@ -428,7 +461,6 @@
         destination.periodToAdd = periodToSend;
         
     }
-    
     
     if ([segue.identifier isEqualToString:@"newExpenseSegue"]){
         UINavigationController * nav = segue.destinationViewController;

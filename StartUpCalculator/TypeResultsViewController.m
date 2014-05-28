@@ -66,20 +66,26 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.title = @"didiid";
-    
     NSArray *periodStrSplit = [self.periodStr componentsSeparatedByString:@"-"];
     selectedPeriodsArr = [NSMutableArray arrayWithCapacity:[periodStrSplit count]];
     [selectedPeriodsArr addObjectsFromArray:periodStrSplit];
     
+    NSString *titleText = [[self.displayTitle substringToIndex:[self.displayTitle length]-2]capitalizedString];
+    int titleNumber;
+    if ([self.displayTitle isEqualToString:@"monthly"]) {
+        titleNumber = (self.displayTitleNumber + 1) + ((self.displayTitleSectionNumber + 1) * 12 - 12);
+    } else if ([self.displayTitle isEqualToString:@"quarterly"]) {
+        titleNumber = (self.displayTitleNumber + 1) + ((self.displayTitleSectionNumber + 1) * 4 - 4);
+    } else {
+        titleNumber = self.displayTitleNumber + 1;
+    }
+    
+    self.title = [NSString stringWithFormat:@"%@ %d", titleText, titleNumber];
+    
     //NSLog(@"periodArr count is %lu", (unsigned long)selectedPeriodsArr.count);
-    //NSLog(@"selectedPeriodArr is %@",selectedPeriodsArr);
+    //NSLog(@"selectedPeriodArr count is %lu",(unsigned long)selectedPeriodsArr.count);
     
     [self calculateTotalForEachType:selectedPeriodsArr forType:@"income" forPeriod:periodsArr];
-//    NSLog(@"total is %.2f", loanTotal.floatValue);
-//    NSLog(@"total is %.2f", othersTotal.floatValue);
-//    NSLog(@"displayItemDic is %@", displayItemDic);
-    //NSLog(@"displayItemArr is %lu", (unsigned long)displayItemArr.count);
     
     displayType = @"income";
     self.typeSwitch.selectedSegmentIndex = 0;
@@ -321,7 +327,6 @@
              cell.typeImage.image = [UIImage imageNamed:imgName];
          }
      }
-     
      
  return cell;
  }

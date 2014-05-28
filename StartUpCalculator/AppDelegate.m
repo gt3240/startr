@@ -31,47 +31,52 @@
     self.window.tintColor = [UIColor whiteColor];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    BOOL isRunMoreThanOnce = [[NSUserDefaults standardUserDefaults] boolForKey:@"isRunMoreThanOnce"];
-    if(!isRunMoreThanOnce){
+    BOOL firstLaunch = [[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"];
+    if(!firstLaunch){
         // load the p list
-        NSLog(@"oops, not first time");
-
-//        NSString *pathArtist = [[NSBundle mainBundle] pathForResource:@"startup" ofType:@"plist"];
-//        NSArray *projectList = [NSArray arrayWithContentsOfFile:pathArtist];
-//        
-//        for (NSDictionary *imProject in projectList) {
-//            Projects *newProject = [Projects create];
-//            
-//            newProject.name = imProject[@"projectName"];
-//            
-//            for (NSDictionary *periodList in imProject[@"period"]) {
-//                Periods *newPeriod = [Periods create];
-//                newPeriod.periodNum = periodList[@"periodNum"];
-//                newPeriod.projects = newProject;
-//                
-//                for (NSDictionary *incomeList in periodList[@"income"]) {
-//                    Incomes *newIncome = [Incomes create];
-//                    newIncome.title = incomeList[@"title"];
-//                    newIncome.amount = incomeList[@"amount"];
-//                    newIncome.period = newPeriod;
-//                    newIncome.recurring = incomeList[@"recurring"];
-//                    newIncome.recurringAmount = incomeList[@"recurringAmount"];
-//                    newIncome.recurringType = incomeList[@"recurringType"];
-//                    newIncome.recurringPeriod = incomeList[@"recurringPeriod"];
-//                    newIncome.notes = incomeList[@"notes"];
-//                    newIncome.source = incomeList[@"source"];
-//                }
-//            }
-//            
-//            [[IBCoreDataStore mainStore] save];
-//           }
+        NSLog(@"first time");
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isRunMoreThanOnce"];
+        //prepare for iCloud
+
+        id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];
+        
+        if (currentiCloudToken) {
+            NSData *newTokenData =
+            [NSKeyedArchiver archivedDataWithRootObject: currentiCloudToken];
+            [[NSUserDefaults standardUserDefaults]
+             setObject: newTokenData
+             forKey: @"com.tkj.startr.UbiquityIdentityToken"];
+        } else {
+            [[NSUserDefaults standardUserDefaults]
+             removeObjectForKey: @"com.tkj.startr.UbiquityIdentityToken"];
+        }
+        
+        if (currentiCloudToken) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"iCloud sync"
+                                  message: @"Should documents be stored in iCloud and available on all your devices?"
+                                  delegate: self
+                                  cancelButtonTitle: @"No"
+                                  otherButtonTitles: @"Use iCloud", nil];
+            [alert show];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-
     return YES;
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+        if (buttonIndex == 0) {
+            NSLog(@"cancle clicked");
+            
+        } else {
+           NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setBool:YES forKey:@"enableICloud"];
+        }    
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

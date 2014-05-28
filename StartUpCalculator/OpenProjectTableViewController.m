@@ -37,6 +37,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
+    [self.tableView setBackgroundView:imageView];
+    self.tableView.backgroundView.layer.zPosition -= 1;
     
     //  1
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
@@ -47,14 +51,21 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     self.fetchedRecordsArray = [[[appDelegate getAllProjects]mutableCopy] sortedArrayUsingDescriptors:@[sortDescriptor]];
     //  3
-
     
     // add iCloud observers
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesDidChange:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeContent:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    NSLog(@" icloud sync is %@", [defaults objectForKey:@"enableICloud"]);
+    
+    if ([defaults objectForKey:@"enableICloud"]) {
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesDidChange:) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:self.managedObjectContext.persistentStoreCoordinator];
+        
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeContent:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:self.managedObjectContext.persistentStoreCoordinator];
+    }
+    
     
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm"];
@@ -69,9 +80,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
-    [self.tableView setBackgroundView:imageView];
-
+    
 }
 
 #pragma mark - iCloud Methods
@@ -111,8 +120,8 @@
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO];
     self.fetchedRecordsArray = [[[appDelegate getAllProjects]mutableCopy] sortedArrayUsingDescriptors:@[sortDescriptor]];
+    
     [self.tableView reloadData];
-
 }
 
 #pragma mark - Table view data source

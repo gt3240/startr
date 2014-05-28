@@ -228,6 +228,10 @@
     float total = income - expense;
     
     cell.totalAmountLabel.text = [self formatToCurrency:[NSNumber numberWithFloat:total]];
+    cell.totalAmountLabel.adjustsFontSizeToFitWidth = YES;
+    cell.incomeAmountLabel.adjustsFontSizeToFitWidth = YES;
+    cell.expenseAmountLabel.adjustsFontSizeToFitWidth = YES;
+
     //NSLog(@"total is %f", total);
     return cell;
 }
@@ -290,6 +294,9 @@
         TypeResultsViewController * destination = segue.destinationViewController;
         destination.periodStr = [[incomeArr objectAtIndex:self.resultTBV.indexPathForSelectedRow.row]  objectForKey:@"periodStr"];
         destination.openProject = self.openProject;
+        destination.displayTitle = displayType;
+        destination.displayTitleNumber = (int)self.resultTBV.indexPathForSelectedRow.row;
+        destination.displayTitleSectionNumber = (int)self.resultTBV.indexPathForSelectedRow.section;
     }
 }
 

@@ -38,6 +38,8 @@
 {
     [super viewDidLoad];
 
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"main_menu_bg"] forBarMetrics:UIBarMetricsDefault];
+    
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
     [self.tableView setBackgroundView:imageView];
     self.tableView.backgroundView.layer.zPosition -= 1;

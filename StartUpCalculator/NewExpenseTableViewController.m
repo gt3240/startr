@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "ExpenseTypeCollectionViewController.h"
 #import "IncomeAndExpenseType.h"
+#import "displayTypeImage.h"
 
 @interface NewExpenseTableViewController ()
 {
@@ -23,6 +24,8 @@
     BOOL deleteRecur;
     UIAlertView *recurAlert;
     float keyboardOffset;
+    displayTypeImage *img;
+    int posOrNegInt;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
@@ -42,8 +45,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    img = [[displayTypeImage alloc]init];
     self.notes.tag = 5;
+    posOrNegInt = 1;
     
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
@@ -68,6 +72,7 @@
        
         //self.IncomeTypeLabel.text = incomeTypeStr;
         self.TypeLabel.text = expenseTypeObj.typeTitle;
+        self.typeImage.image = [img showImage:expenseTypeObj.typeTitle];
     
         if ([self.expenseToEdit.recurring intValue] == 1){
              keyboardOffset = 276;
@@ -95,9 +100,6 @@
         addExpense = [NSEntityDescription insertNewObjectForEntityForName:@"Expenses" inManagedObjectContext:self.managedObjectContext];
         recurringDateID = [NSDate date];
     }
-    
-    //NSLog(@"period id is %@", self.periodToAdd.periodNum);
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -107,6 +109,7 @@
 
     if (expenseTypeObj) {
         self.TypeLabel.text = expenseTypeObj.typeTitle;
+        self.typeImage.image = [img showImage:expenseTypeObj.typeTitle];
     } else {
         self.TypeLabel.text = @"";
     }
@@ -142,7 +145,7 @@
 
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
-    NSLog(@"tf tag is %d", self.notes.tag);
+    NSLog(@"tf tag is %ld", (long)self.notes.tag);
     if (self.expenseToEdit){
         
         //First update period income total
@@ -284,9 +287,9 @@
                 Periods *nextP = pInProjectArr[i - 1];
                 Expenses *newExpense = [NSEntityDescription insertNewObjectForEntityForName:@"Expenses" inManagedObjectContext:self.managedObjectContext];
                 if (self.recurringType.selectedSegmentIndex == 0) {
-                    newAmount += self.recurringAmount.text.floatValue;
+                    newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
                 } else {
-                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100;
+                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100 * posOrNegInt;
                 }
                 [self createNewExpense:newExpense toPeriod:nextP withAmount:newAmount];
             }
@@ -298,9 +301,9 @@
             newPeriod.projects = self.projectToAdd;
             Expenses *newExpense = [NSEntityDescription insertNewObjectForEntityForName:@"Expenses" inManagedObjectContext:self.managedObjectContext];
             if (self.recurringType.selectedSegmentIndex == 0) {
-                newAmount += self.recurringAmount.text.floatValue;
+                newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
             } else {
-                newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue /100;
+                newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue /100 * posOrNegInt;
             }
             [self createNewExpense:newExpense toPeriod:newPeriod withAmount:newAmount];
         }
@@ -322,7 +325,7 @@
     expense.source = self.sourceLabel.text;
     
     if (expenseTypeObj.typeTitle == NULL) {
-        expense.type = @"Undeclared";
+        expense.type = @"Undeclared Expense";
     } else {
         expense.type = expenseTypeObj.typeTitle;
     }
@@ -336,7 +339,7 @@
         
         expense.recurringDateID = recurringDateID;
         
-        expense.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue];
+        expense.recurringAmount = [NSNumber numberWithFloat:(self.recurringAmount.text.floatValue * posOrNegInt)] ;
         
         expense.recurringEndPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue + self.periodToAdd.periodNum.intValue - 1];
     } else {
@@ -351,6 +354,8 @@
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 - (IBAction)recurringSwitched:(UISwitch *)sender {
         
@@ -385,6 +390,14 @@
             [self deleteFutureRecurs:self.expenseToEdit.recurringDateID];
         }
         
+    }
+}
+
+- (IBAction)negOrPosSwtiched:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        posOrNegInt = 1;
+    } else {
+        posOrNegInt = -1;
     }
 }
 
@@ -445,18 +458,6 @@
 
 #pragma mark - keyboard offset
 
-//-(void)keyboardWillShow {
-//    // Animate the current view out of the way
-//    if (self.view.frame.origin.y >= 0)
-//    {
-//        [self setViewMovedUp:YES];
-//    }
-//    else if (self.view.frame.origin.y < 0)
-//    {
-//        [self setViewMovedUp:NO];
-//    }
-//}
-//
 -(void)keyboardWillHide {
    
     if (self.view.frame.origin.y < 0)
@@ -519,4 +520,11 @@
     
     [UIView commitAnimations];
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+}
+
 @end

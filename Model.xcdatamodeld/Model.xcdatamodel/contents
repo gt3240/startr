@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Expenses" representedClassName="Expenses" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,6 +28,11 @@
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="period" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Periods" inverseName="income" inverseEntity="Periods" syncable="YES"/>
     </entity>
+    <entity name="Notes" representedClassName="Notes" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="project" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Projects" inverseName="notes" inverseEntity="Projects" syncable="YES"/>
+    </entity>
     <entity name="Periods" representedClassName="Periods" syncable="YES">
         <attribute name="expenseTotal" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="incomeTotal" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -40,13 +45,16 @@
     <entity name="Projects" representedClassName="Projects" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="notes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notes" inverseName="project" inverseEntity="Notes" syncable="YES"/>
         <relationship name="period" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Periods" inverseName="projects" inverseEntity="Periods" syncable="YES"/>
     </entity>
     <elements>
         <element name="Expenses" positionX="0" positionY="135" width="128" height="223"/>
         <element name="Incomes" positionX="27" positionY="90" width="128" height="223"/>
         <element name="Periods" positionX="0" positionY="63" width="128" height="148"/>
-        <element name="Projects" positionX="-36" positionY="9" width="128" height="103"/>
+        <element name="Projects" positionX="-36" positionY="9" width="128" height="133"/>
+        <element name="Notes" positionX="0" positionY="126" width="128" height="88"/>
     </elements>
 </model>

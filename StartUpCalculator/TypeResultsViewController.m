@@ -64,8 +64,10 @@
     // Do any additional setup after loading the view.
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self setTabBarItemColor];
     NSArray *periodStrSplit = [self.periodStr componentsSeparatedByString:@"-"];
     selectedPeriodsArr = [NSMutableArray arrayWithCapacity:[periodStrSplit count]];
     [selectedPeriodsArr addObjectsFromArray:periodStrSplit];
@@ -94,6 +96,31 @@
 //    NSLog(@"keyArr is %@", keyArr);
 //    NSLog(@"valArr is %@", valArr);
 }
+
+- (void)setTabBarItemColor
+{
+    self.tabBarController.tabBar.barTintColor = [UIColor colorWithRed:27/255.0f green:172/255.0f blue:167/255.0f alpha:1.0f];
+    
+    NSArray *items = self.tabBarController.tabBar.items;
+    UITabBarItem *inBtn = items[0];
+    UITabBarItem *outBtn = items[1];
+    UITabBarItem *resultBtn = items[2];
+    UITabBarItem *infoBtn = items[3];
+    
+    
+    inBtn.image = [[UIImage imageNamed:@"In_iconGreen"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    outBtn.image = [[UIImage imageNamed:@"Out_iconGreen"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    infoBtn.image = [[UIImage imageNamed:@"profile_iconGreen"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    
+    [resultBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateHighlighted];
+    
+    [inBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:133/255.0f blue:142/255.0f alpha:1.0f]} forState:UIControlStateNormal];
+    [outBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:133/255.0f blue:142/255.0f alpha:1.0f]} forState:UIControlStateNormal];
+    [infoBtn setTitleTextAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue" size:10.0f],NSForegroundColorAttributeName : [UIColor colorWithRed:0/255.0f green:133/255.0f blue:142/255.0f alpha:1.0f]} forState:UIControlStateNormal];
+}
+
+
 - (IBAction)typeSwitched:(UISegmentedControl *)sender {
     
     if (sender.selectedSegmentIndex == 0) {
@@ -155,7 +182,7 @@
                 } else if ([thisIncome.type isEqualToString:@"Others"])
                 {
                     othersTotal = [NSNumber numberWithFloat:([othersTotal floatValue] + [thisIncome.amount floatValue])];
-                } else if ([thisIncome.type isEqualToString:@"Undeclared"])
+                } else if ([thisIncome.type isEqualToString:@"Undeclared Income"])
                 {
                     undeclaredTotal = [NSNumber numberWithFloat:([undeclaredTotal floatValue] + [thisIncome.amount floatValue])];
                 }
@@ -213,7 +240,7 @@
                 }else if ([thisExpense.type isEqualToString:@"Others"])
                 {
                     othersTotal = [NSNumber numberWithFloat:([othersTotal floatValue] + [thisExpense.amount floatValue])];
-                } else if ([thisExpense.type isEqualToString:@"Undeclared"])
+                } else if ([thisExpense.type isEqualToString:@"Undeclared Expense"])
                 {
                     undeclaredTotal = [NSNumber numberWithFloat:([undeclaredTotal floatValue] + [thisExpense.amount floatValue])];
                 }

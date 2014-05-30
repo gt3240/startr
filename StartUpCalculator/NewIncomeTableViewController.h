@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *notes;
 @property (weak, nonatomic) IBOutlet UITextField *sourceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *IncomeTypeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *typeImage;
 
 //@property (strong, nonatomic) id<editOrNewIncomeDelegate>  editIncomeDelegate;
 @property (strong, nonatomic) id<editOrNewIncomeDelegate>  addIncomeDelegate;

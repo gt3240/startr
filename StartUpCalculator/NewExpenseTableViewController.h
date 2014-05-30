@@ -29,11 +29,13 @@
 @property (weak, nonatomic) IBOutlet UISwitch *recurringSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *recurringAmount;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *recurringType;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *negOrPosSwitch;
 @property (weak, nonatomic) IBOutlet UITextField *recurringPeriodTextField;
 
 @property (weak, nonatomic) IBOutlet UITextView *notes;
 @property (weak, nonatomic) IBOutlet UITextField *sourceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *TypeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *typeImage;
 
 @property (strong, nonatomic) id<editOrNewExpenseDelegate>  addExpenseDelegate;
 

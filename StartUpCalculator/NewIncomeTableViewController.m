@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "IncomeTypeCollectionViewController.h"
 #import "IncomeAndExpenseType.h"
+#import "displayTypeImage.h"
 
 @interface NewIncomeTableViewController ()
 {
@@ -23,9 +24,10 @@
     BOOL deleteRecur;
     UIAlertView *recurAlert;
     float keyboardOffset;
+    displayTypeImage *img;
+    int posOrNegInt;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
-
 @end
 
 @implementation NewIncomeTableViewController
@@ -43,7 +45,9 @@
 {
     [super viewDidLoad];
     
+    img = [[displayTypeImage alloc]init];
     self.notes.tag = 5;
+    posOrNegInt = 1;
     
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
@@ -57,8 +61,9 @@
         self.amountTextField.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.amount];
         self.sourceLabel.text = self.incomeToEdit.source;
         incomeTypeObj.typeTitle = self.incomeToEdit.type;
-        //self.IncomeTypeLabel.text = incomeTypeStr;
         self.IncomeTypeLabel.text = incomeTypeObj.typeTitle;
+        self.typeImage.image = [img showImage:incomeTypeObj.typeTitle];
+        
         
         if ([self.incomeToEdit.notes isEqualToString:@""]) {
             self.notes.text = @"Notes";
@@ -107,6 +112,7 @@
     
     if (incomeTypeObj) {
         self.IncomeTypeLabel.text = incomeTypeObj.typeTitle;
+        self.typeImage.image = [img showImage:incomeTypeObj.typeTitle];
     } else {
         self.IncomeTypeLabel.text = @"";
     }
@@ -272,9 +278,9 @@
                 Periods *nextP = pInProjectArr[i - 1];
                 Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
                 if (self.recurringType.selectedSegmentIndex == 0) {
-                    newAmount += self.recurringAmount.text.floatValue;
+                    newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
                 } else {
-                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100;
+                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100 * posOrNegInt;
                 }
                 [self createNewIncome:newIncome toPeriod:nextP withAmount:newAmount];
             }
@@ -286,9 +292,9 @@
             newPeriod.projects = self.projectToAdd;
             Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
             if (self.recurringType.selectedSegmentIndex == 0) {
-                newAmount += self.recurringAmount.text.floatValue;
+                newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
             } else {
-                newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue /100;
+                newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue /100 * posOrNegInt;
             }
             [self createNewIncome:newIncome toPeriod:newPeriod withAmount:newAmount];
         }        
@@ -310,7 +316,7 @@
     income.source = self.sourceLabel.text;
     
     if (incomeTypeObj.typeTitle == NULL) {
-        income.type = @"Undeclared";
+        income.type = @"Undeclared Income";
     } else {
         income.type = incomeTypeObj.typeTitle;
     }
@@ -324,7 +330,7 @@
         
         income.recurringDateID = recurringDateID;
         
-        income.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue];
+        income.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue * posOrNegInt];
         
         income.recurringEndPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue + self.periodToAdd.periodNum.intValue - 1];
     } else {
@@ -373,6 +379,14 @@
             [self deleteFutureRecurs:self.incomeToEdit.recurringDateID];
         }
 
+    }
+}
+
+- (IBAction)posOrNegSwitched:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        posOrNegInt = 1;
+    } else {
+        posOrNegInt = -1;
     }
 }
 
@@ -492,5 +506,11 @@
     self.view.frame = rect;
     
     [UIView commitAnimations];
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 @end

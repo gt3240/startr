@@ -36,6 +36,10 @@
         // load the p list
         NSLog(@"first time");
         
+        UIStoryboard *soyStoryboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+        
+        self.window.rootViewController = [soyStoryboard instantiateViewControllerWithIdentifier:@"tutorail"];
+        
         //prepare for iCloud
 
         id currentiCloudToken = [[NSFileManager defaultManager] ubiquityIdentityToken];

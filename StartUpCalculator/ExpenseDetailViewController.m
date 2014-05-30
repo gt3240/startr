@@ -8,6 +8,7 @@
 
 #import "ExpenseDetailViewController.h"
 #import "NewExpenseTableViewController.h"
+#import "displayTypeImage.h"
 
 @interface ExpenseDetailViewController ()
 
@@ -26,6 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.noteUIView.center = CGPointMake(160, 80);
+
     // Do any additional setup after loading the view.
 }
 
@@ -38,46 +41,9 @@
     self.fromLabel.text = self.expenseToShowDetail.source;
     self.notesTextView.text = self.expenseToShowDetail.notes;
     
-    if ([self.expenseToShowDetail.type isEqualToString:@"Rent"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Rent"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Electricity"]){
-        self.typeImage.image = [UIImage imageNamed:@"Electricity"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Employee"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Employee"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Others"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Others"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Finance"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Finance"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Marketing"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"marketing"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Telephone"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Telephone"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"COGS"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"COGS"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Water"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Water"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Automobile"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Automobile"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Hardware"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Hardware"];
-    } else if ([self.expenseToShowDetail.type isEqualToString:@"Expenses"])
-    {
-        self.typeImage.image = [UIImage imageNamed:@"Expenses"];
-    }
-    else         {
-        self.typeImage.image = [UIImage imageNamed:@"PlaceHolderRed"];
-    }    
-    
+    displayTypeImage *img = [[displayTypeImage alloc]init];
+    self.typeImage.image = [img showImage:self.expenseToShowDetail.type];
+        
     if ([self.expenseToShowDetail.recurring intValue] == 1) {
         
         //self.recurringLabel.text = @"Increased by";
@@ -85,22 +51,33 @@
 //        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm:ss"];
 //        self.notesTextView.text = [dateFormatter stringFromDate:self.expenseToShowDetail.recurringDateID];
         
-        self.recurUntilLabel.text = [NSString stringWithFormat: @"Recur until month %@", self.expenseToShowDetail.recurringEndPeriod.stringValue];
+        self.recurUntilLabel.text = [NSString stringWithFormat: @"Repeat until month %@", self.expenseToShowDetail.recurringEndPeriod.stringValue];
         
-        NSLog(@"type is %@", self.expenseToShowDetail.period.periodType);
         self.recurringAmountLabel.text = self.expenseToShowDetail.recurringAmount.stringValue;
+    
         if ([self.expenseToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
+
+            if (self.expenseToShowDetail.recurringAmount.intValue < 0) {
+                 self.recurringAmountLabel.text = [NSString stringWithFormat:@"-$%@", [NSNumber numberWithFloat:(self.expenseToShowDetail.recurringAmount.floatValue * -1)]];
+             } else {
+                 self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.expenseToShowDetail.recurringAmount];
             
-            self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.expenseToShowDetail.recurringAmount];
+             }
+            
         } else {
+            if (self.expenseToShowDetail.recurringAmount.intValue < 0) {
+                self.recurringAmountLabel.text = [NSString stringWithFormat:@"-%@%%", [NSNumber numberWithFloat:(self.expenseToShowDetail.recurringAmount.floatValue * -1)]];
+            } else {
+                self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.expenseToShowDetail.recurringAmount];
+            }
             
-            self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.expenseToShowDetail.recurringAmount];
         }
     } else {
        
         [self.recurringView setHidden:YES];
         
-        //self.noteUIView.layer.position.x = new.x;
+        
+        //self.noteUIView.layer.position.x = 200;
         //self.recurringLabel.text = @"";
     }
 }

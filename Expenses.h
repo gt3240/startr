@@ -2,7 +2,7 @@
 //  Expenses.h
 //  StartUpCalculator
 //
-//  Created by Tom on 5/8/14.
+//  Created by Tom on 5/28/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
@@ -17,13 +17,13 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * recurring;
 @property (nonatomic, retain) NSNumber * recurringAmount;
+@property (nonatomic, retain) NSDate * recurringDateID;
+@property (nonatomic, retain) NSNumber * recurringEndPeriod;
 @property (nonatomic, retain) NSNumber * recurringPeriod;
 @property (nonatomic, retain) NSString * recurringType;
 @property (nonatomic, retain) NSString * source;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSDate * recurringDateID;
-@property (nonatomic, retain) NSNumber * recurringEndPeriod;
 @property (nonatomic, retain) Periods *period;
 
 @end

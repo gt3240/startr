@@ -16,6 +16,7 @@
 #import "OpenProjectTableViewController.h"
 #import "ProjectTypeViewController.h"
 #import "IncomeDetailViewController.h"
+#import "displayTypeImage.h"
 
 
 @interface IncomeViewController ()
@@ -348,20 +349,23 @@
         cell.amountLabel.text = [self formatToCurrency:imIncome.amount];
         cell.amountLabel.adjustsFontSizeToFitWidth = YES;
         
-        if ([imIncome.type isEqualToString:@"Investment"])
-        {
-            cell.image.image = [UIImage imageNamed:@"investment"];
-        } else if ([imIncome.type isEqualToString:@"Loan"]){
-            cell.image.image = [UIImage imageNamed:@"loan"];
-        } else if ([imIncome.type isEqualToString:@"Sales"])
-        {
-            cell.image.image = [UIImage imageNamed:@"sales"];
-        } else if ([imIncome.type isEqualToString:@"Others"])
-        {
-            cell.image.image = [UIImage imageNamed:@"others"];
-        } else         {
-            cell.image.image = [UIImage imageNamed:@"PlaceHolderBlue"];
-        }
+        displayTypeImage *img = [[displayTypeImage alloc]init];
+        
+        cell.image.image = [img showImage:imIncome.type];
+//        if ([imIncome.type isEqualToString:@"Investment"])
+//        {
+//            cell.image.image = [UIImage imageNamed:@"investment"];
+//        } else if ([imIncome.type isEqualToString:@"Loan"]){
+//            cell.image.image = [UIImage imageNamed:@"loan"];
+//        } else if ([imIncome.type isEqualToString:@"Sales"])
+//        {
+//            cell.image.image = [UIImage imageNamed:@"sales"];
+//        } else if ([imIncome.type isEqualToString:@"Others"])
+//        {
+//            cell.image.image = [UIImage imageNamed:@"others"];
+//        } else         {
+//            cell.image.image = [UIImage imageNamed:@"PlaceHolderBlue"];
+//        }
         
         cell.customerLabel.text = imIncome.source;
         

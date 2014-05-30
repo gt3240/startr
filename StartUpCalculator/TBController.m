@@ -9,6 +9,7 @@
 #import "TBController.h"
 #import "ExpensesViewController.h"
 #import "ResultsVC.h"
+#import "ProfileViewController.h"
 
 @interface TBController ()
 
@@ -37,6 +38,11 @@
     UINavigationController *resultNav = self.viewControllers[2];
     ResultsVC *rvc = resultNav.viewControllers[0];
     rvc.openProject = self.projectToOpen;
+    
+    // send project to profile
+    UINavigationController *profileNav = self.viewControllers[3];
+    ProfileViewController *pvc = profileNav.viewControllers[0];
+    pvc.openProject = self.projectToOpen;
 }
 
 - (void)didReceiveMemoryWarning

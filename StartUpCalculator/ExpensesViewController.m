@@ -14,6 +14,7 @@
 #import "AppDelegate.h"
 #import "Periods.h"
 #import "ExpenseDetailViewController.h"
+#import "displayTypeImage.h"
 
 @interface ExpensesViewController ()
 {
@@ -341,45 +342,9 @@
         cell.amountLabel.text = [self formatToCurrency:imExpense.amount];
         cell.amountLabel.adjustsFontSizeToFitWidth = YES;
         
-        if ([imExpense.type isEqualToString:@"Rent"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Rent"];
-        } else if ([imExpense.type isEqualToString:@"Electricity"]){
-            cell.image.image = [UIImage imageNamed:@"Electricity"];
-        } else if ([imExpense.type isEqualToString:@"Employee"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Employee"];
-        } else if ([imExpense.type isEqualToString:@"Others"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Others"];
-        } else if ([imExpense.type isEqualToString:@"Finance"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Finance"];
-        } else if ([imExpense.type isEqualToString:@"Marketing"])
-        {
-            cell.image.image = [UIImage imageNamed:@"marketing"];
-        } else if ([imExpense.type isEqualToString:@"Telephone"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Telephone"];
-        } else if ([imExpense.type isEqualToString:@"COGS"])
-        {
-            cell.image.image = [UIImage imageNamed:@"COGS"];
-        } else if ([imExpense.type isEqualToString:@"Water"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Water"];
-        } else if ([imExpense.type isEqualToString:@"Automobile"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Automobile"];
-        } else if ([imExpense.type isEqualToString:@"Hardware"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Hardware"];
-        } else if ([imExpense.type isEqualToString:@"Expenses"])
-        {
-            cell.image.image = [UIImage imageNamed:@"Expenses"];
-        }        
-        else         {
-            cell.image.image = [UIImage imageNamed:@"PlaceHolderRed"];
-        }
+        displayTypeImage *img = [[displayTypeImage alloc]init];
+        
+        cell.image.image = [img showImage:imExpense.type];
         
         cell.customerLabel.text = imExpense.source;
         

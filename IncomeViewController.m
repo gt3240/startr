@@ -97,7 +97,7 @@
     [self.periodCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:appDelegate.peroidToShow inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     selectedCell  = (ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
     [selectedCell setButtonSelected:YES];
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
     previousSelected = (int)selectedCell.tag;
 }
 
@@ -191,7 +191,8 @@
     
     selectedCell  = (ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
     [selectedCell setButtonSelected:YES];
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
+
     previousSelected = newCount.intValue - 1;
     
     [self loadPeriodFromProject:currentProject];
@@ -270,7 +271,8 @@
     
     selectedCell = (ViewPeriodCollectionCell*)[collectionView cellForItemAtIndexPath:indexPath];
     
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
+
     [selectedCell setButtonSelected:YES];
     
     previousSelected = (int)selectedCell.tag;

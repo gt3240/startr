@@ -72,8 +72,9 @@
             }
         }
     } else {
-        self.recurringAmountLabel.text = @"---";
-        //self.recurringLabel.text = @"";
+        [self.recurringAmountLabel setHidden:YES];
+        [self.recurUntilLabel setHidden:YES];
+        self.changeByLabel.text = @"Non repeat item";
     }
 }
 

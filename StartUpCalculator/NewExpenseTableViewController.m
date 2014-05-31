@@ -189,21 +189,43 @@
             newAmount = startingAmount;
             
             if ([shouldRecurr isEqualToNumber:@1]) {
-                [self setRecurringInfoFor:addExpense];
+                
+                if (self.recurringPeriodTextField.text.floatValue == 0) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating months can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                } else if (self.recurringAmount.text.floatValue == 0) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating amount can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                } else {
+                    [self setRecurringInfoFor:addExpense];
+                    
+                    [self.periodToAdd addExpenseObject:addExpense];
+                    
+                    NSError *error;
+                    if (![self.managedObjectContext save:&error]) {
+                        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                    }
+                    
+                    [self.addExpenseDelegate expenseAdded];
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
                 
             } else {
                 [self createNewExpense:addExpense toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue];
+                
+                [self.periodToAdd addExpenseObject:addExpense];
+                
+                NSError *error;
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                }
+                
+                [self.addExpenseDelegate expenseAdded];
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
-            [self.periodToAdd addExpenseObject:addExpense];
             
-            NSError *error;
-            if (![self.managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-            }
-            
-            [self.addExpenseDelegate expenseAdded];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
         
     }
@@ -261,6 +283,7 @@
 
 - (void)setRecurringInfoFor:(Expenses *)thisExpense
 {
+    
     thisExpense.recurring = shouldRecurr;
     thisExpense.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue];
     thisExpense.recurringPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue];

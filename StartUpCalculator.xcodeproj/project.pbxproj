@@ -21,6 +21,7 @@
 		CB308F2B190824930083B716 /* TBController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB308F2A190824930083B716 /* TBController.m */; };
 		CB3F31041909B11B00511A15 /* MainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */; };
 		CB3F31061909C29800511A15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F31051909C29800511A15 /* QuartzCore.framework */; };
+		CB4010621939299D0036CCE8 /* EditProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4010611939299D0036CCE8 /* EditProjectTableViewController.m */; };
 		CB5A64F8191D797C0054A0EC /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5A64F7191D797C0054A0EC /* ResultsVC.m */; };
 		CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */; };
 		CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */; };
@@ -138,6 +139,8 @@
 		CB3F31021909B11B00511A15 /* MainMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenuTableViewController.h; path = ../MainMenuTableViewController.h; sourceTree = "<group>"; };
 		CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainMenuTableViewController.m; path = ../MainMenuTableViewController.m; sourceTree = "<group>"; };
 		CB3F31051909C29800511A15 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CB4010601939299D0036CCE8 /* EditProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectTableViewController.h; sourceTree = "<group>"; };
+		CB4010611939299D0036CCE8 /* EditProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectTableViewController.m; sourceTree = "<group>"; };
 		CB5A64F6191D797C0054A0EC /* ResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsVC.h; sourceTree = "<group>"; };
 		CB5A64F7191D797C0054A0EC /* ResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
 		CB6109A718FEFC5500300B9A /* SavedProjectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewController.h; sourceTree = "<group>"; };
@@ -699,6 +702,8 @@
 				CBE838C719367364009BBCB2 /* AddNotesViewController.m */,
 				CBE838A1193652D3009BBCB2 /* ProfileViewController.h */,
 				CBE838A2193652D3009BBCB2 /* ProfileViewController.m */,
+				CB4010601939299D0036CCE8 /* EditProjectTableViewController.h */,
+				CB4010611939299D0036CCE8 /* EditProjectTableViewController.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -841,6 +846,7 @@
 				CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */,
 				CB734BEA18F5D62B003268EB /* NSObject+InnerBand.m in Sources */,
 				CB166793191C264F00C9B7E6 /* ExpenseDetailViewController.m in Sources */,
+				CB4010621939299D0036CCE8 /* EditProjectTableViewController.m in Sources */,
 				CB166778191C1C3E00C9B7E6 /* ExpenseTypeCollectionCell.m in Sources */,
 				CB166775191C1C2700C9B7E6 /* ExpenseTypeCollectionViewController.m in Sources */,
 				CB734BEB18F5D62B003268EB /* NSString+Encoding.m in Sources */,

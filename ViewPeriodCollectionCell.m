@@ -29,14 +29,19 @@
 - (void)drawRect:(CGRect)rect
 {
     if (self.buttonSelected) {
-        CGRect box = CGRectInset(self.bounds, self.bounds.size.width * 0.1f, self.bounds.size.height * 0.1f);
-        
-        UIBezierPath * circleBackGround = [UIBezierPath bezierPathWithOvalInRect:box];
-        [[UIColor whiteColor] setFill];
-        [circleBackGround fill];
-        
+        [self.periodCellBG setHidden:NO];
+        [self.periodLabel setTextColor:[UIColor whiteColor]];
+
+//        CGRect box = CGRectInset(self.bounds, self.bounds.size.width * 0.1f, self.bounds.size.height * 0.1f);
+//        
+//        UIBezierPath * circleBackGround = [UIBezierPath bezierPathWithOvalInRect:box];
+//        [[UIColor whiteColor] setFill];
+//        [circleBackGround fill];
+    
         //[self.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
     } else {
+        [self.periodCellBG setHidden:YES];
+
         [self.periodLabel setTextColor:[UIColor whiteColor]];
     }
     

@@ -11,11 +11,13 @@
 #import "AppDelegate.h"
 #import "AddNotesViewController.h"
 #import "Notes.h"
+#import "EditProjectTableViewController.h"
 
 @interface ProfileViewController ()
 {
     NSArray *notesArr;
     NSDateFormatter *dateFormatter;
+    int noteRowCount;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
@@ -55,7 +57,11 @@
     notesArr = [self.openProject.notes sortedArrayUsingDescriptors:@[sort]];
     
     NSLog(@"notes count %lu", (unsigned long)notesArr.count);
+    
+    noteRowCount = (int)notesArr.count;
     [self.notesTableView reloadData];
+    [self.navigationItem setTitle:self.openProject.name];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -123,7 +129,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return notesArr.count;
+    return noteRowCount;
 }
 
 
@@ -153,29 +159,30 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        
-//        [self.mainTableView beginUpdates];
-//        
-//        Periods *periodToDelete = periodsArr[previousSelected];
-//        Incomes *incomeToDelete = incomeArr[indexPath.row];
-//        
-//        incomeRowCount = incomeRowCount - 1;
-//        
-//        periodToDelete.incomeTotal = @([periodToDelete.incomeTotal floatValue] - [incomeToDelete.amount floatValue]);
-//        [periodToDelete removeIncomeObject:incomeToDelete];
-//        
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//        
-//        NSError *error;
-//        if (![self.managedObjectContext save:&error]) {
-//            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-//        }
-//        
-//        [self loadIncome];
-//        
-//        [self.mainTableView endUpdates];
-//        
-//        [self.mainTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+        
+        [self.notesTableView beginUpdates];
+        
+        Notes *notesToDelete = notesArr[indexPath.row];
+        
+        noteRowCount = noteRowCount - 1;
+        
+        //periodToDelete.incomeTotal = @([periodToDelete.incomeTotal floatValue] - [incomeToDelete.amount floatValue]);
+        [self.openProject removeNotesObject:notesToDelete];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        
+        NSError *error;
+        if (![self.managedObjectContext save:&error]) {
+            NSLog(@"Whoops, couldn't delete note: %@", [error localizedDescription]);
+        }
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+        
+        notesArr = [self.openProject.notes sortedArrayUsingDescriptors:@[sort]];
+
+        [self.notesTableView endUpdates];
+        
+        [self.notesTableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -205,6 +212,10 @@
         AddNotesViewController * destination = nav.viewControllers[0];
         Notes *notesToSend = notesArr[self.notesTableView.indexPathForSelectedRow.row];
         destination.currentNotes = notesToSend;
+    } else if ([segue.identifier isEqualToString:@"changeTitleSegue"]) {
+        UINavigationController * nav = segue.destinationViewController;
+        EditProjectTableViewController * destination = nav.viewControllers[0];
+        destination.openedProject = self.openProject;
     }
 }
 

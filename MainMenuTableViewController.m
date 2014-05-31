@@ -30,6 +30,10 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"main_menu_bg"]];
     [self.tableView setBackgroundView:imageView];
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                            withAnimation:UIStatusBarAnimationFade];
+
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

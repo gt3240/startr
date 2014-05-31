@@ -40,6 +40,9 @@
     }
     
     [self.tutorialScrollView setContentSize:CGSizeMake(self.tutorialScrollView.frame.size.width*myContainers.count, self.tutorialScrollView.frame.size.height)];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                            withAnimation:UIStatusBarAnimationFade];
 }
 
 - (void)didReceiveMemoryWarning

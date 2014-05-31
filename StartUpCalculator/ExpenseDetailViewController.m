@@ -27,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.noteUIView.center = CGPointMake(160, 80);
 
     // Do any additional setup after loading the view.
 }
@@ -76,9 +75,9 @@
        
         [self.recurringView setHidden:YES];
         
+        self.noteUIView.frame = CGRectMake(0, 260, 320, 200);
+        self.notesTextView.frame = CGRectMake(20, 10, 280, 180);
         
-        //self.noteUIView.layer.position.x = 200;
-        //self.recurringLabel.text = @"";
     }
 }
 

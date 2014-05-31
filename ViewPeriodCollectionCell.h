@@ -11,6 +11,7 @@
 @interface ViewPeriodCollectionCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *periodLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *periodCellBG;
 
 @property (nonatomic) BOOL buttonSelected;
 

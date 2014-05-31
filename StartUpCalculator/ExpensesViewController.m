@@ -51,6 +51,7 @@
     
     appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -97,8 +98,9 @@
     [self.periodCollectionView selectItemAtIndexPath:[NSIndexPath indexPathForRow:appDelegate.peroidToShow inSection:0] animated:YES scrollPosition:UICollectionViewScrollPositionCenteredHorizontally];
     selectedCell  =(ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
     [selectedCell setButtonSelected:YES];
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
     previousSelected = (int)selectedCell.tag;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -177,6 +179,8 @@
     NSError *error;
     if (![self.managedObjectContext save:&error]) {
         NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+    } else {
+        NSLog(@"p added");
     }
     periodCount = newCount.intValue;
     
@@ -184,7 +188,7 @@
     
     selectedCell  = (ViewPeriodCollectionCell *)[self.periodCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:appDelegate.peroidToShow inSection:0]];
     [selectedCell setButtonSelected:YES];
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:30/255.0f green:156/255.0f blue:227/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
     previousSelected = newCount.intValue - 1;
     
     [self loadPeriodFromProject:currentProject];
@@ -202,12 +206,12 @@
 }
 
 #pragma mark - CollectionView
--(long)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+-(int)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 2;
 }
 
--(long)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+-(int)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 1){
         return 1;
@@ -264,7 +268,7 @@
     NSLog(@"selecedcell now is %@", selectedCell);
 
     
-    [selectedCell.periodLabel setTextColor:[UIColor colorWithRed:235/255.0f green:92/255.0f blue:104/255.0f alpha:1.0f]];
+    [selectedCell.periodLabel setTextColor:[UIColor whiteColor]];
     [selectedCell setButtonSelected:YES];
     previousSelected = (int)selectedCell.tag;
     

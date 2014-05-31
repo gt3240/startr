@@ -180,22 +180,39 @@
             newAmount = startingAmount;
             
             if ([shouldRecurr isEqualToNumber:@1]) {
-                [self setRecurringInfoFor:addIncome];
-                
+                if (self.recurringPeriodTextField.text.floatValue == 0) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating months can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                } else if (self.recurringAmount.text.floatValue == 0) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating amount can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                } else {
+                    [self setRecurringInfoFor:addIncome];
+                    
+                    [self.periodToAdd addIncomeObject:addIncome];
+                    
+                    NSError *error;
+                    if (![self.managedObjectContext save:&error]) {
+                        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                    }
+                    
+                    [self.addIncomeDelegate incomeAdded];
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
             } else {
                 [self createNewIncome:addIncome toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue];
+                [self.periodToAdd addIncomeObject:addIncome];
+                
+                NSError *error;
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                };
+                
+                [self.addIncomeDelegate incomeAdded];
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
             }
-            
-            [self.periodToAdd addIncomeObject:addIncome];
-            
-            NSError *error;
-            if (![self.managedObjectContext save:&error]) {
-                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-            };
-            
-            [self.addIncomeDelegate incomeAdded];
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
     

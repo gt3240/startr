@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "bg2.png"
+      "filename" : "periodCellWhiteBG.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "bg2@2x.png"
+      "filename" : "periodCellWhiteBG-1.png"
     }
   ],
   "info" : {

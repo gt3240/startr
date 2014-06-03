@@ -87,11 +87,6 @@
 		CBD982A618E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD982A518E5FF2600AFA3C0 /* IncomeItemsTableViewCell.m */; };
 		CBE838A3193652D3009BBCB2 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838A2193652D3009BBCB2 /* ProfileViewController.m */; };
 		CBE838A71936546B009BBCB2 /* notesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838A61936546B009BBCB2 /* notesTableViewCell.m */; };
-		CBE838B9193665E7009BBCB2 /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838B8193665E7009BBCB2 /* Periods.m */; };
-		CBE838BC193665E8009BBCB2 /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838BB193665E8009BBCB2 /* Incomes.m */; };
-		CBE838BF193665E8009BBCB2 /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838BE193665E8009BBCB2 /* Expenses.m */; };
-		CBE838C2193665E8009BBCB2 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838C1193665E8009BBCB2 /* Projects.m */; };
-		CBE838C5193665E8009BBCB2 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838C4193665E8009BBCB2 /* Notes.m */; };
 		CBE838C819367364009BBCB2 /* AddNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE838C719367364009BBCB2 /* AddNotesViewController.m */; };
 		CBEE9BC418F4E5E300D2CAB5 /* startup.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBEE9BC318F4E5E300D2CAB5 /* startup.plist */; };
 		CBEE9C9718F504BB00D2CAB5 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBEE9C9518F504BB00D2CAB5 /* Model.xcdatamodeld */; };
@@ -102,6 +97,11 @@
 		CBF1BB31190F0021000A38D2 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */; };
 		CBF42DEF18EB740200A78B54 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */; };
 		CBF5AF08192D07E8000EEC87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF5AF07192D07E8000EEC87 /* CoreData.framework */; };
+		CBFE0F63193D108E000A5E10 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F62193D108E000A5E10 /* Projects.m */; };
+		CBFE0F66193D108F000A5E10 /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F65193D108F000A5E10 /* Expenses.m */; };
+		CBFE0F69193D108F000A5E10 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F68193D108F000A5E10 /* Notes.m */; };
+		CBFE0F6C193D108F000A5E10 /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F6B193D108F000A5E10 /* Periods.m */; };
+		CBFE0F6F193D108F000A5E10 /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F6E193D108F000A5E10 /* Incomes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,16 +265,6 @@
 		CBE838A2193652D3009BBCB2 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		CBE838A51936546B009BBCB2 /* notesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notesTableViewCell.h; sourceTree = "<group>"; };
 		CBE838A61936546B009BBCB2 /* notesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notesTableViewCell.m; sourceTree = "<group>"; };
-		CBE838B7193665E7009BBCB2 /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
-		CBE838B8193665E7009BBCB2 /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
-		CBE838BA193665E7009BBCB2 /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
-		CBE838BB193665E8009BBCB2 /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
-		CBE838BD193665E8009BBCB2 /* Expenses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expenses.h; sourceTree = "<group>"; };
-		CBE838BE193665E8009BBCB2 /* Expenses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expenses.m; sourceTree = "<group>"; };
-		CBE838C0193665E8009BBCB2 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
-		CBE838C1193665E8009BBCB2 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
-		CBE838C3193665E8009BBCB2 /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
-		CBE838C4193665E8009BBCB2 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
 		CBE838C619367364009BBCB2 /* AddNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNotesViewController.h; sourceTree = "<group>"; };
 		CBE838C719367364009BBCB2 /* AddNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNotesViewController.m; sourceTree = "<group>"; };
 		CBEE9BC318F4E5E300D2CAB5 /* startup.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = startup.plist; sourceTree = "<group>"; };
@@ -290,6 +280,16 @@
 		CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
 		CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CBF5AF07192D07E8000EEC87 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		CBFE0F61193D108E000A5E10 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
+		CBFE0F62193D108E000A5E10 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
+		CBFE0F64193D108F000A5E10 /* Expenses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expenses.h; sourceTree = "<group>"; };
+		CBFE0F65193D108F000A5E10 /* Expenses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expenses.m; sourceTree = "<group>"; };
+		CBFE0F67193D108F000A5E10 /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
+		CBFE0F68193D108F000A5E10 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
+		CBFE0F6A193D108F000A5E10 /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
+		CBFE0F6B193D108F000A5E10 /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
+		CBFE0F6D193D108F000A5E10 /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
+		CBFE0F6E193D108F000A5E10 /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,18 +321,18 @@
 		CB18390118F0D019001C1E85 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				CBE838C3193665E8009BBCB2 /* Notes.h */,
-				CBE838C4193665E8009BBCB2 /* Notes.m */,
-				CBE838C0193665E8009BBCB2 /* Projects.h */,
-				CBE838C1193665E8009BBCB2 /* Projects.m */,
-				CBE838BD193665E8009BBCB2 /* Expenses.h */,
-				CBE838BE193665E8009BBCB2 /* Expenses.m */,
-				CBE838BA193665E7009BBCB2 /* Incomes.h */,
-				CBE838BB193665E8009BBCB2 /* Incomes.m */,
-				CBE838B7193665E7009BBCB2 /* Periods.h */,
-				CBE838B8193665E7009BBCB2 /* Periods.m */,
 				CB734B9B18F5D62B003268EB /* InnerBand */,
 				CBEE9C9518F504BB00D2CAB5 /* Model.xcdatamodeld */,
+				CBFE0F6D193D108F000A5E10 /* Incomes.h */,
+				CBFE0F6E193D108F000A5E10 /* Incomes.m */,
+				CBFE0F6A193D108F000A5E10 /* Periods.h */,
+				CBFE0F6B193D108F000A5E10 /* Periods.m */,
+				CBFE0F67193D108F000A5E10 /* Notes.h */,
+				CBFE0F68193D108F000A5E10 /* Notes.m */,
+				CBFE0F64193D108F000A5E10 /* Expenses.h */,
+				CBFE0F65193D108F000A5E10 /* Expenses.m */,
+				CBFE0F61193D108E000A5E10 /* Projects.h */,
+				CBFE0F62193D108E000A5E10 /* Projects.m */,
 				CBEE9BC318F4E5E300D2CAB5 /* startup.plist */,
 			);
 			name = "Core Data";
@@ -820,7 +820,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBE838BF193665E8009BBCB2 /* Expenses.m in Sources */,
+				CBFE0F6C193D108F000A5E10 /* Periods.m in Sources */,
 				CBA0FF2F18E366D800781F08 /* ViewController.m in Sources */,
 				CB65C1DD193824BA00B2C5A6 /* TutorialViewController.m in Sources */,
 				CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */,
@@ -845,6 +845,8 @@
 				CBF1BB29190EBB04000A38D2 /* IncomeTypeCollectionCell.m in Sources */,
 				CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */,
 				CB734BEA18F5D62B003268EB /* NSObject+InnerBand.m in Sources */,
+				CBFE0F66193D108F000A5E10 /* Expenses.m in Sources */,
+				CBFE0F63193D108E000A5E10 /* Projects.m in Sources */,
 				CB166793191C264F00C9B7E6 /* ExpenseDetailViewController.m in Sources */,
 				CB4010621939299D0036CCE8 /* EditProjectTableViewController.m in Sources */,
 				CB166778191C1C3E00C9B7E6 /* ExpenseTypeCollectionCell.m in Sources */,
@@ -859,11 +861,11 @@
 				CB308F2B190824930083B716 /* TBController.m in Sources */,
 				CB734BF918F5D62B003268EB /* IBMessageProcessor.m in Sources */,
 				CBC4B0F51903580E008B991B /* OpenTableTableViewCell.m in Sources */,
-				CBE838B9193665E7009BBCB2 /* Periods.m in Sources */,
 				CB734BF518F5D62B003268EB /* IBHTTPPostRequestMessage.m in Sources */,
 				CB734BF418F5D62B003268EB /* IBHTTPGetRequestMessage.m in Sources */,
 				CB8C1A0B191D68AE00C9A10F /* ResultsTableViewCell.m in Sources */,
 				CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */,
+				CBFE0F6F193D108F000A5E10 /* Incomes.m in Sources */,
 				CBBC31B319240E7000A04372 /* TypeResultsViewController.m in Sources */,
 				CB734BE318F5D62B003268EB /* CGContext+InnerBand.m in Sources */,
 				CB734BEE18F5D62B003268EB /* UIImage+InnerBand.m in Sources */,
@@ -871,7 +873,6 @@
 				CB734BED18F5D62B003268EB /* UIColor+InnerBand.m in Sources */,
 				CBE838A71936546B009BBCB2 /* notesTableViewCell.m in Sources */,
 				CB734BE118F5D62B003268EB /* IBCoreTextLabel.m in Sources */,
-				CBE838C5193665E8009BBCB2 /* Notes.m in Sources */,
 				CBC4B0F2190357FF008B991B /* OpenProjectTableViewController.m in Sources */,
 				CBF1BB2E190EBF5E000A38D2 /* IncomeAndExpenseType.m in Sources */,
 				CB734BE418F5D62B003268EB /* NSArray+InnerBand.m in Sources */,
@@ -879,10 +880,9 @@
 				CB5A64F8191D797C0054A0EC /* ResultsVC.m in Sources */,
 				CB734BF218F5D62B003268EB /* IBCoreDataStore.m in Sources */,
 				CB734BE518F5D62B003268EB /* NSDate+InnerBand.m in Sources */,
-				CBE838C2193665E8009BBCB2 /* Projects.m in Sources */,
-				CBE838BC193665E8009BBCB2 /* Incomes.m in Sources */,
 				CB67A63118F2FB1B001022E7 /* NewProjectViewController.m in Sources */,
 				CB166772191C197100C9B7E6 /* NewExpenseTableViewController.m in Sources */,
+				CBFE0F69193D108F000A5E10 /* Notes.m in Sources */,
 				CBA0FF2218E366D800781F08 /* main.m in Sources */,
 				CB734BE218F5D62B003268EB /* IBHTMLLabel.m in Sources */,
 				CB16676F191BEFF100C9B7E6 /* ExpenseItemsTableViewCell.m in Sources */,
@@ -1030,13 +1030,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = StartUpCalculator/StartUpCalculator.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tom Liu (MMKK5LN68U)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
 				INFOPLIST_FILE = "StartUpCalculator/StartUpCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E87F258E-F6FC-4EB5-A59D-9887EABA4BAA";
+				PROVISIONING_PROFILE = "D29DA892-2FB7-4BED-BAFE-877A62BCAF29";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1048,13 +1048,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = StartUpCalculator/StartUpCalculator.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tom Liu (MMKK5LN68U)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
 				INFOPLIST_FILE = "StartUpCalculator/StartUpCalculator-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "E87F258E-F6FC-4EB5-A59D-9887EABA4BAA";
+				PROVISIONING_PROFILE = "D29DA892-2FB7-4BED-BAFE-877A62BCAF29";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1100,6 +1100,75 @@
 			};
 			name = Release;
 		};
+		CBCB979F193987A800E80063 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		CBCB97A0193987A800E80063 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = StartUpCalculator/StartUpCalculator.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tom Liu (MMKK5LN68U)";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
+				INFOPLIST_FILE = "StartUpCalculator/StartUpCalculator-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D29DA892-2FB7-4BED-BAFE-877A62BCAF29";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Distribution;
+		};
+		CBCB97A1193987A800E80063 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/StartUpCalculator.app/StartUpCalculator";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "StartUpCalculator/StartUpCalculator-Prefix.pch";
+				INFOPLIST_FILE = "StartUpCalculatorTests/StartUpCalculatorTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1108,6 +1177,7 @@
 			buildConfigurations = (
 				CBA0FF4518E366D900781F08 /* Debug */,
 				CBA0FF4618E366D900781F08 /* Release */,
+				CBCB979F193987A800E80063 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1117,6 +1187,7 @@
 			buildConfigurations = (
 				CBA0FF4818E366D900781F08 /* Debug */,
 				CBA0FF4918E366D900781F08 /* Release */,
+				CBCB97A0193987A800E80063 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1126,6 +1197,7 @@
 			buildConfigurations = (
 				CBA0FF4B18E366D900781F08 /* Debug */,
 				CBA0FF4C18E366D900781F08 /* Release */,
+				CBCB97A1193987A800E80063 /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

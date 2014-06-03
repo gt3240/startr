@@ -25,7 +25,7 @@
     UIAlertView *recurAlert;
     float keyboardOffset;
     displayTypeImage *img;
-    int posOrNegInt;
+    //int posOrNegInt;
 }
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 @end
@@ -46,8 +46,9 @@
     [super viewDidLoad];
     
     img = [[displayTypeImage alloc]init];
-    self.notes.tag = 5;
-    posOrNegInt = 1;
+    self.notes.tag = 5; // note text view tag for move view up when keyboard show
+    self.recurringPeriodTextField.tag = 4;
+    self.recurringAmount.tag = 4;
     
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
     self.managedObjectContext = appDelegate.managedObjectContext;
@@ -58,7 +59,7 @@
 
         self.title = @"Edit";
         self.titleTextField.text = self.incomeToEdit.title;
-        self.amountTextField.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.amount];
+        self.amountTextField.text = [NSString stringWithFormat:@"$%@", self.incomeToEdit.amount];
         self.sourceLabel.text = self.incomeToEdit.source;
         incomeTypeObj.typeTitle = self.incomeToEdit.type;
         self.IncomeTypeLabel.text = incomeTypeObj.typeTitle;
@@ -79,16 +80,24 @@
             shouldRecurr = @1;
             [self.recurringSwitch setOn:YES];
             deleteRecur = NO;
+            //NSLog(@"recurring type %@", self.incomeToEdit.recurringType);
             if ([self.incomeToEdit.recurringType isEqualToString:@"fixedAmount"]){
                 self.recurringType.selectedSegmentIndex = 0;
-                self.recurringAmount.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.recurringAmount];
+                self.recurringAmount.text = [NSString stringWithFormat:@"$%@", self.incomeToEdit.recurringAmount];
             } else {
+                
                 self.recurringType.selectedSegmentIndex = 1;
-                self.recurringAmount.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.recurringAmount];
+                self.recurringAmount.text = [NSString stringWithFormat:@"%@%%", self.incomeToEdit.recurringAmount];
             }
             
-            //self.recurringPeriodTextfield.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.recurringPeriod];
-            
+            if ([self.incomeToEdit.recurringPostiveOrNegative isEqualToString:@"positive"]) {
+                self.posOrNegSegementControl.selectedSegmentIndex = 0;
+            } else {
+                self.posOrNegSegementControl.selectedSegmentIndex = 1;
+
+            }
+            self.recurringPeriodTextField.text = [NSString stringWithFormat:@"Repeat until month %@", self.incomeToEdit.recurringPeriod];
+            keyboardOffset = 414;
         } else {
             [self.recurringSwitch setOn:NO];
             shouldRecurr = 0;
@@ -99,7 +108,7 @@
         keyboardOffset = 276;
 
         addIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
-        recurringDateID = [NSDate date];
+        
     }
     
     //NSLog(@"period id is %@", self.periodToAdd.periodNum);
@@ -108,6 +117,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    recurringDateID = [NSDate date];
+    
     NSLog(@"income type is %@", incomeTypeObj.typeTitle);
     
     if (incomeTypeObj) {
@@ -138,39 +149,89 @@
 
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
+    
     if (self.incomeToEdit){
+        if ([self.amountTextField.text hasPrefix:@"$"]) {
+            self.amountTextField.text = [NSString stringWithFormat:@"%@", self.incomeToEdit.amount];
+        }
         
-        //First update period income total
-        NSNumber * previousTotal = self.incomeToEdit.period.incomeTotal;
-        NSNumber * incomeBeforeChange = self.incomeToEdit.amount;
-        NSNumber * incomeAfterChange = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
-        self.incomeToEdit.period.incomeTotal = @([previousTotal floatValue] -[incomeBeforeChange floatValue] + [incomeAfterChange floatValue]);
-        
-        self.incomeToEdit.title = self.titleTextField.text;
-        
-        self.incomeToEdit.source = self.sourceLabel.text;
-        
-        self.incomeToEdit.amount = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
-        
-        self.incomeToEdit.type = incomeTypeObj.typeTitle;
-        self.incomeToEdit.notes = self.notes.text;
-        
-        if (deleteRecur == YES ) {
-            [self deleteFutureRecurs:self.incomeToEdit.recurringDateID];
+        if ([self.incomeToEdit.recurring isEqualToNumber:@1]) {
+            if (deleteRecur == YES ) {
+                [self deleteFutureRecurs:self.incomeToEdit.recurringDateID];
+                NSError *error;
+                if (![self.managedObjectContext save:&error]) {
+                    NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                } else {
+                    NSLog(@"updated");
+                }
+                
+                [self dismissViewControllerAnimated:YES completion:nil];
+
+            } else {
+                // erase text in repeating amount and period
+                if ([self.recurringPeriodTextField.text hasPrefix:@"Repeat"]) {
+                    self.recurringPeriodTextField.text = [NSString stringWithFormat:@"%d", self.incomeToEdit.recurringPeriod.intValue];
+                }
+                
+                if ([self.recurringAmount.text hasPrefix:@"$"]) {
+                    self.recurringAmount.text = [NSString stringWithFormat:@"%.2f", self.incomeToEdit.recurringAmount.floatValue];
+                }
+                // update repeat data
+                if (self.incomeToEdit.recurringPeriod == 0) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating months can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                    self.recurringPeriodTextField.text = [NSString stringWithFormat:@"%d", self.incomeToEdit.recurringEndPeriod.intValue];
+
+                } else if (self.recurringPeriodTextField.text.floatValue < self.incomeToEdit.recurringEndPeriod.intValue) {
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeat until month cannot be less than previous value.  Deselect repeat to erase future repeated items" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
+                    [alert show];
+                    self.recurringPeriodTextField.text = [NSString stringWithFormat:@"%d", self.incomeToEdit.recurringEndPeriod.intValue];
+                } else {
+                    
+                    //[self deleteFutureRecurs:self.incomeToEdit.recurringDateID];
+                    
+                    [self deleteAllRecurringInfoFor:self.incomeToEdit];
+                    
+                    startingAmount = self.amountTextField.text.floatValue;
+                    newAmount = startingAmount;
+                    
+                    [self setRecurringInfoFor:self.incomeToEdit];
+                    
+                    //[self.periodToAdd addIncomeObject:self.incomeToEdit];
+                    
+                    NSError *error;
+                    if (![self.managedObjectContext save:&error]) {
+                        NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+                    } else {
+                        NSLog(@"updated");
+                    }
+                    
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }
+            }
+
         } else {
-            self.incomeToEdit.recurring = self.incomeToEdit.recurring;
             
-            self.incomeToEdit.recurringAmount = [NSNumber numberWithFloat: self.recurringAmount.text.floatValue];
+            NSNumber * previousTotal = self.incomeToEdit.period.incomeTotal;
+            NSNumber * incomeBeforeChange = self.incomeToEdit.amount;
+            NSNumber * incomeAfterChange = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
+            self.incomeToEdit.period.incomeTotal = @([previousTotal floatValue] -[incomeBeforeChange floatValue] + [incomeAfterChange floatValue]);
             
-            self.incomeToEdit.recurringPeriod = [NSNumber numberWithFloat: self.recurringPeriodTextField.text.floatValue];
+            self.incomeToEdit.title = self.titleTextField.text;
+            
+            self.incomeToEdit.source = self.sourceLabel.text;
+            
+            self.incomeToEdit.amount = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
+            
+            self.incomeToEdit.type = incomeTypeObj.typeTitle;
+            self.incomeToEdit.notes = self.notes.text;
+            NSError *error;
+            if (![self.managedObjectContext save:&error]) {
+                NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
+            }
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
-        
-        NSError *error;
-        if (![self.managedObjectContext save:&error]) {
-            NSLog(@"Whoops, couldn't save: %@", [error localizedDescription]);
-        }
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
         
     } else {
         if ([self validateInputs] == YES) {
@@ -183,13 +244,11 @@
                 if (self.recurringPeriodTextField.text.floatValue == 0) {
                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating months can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
                     [alert show];
-                } else if (self.recurringAmount.text.floatValue == 0) {
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating amount can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                    [alert show];
+                    [self.recurringPeriodTextField becomeFirstResponder];
                 } else {
                     [self setRecurringInfoFor:addIncome];
                     
-                    [self.periodToAdd addIncomeObject:addIncome];
+                    //[self.periodToAdd addIncomeObject:addIncome];
                     
                     NSError *error;
                     if (![self.managedObjectContext save:&error]) {
@@ -201,7 +260,7 @@
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }
             } else {
-                [self createNewIncome:addIncome toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue];
+                [self createNewIncome:addIncome toPeriod:self.periodToAdd withAmount:self.amountTextField.text.floatValue nextP:0];
                 [self.periodToAdd addIncomeObject:addIncome];
                 
                 NSError *error;
@@ -267,15 +326,49 @@
     }
 }
 
+- (void)deleteAllRecurringInfoFor: (Incomes *)thisIncome
+{
+    // delete old income first
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"periodNum" ascending:YES];
+    NSArray * pInProjectArr = [self.projectToAdd.period sortedArrayUsingDescriptors:@[sort]];
+    
+    for (int i = thisIncome.period.periodNum.intValue - 1; i < pInProjectArr.count; i++) {
+        Periods *thisP = pInProjectArr[i];
+        
+        NSArray *incomeInThisP = [thisP.income allObjects];
+        NSLog(@"this set have %lu incomes", (unsigned long)incomeInThisP.count);
+        
+        // delete old repeat records
+        for (int a = 0; a < incomeInThisP.count; a++) {
+            Incomes *thisI = incomeInThisP[a];
+            NSLog(@"\n \n thisI ID is %@, Income ID is %@", thisI.recurringDateID, thisIncome.recurringDateID);
+            if ([thisI.recurringDateID isEqual: thisIncome.recurringDateID]) {
+                NSNumber * previousTotal = thisP.incomeTotal;
+                NSNumber * incomeBeforeChange = thisI.amount;
+                thisP.incomeTotal = @([previousTotal floatValue] -[incomeBeforeChange floatValue]);
+                [thisP removeIncomeObject:thisI];
+            }
+        }
+        
+    }
+}
+
 - (void)setRecurringInfoFor:(Incomes *)thisIncome
 {
     thisIncome.recurring = shouldRecurr;
     thisIncome.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue];
     thisIncome.recurringPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue];
+    
     if (self.recurringType.selectedSegmentIndex == 0) {
         thisIncome.recurringType = @"fixedAmount";
     } else {
         thisIncome.recurringType = @"percentage";
+    }
+    
+    if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+        thisIncome.recurringPostiveOrNegative = @"positive";
+    } else {
+        thisIncome.recurringPostiveOrNegative = @"negative";
     }
     
     //Get how many periods are in the projects
@@ -284,22 +377,39 @@
     
     NSArray * pInProjectArr = [self.projectToAdd.period sortedArrayUsingDescriptors:@[sort]];
     
-    for (int i = self.periodToAdd.periodNum.intValue; i < self.recurringPeriodTextField.text.intValue + self.periodToAdd.periodNum.intValue; i++) {
+    for (int i = self.periodToAdd.periodNum.intValue; i <= self.recurringPeriodTextField.text.intValue; i++) {
+        
+        int pNum = self.recurringPeriodTextField.text.intValue; //period terms, number decreases towards the end
         
         if (i <= pInProjectArr.count) {
             // add new income to current period
             if (i == self.periodToAdd.periodNum.intValue) {
-                [self createNewIncome:thisIncome toPeriod:self.periodToAdd withAmount:startingAmount];
+//                if (self.incomeToEdit) {
+//                    newAmount = 0;
+//                }
+                [self createNewIncome:thisIncome toPeriod:self.periodToAdd withAmount:startingAmount nextP:pNum];
+                newAmount = startingAmount;
             } else {
+                
                 // add income to next other periods
                 Periods *nextP = pInProjectArr[i - 1];
                 Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
                 if (self.recurringType.selectedSegmentIndex == 0) {
-                    newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
+                    if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+                        newAmount = newAmount + self.recurringAmount.text.floatValue;
+                    } else {
+                        newAmount = newAmount - self.recurringAmount.text.floatValue;
+                    }
                 } else {
-                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100 * posOrNegInt;
+                    if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+                        newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100;
+                    } else {
+                        newAmount = newAmount - newAmount * self.recurringAmount.text.floatValue / 100;
+                    }
+
                 }
-                [self createNewIncome:newIncome toPeriod:nextP withAmount:newAmount];
+                
+                [self createNewIncome:newIncome toPeriod:nextP withAmount:newAmount nextP:pNum];
             }
         } else {
             // add new period then add income
@@ -309,22 +419,40 @@
             newPeriod.projects = self.projectToAdd;
             Incomes *newIncome = [NSEntityDescription insertNewObjectForEntityForName:@"Incomes" inManagedObjectContext:self.managedObjectContext];
             if (self.recurringType.selectedSegmentIndex == 0) {
-                newAmount += self.recurringAmount.text.floatValue * posOrNegInt;
+                if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+                    newAmount = newAmount + self.recurringAmount.text.floatValue;
+                } else {
+                    newAmount = newAmount - self.recurringAmount.text.floatValue;
+                }
             } else {
-                newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue /100 * posOrNegInt;
+                if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+                    newAmount = newAmount + newAmount * self.recurringAmount.text.floatValue / 100;
+                } else {
+                    newAmount = newAmount - newAmount * self.recurringAmount.text.floatValue / 100;
+                }
+                
             }
-            [self createNewIncome:newIncome toPeriod:newPeriod withAmount:newAmount];
+            [self createNewIncome:newIncome toPeriod:newPeriod withAmount:newAmount nextP:pNum];
         }        
     }
 }
 
-- (void)createNewIncome: (Incomes *)income toPeriod: (Periods *)thisPeriod withAmount:(float)incomeAmount
+- (void)createNewIncome: (Incomes *)income toPeriod: (Periods *)thisPeriod withAmount:(float)incomeAmount nextP:(int)pNum
 {
     NSNumber * previousTotal = thisPeriod.incomeTotal;
     
     //NSNumber * incomeAfterChange = [NSNumber numberWithFloat: self.amountTextField.text.floatValue];
+   NSLog(@"\n \n pnum %@ previousTotal is %@, newAmount is %f", thisPeriod.periodNum, thisPeriod.incomeTotal, newAmount);
     
+//    if ([income.recurringPostiveOrNegative isEqualToString:@"positive"]) {
+//         thisPeriod.incomeTotal = @([previousTotal floatValue] + newAmount);
+//    } else {
+//         thisPeriod.incomeTotal = @([previousTotal floatValue] - newAmount);
+//    }
+//    
     thisPeriod.incomeTotal = @([previousTotal floatValue] + newAmount);
+
+    NSLog(@"income total now is %@", thisPeriod.incomeTotal);
     
     income.amount = [NSNumber numberWithFloat: incomeAmount];
     
@@ -343,13 +471,25 @@
     if ([shouldRecurr isEqualToNumber:@1]) {
         income.recurring = @1;
         
-        income.recurringType = addIncome.recurringType;
+        if (self.incomeToEdit) {
+            income.recurringType = self.incomeToEdit.recurringType;
+            income.recurringDateID = self.incomeToEdit.recurringDateID;
+        } else {
+            income.recurringType = addIncome.recurringType;
+            income.recurringDateID = recurringDateID;
+        }
         
-        income.recurringDateID = recurringDateID;
+        if (self.posOrNegSegementControl.selectedSegmentIndex == 0) {
+            income.recurringPostiveOrNegative = @"positive";
+        } else {
+            income.recurringPostiveOrNegative = @"negative";
+        }
         
-        income.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue * posOrNegInt];
+        income.recurringPeriod = [NSNumber numberWithInt:pNum];
         
-        income.recurringEndPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue + self.periodToAdd.periodNum.intValue - 1];
+        income.recurringAmount = [NSNumber numberWithFloat:self.recurringAmount.text.floatValue];
+        
+        income.recurringEndPeriod = [NSNumber numberWithInt:self.recurringPeriodTextField.text.intValue];
     } else {
         income.recurring = 0;
     }
@@ -376,7 +516,7 @@
     
     if ([self.incomeToEdit.recurring isEqual: @1]) {
         if (![sender isOn]) {
-            recurAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"All future recurring income will be deleted, are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+            recurAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"All future repeating items will be deleted, are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
             [recurAlert show];
         }
     }
@@ -400,11 +540,24 @@
 }
 
 - (IBAction)posOrNegSwitched:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex == 0) {
-        posOrNegInt = 1;
+    
+    if (self.incomeToEdit){
+        
+        if (sender.selectedSegmentIndex == 0) {
+            self.incomeToEdit.recurringPostiveOrNegative = @"positive";
+            
+        } else {
+            self.incomeToEdit.recurringPostiveOrNegative = @"negative";
+        }
     } else {
-        posOrNegInt = -1;
+        if (sender.selectedSegmentIndex == 0) {
+            addIncome.recurringPostiveOrNegative = @"positive";
+            
+        } else {
+            addIncome.recurringPostiveOrNegative = @"negative";
+        }
     }
+
 }
 
 - (IBAction)recurringTypeChanged:(UISegmentedControl *)sender {
@@ -434,8 +587,8 @@
     
     if(self.incomeToEdit){
         if (section == 1) {
-            if ([shouldRecurr  isEqual: @1]) {
-                return 1;
+            if ([shouldRecurr isEqual: @1]) {
+                return 4;
 
             } else {
                 return 0;
@@ -443,7 +596,7 @@
         }
     } else {
         if (section == 1) {
-            if ([shouldRecurr  isEqual: @1]) {
+            if ([shouldRecurr isEqual: @1]) {
                 return 4;
             } else {
                 return 1;
@@ -482,10 +635,41 @@
     }
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    if (self.incomeToEdit) {
+        if (sender == self.recurringPeriodTextField) {
+            self.recurringPeriodTextField.text =[NSString stringWithFormat:@"%d", self.incomeToEdit.recurringEndPeriod.intValue];
+        }
+        
+        if (sender == self.recurringAmount) {
+            self.recurringAmount.text =[NSString stringWithFormat:@"%@", self.incomeToEdit.recurringAmount];
+        }
+        
+        if (sender == self.amountTextField) {
+            self.amountTextField.text =[NSString stringWithFormat:@"%@", self.incomeToEdit.amount];
+        }
+    }
+    
+    if (sender.tag == 4) {
+        keyboardOffset = 146;
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
 -(void)textViewDidBeginEditing:(UITextView *)sender
 {
     if (sender.tag == 5)
     {
+        if ([shouldRecurr isEqualToNumber: @1]) {
+            keyboardOffset = 414;
+        } else {
+            keyboardOffset = 276;
+        }
+
         if ([self.incomeToEdit.notes isEqualToString:@""]) {
             sender.text = @"";
         } else {

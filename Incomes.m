@@ -2,7 +2,7 @@
 //  Incomes.m
 //  StartUpCalculator
 //
-//  Created by Tom on 5/28/14.
+//  Created by Tom on 6/2/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
@@ -23,6 +23,7 @@
 @dynamic source;
 @dynamic title;
 @dynamic type;
+@dynamic recurringPostiveOrNegative;
 @dynamic period;
 
 @end

@@ -47,6 +47,8 @@
     [super viewDidLoad];
     img = [[displayTypeImage alloc]init];
     self.notes.tag = 5;
+    self.recurringAmount.tag = 4;
+
     posOrNegInt = 1;
     
     AppDelegate* appDelegate = [UIApplication sharedApplication].delegate;
@@ -88,7 +90,8 @@
             }
             
             //self.recurringPeriodTextfield.text = [NSString stringWithFormat:@"%@", self.expenseToEdit.recurringPeriod];
-            
+            keyboardOffset = 414;
+
         } else {
              keyboardOffset = 236;
             [self.recurringSwitch setOn:NO];
@@ -192,9 +195,6 @@
                 
                 if (self.recurringPeriodTextField.text.floatValue == 0) {
                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating months can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
-                    [alert show];
-                } else if (self.recurringAmount.text.floatValue == 0) {
-                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Repeating amount can't be 0" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil,nil];
                     [alert show];
                 } else {
                     [self setRecurringInfoFor:addExpense];
@@ -393,7 +393,7 @@
     
     if ([self.expenseToEdit.recurring isEqual: @1]) {
         if (![sender isOn]) {
-            recurAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"All future recurring income will be deleted, are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
+            recurAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"All future repeating items will be deleted, are you sure?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",nil];
             [recurAlert show];
         }
     }
@@ -501,10 +501,27 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)sender
+{
+    if (sender.tag == 4) {
+        keyboardOffset = 146;
+        if  (self.view.frame.origin.y >= 0)
+        {
+            [self setViewMovedUp:YES];
+        }
+    }
+}
+
 -(void)textViewDidBeginEditing:(UITextView *)sender
 {
     if (sender.tag == 5)
     {
+        if ([shouldRecurr isEqualToNumber: @1]) {
+            keyboardOffset = 414;
+        } else {
+            keyboardOffset = 276;
+        }
+        
         if ([self.expenseToEdit.notes isEqualToString:@""]) {
             sender.text = @"";
         } else {

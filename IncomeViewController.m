@@ -73,7 +73,10 @@
         
         //NSLog(@"projectIndexToOpen is %@", self.projectIndexToOpen);
         //NSLog(@"project is %@", self.projectToOpen);
-        
+        //NSLog(@"\n \n appdeleage.p is %d, period count is %d", appDelegate.peroidToShow, periodsArr.count);
+        if (appDelegate.peroidToShow > periodsArr.count) {
+            appDelegate.peroidToShow = 0;
+        }
         periodToShow = periodsArr[appDelegate.peroidToShow];
         
         [self loadIncome];

@@ -73,10 +73,9 @@
         }
     } else {
        
-        [self.recurringView setHidden:YES];
-        
-        self.noteUIView.frame = CGRectMake(0, 260, 320, 200);
-        self.notesTextView.frame = CGRectMake(20, 10, 280, 180);
+        [self.recurringAmountLabel setHidden:YES];
+         [self.recurUntilLabel setHidden:YES];
+         self.changeByLabel.text = @"Non repeat item";
         
     }
 }

@@ -600,6 +600,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="amountLabel" destination="0IH-xU-nsh" id="oaB-y6-xcc"/>
+                        <outlet property="changeByLabel" destination="vZt-J7-Nfx" id="Vy8-bW-fga"/>
                         <outlet property="fromLabel" destination="ktk-dn-ukt" id="Xd1-Be-bjY"/>
                         <outlet property="noteUIView" destination="MRw-xZ-TAy" id="PEo-me-feb"/>
                         <outlet property="notesTextView" destination="2qA-3r-Suz" id="BMR-Pc-iOT"/>
@@ -1363,7 +1364,7 @@
                                                     <color key="tintColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="textColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="OjO-xl-58e" id="8oH-Ic-w70"/>
                                                     </connections>
@@ -1390,7 +1391,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="For how many month?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJv-Lr-8zt">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="What month to repeat to?" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zJv-Lr-8zt">
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="tintColor" red="0.0" green="0.58823529409999997" blue="1" alpha="1" colorSpace="deviceRGB"/>
@@ -1456,6 +1457,7 @@
                         <outlet property="IncomeTypeLabel" destination="Zge-Cb-CK3" id="xYf-Vy-QAV"/>
                         <outlet property="amountTextField" destination="EDw-1g-VMh" id="Mde-G4-yer"/>
                         <outlet property="notes" destination="pnK-9P-Rxe" id="aML-sE-0n7"/>
+                        <outlet property="posOrNegSegementControl" destination="4yP-cP-dkh" id="m9o-cB-jEG"/>
                         <outlet property="recurringAmount" destination="c0C-AC-vTV" id="uQN-AP-VGG"/>
                         <outlet property="recurringPeriodTextField" destination="zJv-Lr-8zt" id="rzI-i2-I6e"/>
                         <outlet property="recurringSwitch" destination="djc-4n-cBf" id="hik-2x-Py3"/>
@@ -2864,7 +2866,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="eYn-2U-i9Z"/>
         <segue reference="mnH-SV-IUm"/>
-        <segue reference="G3C-2P-T9m"/>
+        <segue reference="6o1-BX-pmk"/>
         <segue reference="GC8-ni-yCY"/>
         <segue reference="Rng-5O-oSW"/>
     </inferredMetricsTieBreakers>

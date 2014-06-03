@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *recurUntilLabel;
 @property (weak, nonatomic) IBOutlet UIView *recurringView;
 @property (weak, nonatomic) IBOutlet UIView *noteUIView;
+@property (weak, nonatomic) IBOutlet UILabel *changeByLabel;
 
 @property (strong, nonatomic)Expenses *expenseToShowDetail;
 @property (strong, nonatomic)Projects *projectToAdd;

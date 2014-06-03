@@ -44,6 +44,8 @@
     
     self.typeImage.image = [img showImage:self.incomeToShowDetail.type];
     
+    //NSLog(@"\n\n pos or neg %@", self.incomeToShowDetail.recurringPostiveOrNegative);
+    
     if ([self.incomeToShowDetail.recurring intValue] == 1) {
         
         //self.recurringLabel.text = @"Increased by";
@@ -51,22 +53,24 @@
 //        [dateFormatter setDateFormat:@"MM-dd-yyyy HH:mm:ss"];
 //        self.notesTextView.text = [dateFormatter stringFromDate:self.incomeToShowDetail.recurringDateID];
         
+        self.changeByLabel.text = @"To change by:";
+
         self.recurUntilLabel.text = [NSString stringWithFormat: @"Repeat until month %@", self.incomeToShowDetail.recurringEndPeriod.stringValue];
         
         //NSLog(@"type is %@", self.incomeToShowDetail.period.periodType);
         self.recurringAmountLabel.text = self.incomeToShowDetail.recurringAmount.stringValue;
         if ([self.incomeToShowDetail.recurringType isEqualToString:@"fixedAmount"]){
             
-            if (self.incomeToShowDetail.recurringAmount.intValue < 0) {
-                self.recurringAmountLabel.text = [NSString stringWithFormat:@"-$%@", [NSNumber numberWithFloat:(self.incomeToShowDetail.recurringAmount.floatValue * -1)]];
+            if ([self.incomeToShowDetail.recurringPostiveOrNegative isEqualToString:@"negative"]) {
+                self.recurringAmountLabel.text = [NSString stringWithFormat:@"-$%@", [NSNumber numberWithFloat:(self.incomeToShowDetail.recurringAmount.floatValue)]];
             } else {
                 self.recurringAmountLabel.text = [NSString stringWithFormat:@"$%@", self.incomeToShowDetail.recurringAmount];
                 
             }
         } else {
             
-            if (self.incomeToShowDetail.recurringAmount.intValue < 0) {
-                self.recurringAmountLabel.text = [NSString stringWithFormat:@"-%@%%", [NSNumber numberWithFloat:(self.incomeToShowDetail.recurringAmount.floatValue * -1)]];
+            if ([self.incomeToShowDetail.recurringPostiveOrNegative isEqualToString:@"negative"]) {
+                self.recurringAmountLabel.text = [NSString stringWithFormat:@"-%@%%", [NSNumber numberWithFloat:(self.incomeToShowDetail.recurringAmount.floatValue)]];
             } else {
                 self.recurringAmountLabel.text = [NSString stringWithFormat:@"%@%%", self.incomeToShowDetail.recurringAmount];
             }

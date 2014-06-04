@@ -2,7 +2,7 @@
 //  Incomes.h
 //  StartUpCalculator
 //
-//  Created by Tom on 6/2/14.
+//  Created by Tom on 6/3/14.
 //  Copyright (c) 2014 Tom Liu. All rights reserved.
 //
 
@@ -20,11 +20,11 @@
 @property (nonatomic, retain) NSDate * recurringDateID;
 @property (nonatomic, retain) NSNumber * recurringEndPeriod;
 @property (nonatomic, retain) NSNumber * recurringPeriod;
+@property (nonatomic, retain) NSString * recurringPostiveOrNegative;
 @property (nonatomic, retain) NSString * recurringType;
 @property (nonatomic, retain) NSString * source;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSString * recurringPostiveOrNegative;
 @property (nonatomic, retain) Periods *period;
 
 @end

@@ -8,6 +8,7 @@
         <attribute name="recurringDateID" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="recurringEndPeriod" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="recurringPeriod" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="recurringPostiveOrNegative" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recurringType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -52,7 +53,7 @@
         <relationship name="period" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Periods" inverseName="projects" inverseEntity="Periods" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Expenses" positionX="0" positionY="135" width="128" height="223"/>
+        <element name="Expenses" positionX="0" positionY="135" width="128" height="238"/>
         <element name="Incomes" positionX="27" positionY="90" width="128" height="240"/>
         <element name="Notes" positionX="0" positionY="126" width="128" height="88"/>
         <element name="Periods" positionX="0" positionY="63" width="128" height="148"/>

@@ -22,6 +22,11 @@
 		CB3F31041909B11B00511A15 /* MainMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3F31031909B11B00511A15 /* MainMenuTableViewController.m */; };
 		CB3F31061909C29800511A15 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F31051909C29800511A15 /* QuartzCore.framework */; };
 		CB4010621939299D0036CCE8 /* EditProjectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4010611939299D0036CCE8 /* EditProjectTableViewController.m */; };
+		CB4C5005193E2FF70079760A /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4C5004193E2FF70079760A /* Notes.m */; };
+		CB4C5008193E2FF70079760A /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4C5007193E2FF70079760A /* Projects.m */; };
+		CB4C500B193E2FF70079760A /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4C500A193E2FF70079760A /* Expenses.m */; };
+		CB4C500E193E2FF70079760A /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4C500D193E2FF70079760A /* Incomes.m */; };
+		CB4C5011193E2FF70079760A /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4C5010193E2FF70079760A /* Periods.m */; };
 		CB5A64F8191D797C0054A0EC /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5A64F7191D797C0054A0EC /* ResultsVC.m */; };
 		CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109A818FEFC5500300B9A /* SavedProjectsTableViewController.m */; };
 		CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6109AB18FEFDDC00300B9A /* SavedProjectsTableViewCell.m */; };
@@ -97,11 +102,6 @@
 		CBF1BB31190F0021000A38D2 /* IncomeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */; };
 		CBF42DEF18EB740200A78B54 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */; };
 		CBF5AF08192D07E8000EEC87 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF5AF07192D07E8000EEC87 /* CoreData.framework */; };
-		CBFE0F63193D108E000A5E10 /* Projects.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F62193D108E000A5E10 /* Projects.m */; };
-		CBFE0F66193D108F000A5E10 /* Expenses.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F65193D108F000A5E10 /* Expenses.m */; };
-		CBFE0F69193D108F000A5E10 /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F68193D108F000A5E10 /* Notes.m */; };
-		CBFE0F6C193D108F000A5E10 /* Periods.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F6B193D108F000A5E10 /* Periods.m */; };
-		CBFE0F6F193D108F000A5E10 /* Incomes.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFE0F6E193D108F000A5E10 /* Incomes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +141,16 @@
 		CB3F31051909C29800511A15 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CB4010601939299D0036CCE8 /* EditProjectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProjectTableViewController.h; sourceTree = "<group>"; };
 		CB4010611939299D0036CCE8 /* EditProjectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProjectTableViewController.m; sourceTree = "<group>"; };
+		CB4C5003193E2FF60079760A /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
+		CB4C5004193E2FF70079760A /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
+		CB4C5006193E2FF70079760A /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
+		CB4C5007193E2FF70079760A /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
+		CB4C5009193E2FF70079760A /* Expenses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expenses.h; sourceTree = "<group>"; };
+		CB4C500A193E2FF70079760A /* Expenses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expenses.m; sourceTree = "<group>"; };
+		CB4C500C193E2FF70079760A /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
+		CB4C500D193E2FF70079760A /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
+		CB4C500F193E2FF70079760A /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
+		CB4C5010193E2FF70079760A /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
 		CB5A64F6191D797C0054A0EC /* ResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsVC.h; sourceTree = "<group>"; };
 		CB5A64F7191D797C0054A0EC /* ResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
 		CB6109A718FEFC5500300B9A /* SavedProjectsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedProjectsTableViewController.h; sourceTree = "<group>"; };
@@ -280,16 +290,6 @@
 		CBF1BB30190F0021000A38D2 /* IncomeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IncomeDetailViewController.m; sourceTree = "<group>"; };
 		CBF42DEE18EB740200A78B54 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		CBF5AF07192D07E8000EEC87 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		CBFE0F61193D108E000A5E10 /* Projects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projects.h; sourceTree = "<group>"; };
-		CBFE0F62193D108E000A5E10 /* Projects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Projects.m; sourceTree = "<group>"; };
-		CBFE0F64193D108F000A5E10 /* Expenses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expenses.h; sourceTree = "<group>"; };
-		CBFE0F65193D108F000A5E10 /* Expenses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expenses.m; sourceTree = "<group>"; };
-		CBFE0F67193D108F000A5E10 /* Notes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notes.h; sourceTree = "<group>"; };
-		CBFE0F68193D108F000A5E10 /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notes.m; sourceTree = "<group>"; };
-		CBFE0F6A193D108F000A5E10 /* Periods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Periods.h; sourceTree = "<group>"; };
-		CBFE0F6B193D108F000A5E10 /* Periods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Periods.m; sourceTree = "<group>"; };
-		CBFE0F6D193D108F000A5E10 /* Incomes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Incomes.h; sourceTree = "<group>"; };
-		CBFE0F6E193D108F000A5E10 /* Incomes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Incomes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,18 +321,18 @@
 		CB18390118F0D019001C1E85 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				CB4C500F193E2FF70079760A /* Periods.h */,
+				CB4C5010193E2FF70079760A /* Periods.m */,
+				CB4C500C193E2FF70079760A /* Incomes.h */,
+				CB4C500D193E2FF70079760A /* Incomes.m */,
+				CB4C5009193E2FF70079760A /* Expenses.h */,
+				CB4C500A193E2FF70079760A /* Expenses.m */,
+				CB4C5006193E2FF70079760A /* Projects.h */,
+				CB4C5007193E2FF70079760A /* Projects.m */,
+				CB4C5003193E2FF60079760A /* Notes.h */,
+				CB4C5004193E2FF70079760A /* Notes.m */,
 				CB734B9B18F5D62B003268EB /* InnerBand */,
 				CBEE9C9518F504BB00D2CAB5 /* Model.xcdatamodeld */,
-				CBFE0F6D193D108F000A5E10 /* Incomes.h */,
-				CBFE0F6E193D108F000A5E10 /* Incomes.m */,
-				CBFE0F6A193D108F000A5E10 /* Periods.h */,
-				CBFE0F6B193D108F000A5E10 /* Periods.m */,
-				CBFE0F67193D108F000A5E10 /* Notes.h */,
-				CBFE0F68193D108F000A5E10 /* Notes.m */,
-				CBFE0F64193D108F000A5E10 /* Expenses.h */,
-				CBFE0F65193D108F000A5E10 /* Expenses.m */,
-				CBFE0F61193D108E000A5E10 /* Projects.h */,
-				CBFE0F62193D108E000A5E10 /* Projects.m */,
 				CBEE9BC318F4E5E300D2CAB5 /* startup.plist */,
 			);
 			name = "Core Data";
@@ -820,7 +820,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBFE0F6C193D108F000A5E10 /* Periods.m in Sources */,
 				CBA0FF2F18E366D800781F08 /* ViewController.m in Sources */,
 				CB65C1DD193824BA00B2C5A6 /* TutorialViewController.m in Sources */,
 				CB6109AC18FEFDDC00300B9A /* SavedProjectsTableViewCell.m in Sources */,
@@ -845,8 +844,6 @@
 				CBF1BB29190EBB04000A38D2 /* IncomeTypeCollectionCell.m in Sources */,
 				CB63818B18FE25B6007EFB7E /* SideMenuTableViewController.m in Sources */,
 				CB734BEA18F5D62B003268EB /* NSObject+InnerBand.m in Sources */,
-				CBFE0F66193D108F000A5E10 /* Expenses.m in Sources */,
-				CBFE0F63193D108E000A5E10 /* Projects.m in Sources */,
 				CB166793191C264F00C9B7E6 /* ExpenseDetailViewController.m in Sources */,
 				CB4010621939299D0036CCE8 /* EditProjectTableViewController.m in Sources */,
 				CB166778191C1C3E00C9B7E6 /* ExpenseTypeCollectionCell.m in Sources */,
@@ -855,6 +852,7 @@
 				CB6109A918FEFC5500300B9A /* SavedProjectsTableViewController.m in Sources */,
 				CB734BE618F5D62B003268EB /* NSManagedObject+InnerBand.m in Sources */,
 				CB734BE818F5D62B003268EB /* NSMutableString+InnerBand.m in Sources */,
+				CB4C500B193E2FF70079760A /* Expenses.m in Sources */,
 				CB734BEC18F5D62B003268EB /* NSString+InnerBand.m in Sources */,
 				CBBC31B919240F0900A04372 /* TypeResultsTableViewCell.m in Sources */,
 				CB734BF818F5D62B003268EB /* IBMessageCenter.m in Sources */,
@@ -865,13 +863,16 @@
 				CB734BF418F5D62B003268EB /* IBHTTPGetRequestMessage.m in Sources */,
 				CB8C1A0B191D68AE00C9A10F /* ResultsTableViewCell.m in Sources */,
 				CB1EAE5418FF2F1000282768 /* SideMenuCustomSegue.m in Sources */,
-				CBFE0F6F193D108F000A5E10 /* Incomes.m in Sources */,
 				CBBC31B319240E7000A04372 /* TypeResultsViewController.m in Sources */,
 				CB734BE318F5D62B003268EB /* CGContext+InnerBand.m in Sources */,
+				CB4C5011193E2FF70079760A /* Periods.m in Sources */,
 				CB734BEE18F5D62B003268EB /* UIImage+InnerBand.m in Sources */,
+				CB4C500E193E2FF70079760A /* Incomes.m in Sources */,
 				CB734BE918F5D62B003268EB /* NSNumber+InnerBand.m in Sources */,
 				CB734BED18F5D62B003268EB /* UIColor+InnerBand.m in Sources */,
+				CB4C5008193E2FF70079760A /* Projects.m in Sources */,
 				CBE838A71936546B009BBCB2 /* notesTableViewCell.m in Sources */,
+				CB4C5005193E2FF70079760A /* Notes.m in Sources */,
 				CB734BE118F5D62B003268EB /* IBCoreTextLabel.m in Sources */,
 				CBC4B0F2190357FF008B991B /* OpenProjectTableViewController.m in Sources */,
 				CBF1BB2E190EBF5E000A38D2 /* IncomeAndExpenseType.m in Sources */,
@@ -882,7 +883,6 @@
 				CB734BE518F5D62B003268EB /* NSDate+InnerBand.m in Sources */,
 				CB67A63118F2FB1B001022E7 /* NewProjectViewController.m in Sources */,
 				CB166772191C197100C9B7E6 /* NewExpenseTableViewController.m in Sources */,
-				CBFE0F69193D108F000A5E10 /* Notes.m in Sources */,
 				CBA0FF2218E366D800781F08 /* main.m in Sources */,
 				CB734BE218F5D62B003268EB /* IBHTMLLabel.m in Sources */,
 				CB16676F191BEFF100C9B7E6 /* ExpenseItemsTableViewCell.m in Sources */,
